@@ -1,10 +1,16 @@
 package com.hlkw.cafe.entity;
 
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
-@Component
+@Component @Setter @Getter
+@ToString @EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+
 public class Board {
     private long boardNo;
     private String title;
