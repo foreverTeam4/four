@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 public class Board {
     private long boardNo;
     private String title;
@@ -19,5 +18,4 @@ public class Board {
     private  Member member;
     private Comment comment;
     private LocalDateTime writtenDate;
-
 }

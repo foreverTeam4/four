@@ -29,11 +29,11 @@ CREATE TABLE dust_comment
 drop table dust_board;
 CREATE TABLE dust_board
 (
-    board_no     int(10)       NOT NULL,
-    title        varchar(30)  NOT NULL,
-    content      varchar(500) NOT NULL,
-    view_count   int(10)       NOT NULL,
-    id           varchar(20),
+    board_no     int(10) auto_increment,
+    title        varchar(30)            NOT NULL,
+    content      varchar(500)           NOT NULL,
+    view_count   int(10)                NOT NULL,
+    id     varchar(20),
     comment_num  int(10),
     written_date TIMESTAMP,
     CONSTRAINT pk_board_no
