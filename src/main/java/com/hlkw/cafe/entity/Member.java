@@ -20,5 +20,4 @@ public class Member {
     private String email;
     private String nickname;
     private Level level;
-    private Board board;
 }
