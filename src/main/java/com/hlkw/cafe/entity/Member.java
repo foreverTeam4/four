@@ -3,8 +3,6 @@ package com.hlkw.cafe.entity;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
-import java.util.logging.Level;
-
 @Component @Setter @Getter
 @ToString @EqualsAndHashCode
 @NoArgsConstructor
