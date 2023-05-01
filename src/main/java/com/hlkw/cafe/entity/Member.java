@@ -10,7 +10,6 @@ import java.util.logging.Level;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 public class Member {
     private String id;
     private String pw;
@@ -19,6 +18,7 @@ public class Member {
     private String phoneNum;
     private Gender gender;
     private String email;
-    private String nickName;
+    private String nickname;
     private Level level;
+    private Board board;
 }

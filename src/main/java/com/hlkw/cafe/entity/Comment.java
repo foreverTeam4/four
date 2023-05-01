@@ -12,6 +12,6 @@ import org.springframework.stereotype.Component;
 public class Comment {
     private Member member;
     private String content;
-    private int like;
+    private int likeIt;
     private int dislike;
 }
