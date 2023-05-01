@@ -1,0 +1,71 @@
+.container{
+    width: 1400px;
+    margin: 0 auto;
+}
+
+/* header 영역 */
+.top-header{
+    margin: 30px auto;
+    height: 30px;
+    width: 90%;
+    display: flex;
+    align-items: center;
+}
+
+.logo{
+    width: 35px;
+    height: 35px;
+}
+
+.burger-btn{
+    width: 20px;
+    height: 20px;
+}
+
+.logo-text{
+    color: white;
+    margin: 0 auto;
+    font-weight: 200;
+    font-size: 23px;
+}
+
+/* Category IMG 영역 */
+.category1Img{
+    width: 95%;
+    height: 450px;
+    background-image: url("/assets/jpg/poster1.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    margin: 30px auto;
+
+}
+
+/* Main Content영역 */
+.text-wrapper{
+    color: white;
+    display: flex;
+    width: 75%;
+    margin: 0 auto;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    height: 40px;
+    border-bottom: 1px solid white;
+}
+
+/* 목록별 크기 */
+.boardNo{
+    width: 5%;
+}
+.title{
+    width: 65%;
+}
+.nickname{
+    width: 10%;
+}
+.write-date{
+    width: 15%;
+}
+.view-count{
+    width: 5%;
+}

@@ -4,15 +4,17 @@ import com.hlkw.cafe.entity.Member;
 import com.hlkw.cafe.service.BoardService;
 import com.hlkw.cafe.service.CommentService;
 import com.hlkw.cafe.service.MemberService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("")
+@RequestMapping("/board")
 public class CafeController {
 
     private final BoardService boardService;
@@ -30,5 +32,9 @@ public class CafeController {
         }
     }
 
-
+    @GetMapping("/test")
+    public String test(){
+        System.out.println("test성공!");
+        return "test";
+    }
 }
