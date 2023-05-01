@@ -4,18 +4,19 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hlkw.cafe.repository.BoardMapper">
 
-    <select id="search" resultType="board">
-        select * from dust_board
-        <if test = 'searchBy.equals("writer")'>
-            where id in (select id from dust_member where nickname like '%${word}%')
-        </if>
-        <if test = 'searchBy.equals("title")'>
-            where title like '%${word}%'
-        </if>
-        <if test = 'searchBy.equals("content")'>
-            where content like '%${word}%'
-        </if>
-    </select>
+<!--    <select id="search" resultType="board">-->
+<!--        select * from dust_board-->
+<!--        <if test = 'searchBy.equals("writer")'>-->
+<!--            where id in (select id from dust_member where nickname like '%${word}%')-->
+<!--        </if>-->
+<!--        <if test = 'searchBy.equals("title")'>-->
+<!--            where title like '%${word}%'-->
+<!--        </if>-->
+<!--        <if test = 'searchBy.equals("content")'>-->
+<!--            where content like '%${word}%'-->
+<!--        </if>-->
+<!--    </select>-->
+
     <select id="findOne" resultType="board">
         select * from dust_board where board_no = #{boardNo}
     </select>
