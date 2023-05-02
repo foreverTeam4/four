@@ -15,7 +15,6 @@ public class Board {
     private String title;
     private  String content;
     private  int viewCount;
-    private  Member member;
-    private Comment comment;
+    private  String id;
     private LocalDateTime writtenDate;
 }
