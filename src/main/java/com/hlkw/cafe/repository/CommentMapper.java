@@ -8,5 +8,5 @@ import java.util.List;
 @Mapper
 public interface CommentMapper {
 
-    List<Comment> getList(int boardNo);
+    List<Comment> getBoardCommentList(int boardNo);
 }
