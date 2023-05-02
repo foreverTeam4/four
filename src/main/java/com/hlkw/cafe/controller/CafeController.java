@@ -2,6 +2,7 @@ package com.hlkw.cafe.controller;
 
 import com.hlkw.cafe.dto.WriteDto;
 import com.hlkw.cafe.entity.Board;
+import com.hlkw.cafe.entity.Comment;
 import com.hlkw.cafe.entity.Member;
 import com.hlkw.cafe.service.BoardService;
 import com.hlkw.cafe.service.CommentService;
@@ -26,6 +27,10 @@ public class CafeController {
     private final MemberService memberService;
     private final CommentService commentService;
 
+    @GetMapping("/test")
+    public String test(){
+        return "/test";
+    }
     /*
         param1 : id 아이디
         param2 : pw 패스워드
@@ -54,7 +59,9 @@ public class CafeController {
     @GetMapping("/detail")
     public String boardDetail(int boardNo, Model model) {
         Board board = boardService.boardDetail(boardNo);
+        List<Comment> commentList = commentService.getList(boardNo);
         model.addAttribute("b", board);
+        model.addAttribute("c", commentList);
         return "detail"; //세진 상세페이지 jsp
     }
 
