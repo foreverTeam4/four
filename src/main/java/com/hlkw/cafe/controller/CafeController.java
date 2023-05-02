@@ -59,7 +59,7 @@ public class CafeController {
     @GetMapping("/detail")
     public String boardDetail(int boardNo, Model model) {
         Board board = boardService.boardDetail(boardNo);
-        List<Comment> commentList = commentService.getList(boardNo);
+        List<Comment> commentList = commentService.getBoardCommentList (boardNo);
         model.addAttribute("b", board);
         model.addAttribute("c", commentList);
         return "detail"; //세진 상세페이지 jsp

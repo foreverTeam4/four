@@ -3,3 +3,24 @@ body {
     background-size: 100%;
 }
 
+.container {
+    border: 1px solid #fff;
+    padding: 20px;
+    width: 1000px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.container .messageWrapper .message {
+    color: #fff;
+    font-size: 25px;
+    font-weight: lighter;
+}
+
+.container .loginBlock {
+    color: #fdeaa8;
+    font-size: 25px;
+    font-weight: lighter;
+}
