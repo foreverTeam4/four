@@ -1,5 +1,6 @@
 package com.hlkw.cafe.controller;
 
+import com.hlkw.cafe.dto.CafeListResponseDTO;
 import com.hlkw.cafe.dto.WriteDto;
 import com.hlkw.cafe.entity.Board;
 import com.hlkw.cafe.entity.Comment;
@@ -52,6 +53,13 @@ public class CafeController {
             return "/main"; //석빈이 메인 페이지 jsp
         }
 
+    }
+
+    @GetMapping("/boardView")
+    public String boardView(Model model) {
+        List<CafeListResponseDTO> responseDTOS = boardService.getList();
+        model.addAttribute("cfList", responseDTOS);
+        return "boardView";
     }
 
     //게시글 디테일 조회

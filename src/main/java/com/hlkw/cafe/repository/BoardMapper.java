@@ -1,5 +1,6 @@
 package com.hlkw.cafe.repository;
 
+import com.hlkw.cafe.dto.CafeListResponseDTO;
 import com.hlkw.cafe.dto.WriteDto;
 import com.hlkw.cafe.entity.Board;
 import org.apache.ibatis.annotations.Mapper;
@@ -16,4 +17,6 @@ public interface BoardMapper {
     boolean remove(int boardNo);
 
      List<Board> search(String searchBy, String word);
+
+    List<CafeListResponseDTO> findAll();
 }

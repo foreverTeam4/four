@@ -1,5 +1,6 @@
 package com.hlkw.cafe.service;
 
+import com.hlkw.cafe.dto.CafeListResponseDTO;
 import com.hlkw.cafe.dto.WriteDto;
 import com.hlkw.cafe.entity.Board;
 import com.hlkw.cafe.repository.BoardMapper;
@@ -29,5 +30,9 @@ public class BoardService {
 
     public List<Board> boardSearch(String searchBy, String word) {
         return boardMapper.search(searchBy, word);
+    }
+
+    public List<CafeListResponseDTO> getList() {
+        return boardMapper.findAll();
     }
 }

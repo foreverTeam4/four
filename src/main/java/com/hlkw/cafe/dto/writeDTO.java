@@ -1,13 +1,15 @@
 package com.hlkw.cafe.dto;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
+import org.springframework.stereotype.Component;
 
-@Getter
-@ToString
-@EqualsAndHashCode
-public class writeDTO {
-
-
+@Getter @Setter @ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Component
+public class WriteDto {
+    private long boardNo;
+    private String title;
+    private String content;
 }
