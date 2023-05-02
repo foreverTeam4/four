@@ -27,10 +27,6 @@ public class CafeController {
     private final MemberService memberService;
     private final CommentService commentService;
 
-    @GetMapping("/test")
-    public String test(){
-        return "/test";
-    }
     /*
         param1 : id 아이디
         param2 : pw 패스워드
@@ -40,12 +36,18 @@ public class CafeController {
         - 멤버객체가 일반 회원이라면 메인화면으로 이동
         - 멤버객체가 null이라면 로그인 페이지로 이동
      */
-    @PostMapping("/login")
+
+    @GetMapping("/login")
+    public String loginPage(){
+        return "/login";
+    }
+
+    @PostMapping("/main")
     public String login(String id, String pw, Model model) {
         Member mbr = memberService.login(id, pw);
         model.addAttribute("m", mbr);
         if (mbr == null) {
-            return "/index"; //
+            return "/loginfail"; //
         } else if (mbr.getId().equals("admin")) {
             return "/admin_main"; // 태근이 관리자 메인 jsp
         } else {

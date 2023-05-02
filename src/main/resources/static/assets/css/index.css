@@ -1,6 +1,7 @@
 * {
     box-sizing: border-box;
 }
+
 body {
     background: url("../jpg/background.jpg") repeat;
     background-size: 100%;
@@ -26,36 +27,32 @@ body {
     margin-bottom: 180px;
 }
 
-.container .loginBlock {
-    width: 1000px;
-    color: #fdeaa8;
-    font-size: 50px;
-    font-weight: lighter;
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-}
-
-.container .loginBlock .login {
-    display: flex;
-    align-items: center;
-}
-
-.container .loginBlock .login input {
+.container .indexBlock {
     font-size: 40px;
-    background: none;
-    border: none;
-    outline: none;
-    color: #fff;
-    width: 350px;
-    margin: 0 20px;
-    border-bottom: 1px solid gray;
-    padding-bottom: 20px;
+    font-weight: lighter;
+    display: flex;
+    position: relative;
+    border: 1px solid gray;
+    border-left: none;
+    border-right: none;
 }
 
-.container .fail {
-    color: rgba(255, 0, 0, 0.63);
-    font-weight: lighter;
-    position: absolute;
-    bottom: 15px;
+.container .indexBlock .selectBlock {
+    text-decoration: none;
+    color: #fdeaa8;
+    width: 600px;
+}
+
+.container .indexBlock .selectBlock #loginPage {
+    border-right: 1px solid gray;
+}
+
+.container .indexBlock .selectBlock h2 {
+    margin: 0;
+    padding-top: 60px;
+    margin-left: 20px;
+}
+
+.container .indexBlock .selectBlock .num {
+    font-size: 2em;
 }
