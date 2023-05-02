@@ -10,8 +10,9 @@ import org.springframework.stereotype.Component;
 @Builder
 
 public class Comment {
-    private Member member;
+    private long commentNum;
+    private String id;
     private String content;
     private int likeIt;
-    private int dislike;
+    private long boardNo;
 }
