@@ -1,5 +1,5 @@
 /* --font--
-    국문 : Gothic A1 
+    국문 : Noto Sans KR
     Gothic1 - font weight 400이하 사용
     영문 : Montserrat
     Montserrat - font weight 600이하 사용
@@ -13,8 +13,7 @@
 
 
 * {
-    font-family: 'Montserrat', sans-serif;
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'Montserrat', 'Noto Sans KR';
 }
 
 /* reset CSS */
