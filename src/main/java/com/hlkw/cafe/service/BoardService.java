@@ -1,6 +1,7 @@
 package com.hlkw.cafe.service;
 
-import com.hlkw.cafe.dto.CafeListResponseDTO;
+import com.hlkw.cafe.dto.WriteDto;
+import com.hlkw.cafe.entity.Board;
 import com.hlkw.cafe.repository.BoardMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,9 +15,19 @@ public class BoardService {
     private final BoardMapper boardMapper;
 
 
-    public List<CafeListResponseDTO> getList() {
-        boardMapper.findAll();
+    public Board boardDetail(int boardNo) {
+        return boardMapper.findOne(boardNo);
+    }
 
-        return boardMapper.findAll();
+    public boolean boardUpdate(WriteDto dto) {
+        return boardMapper.modify(dto);
+    }
+
+    public void removeBoard(int boardNo) {
+        boardMapper.remove(boardNo);
+    }
+
+    public List<Board> boardSearch(String searchBy, String word) {
+        return boardMapper.search(searchBy, word);
     }
 }
