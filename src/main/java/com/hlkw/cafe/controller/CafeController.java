@@ -100,7 +100,9 @@ public class CafeController {
 
     @GetMapping("/admin")
     public String adminList(){
-        commentService.getBoardCommentList(0);
+        List<Comment> commentList = commentService.getBoardCommentList(0);
+        List<Board> boardList = boardService.boardSearch("searchBy","");
+
         return "admin";
     }
 

@@ -7,13 +7,13 @@
     <select id="search" resultType="board">
         select * from dust_board
         <if test = 'searchBy == "writer"'>
-            where id in (select id from dust_member where nickname like concat(‘%’, #{word}, ‘%’))
+            where id in (select id from dust_member where nickname like concat('%', #{word}, '%'))
         </if>
         <if test = 'searchBy == "title"'>
-            where title like concat(‘%’, #{word}, ‘%’)
+            where title like concat('%', #{word}, '%')
         </if>
         <if test = 'searchBy == "content"'>
-            where content like concat(‘%’, #{word}, ‘%’)
+            where content like concat('%', #{word}, '%')
         </if>
     </select>
 
@@ -28,5 +28,7 @@
     <delete id="remove">
         delete from dust_board where board_no = #{boardNo}
     </delete>
+
+
 
 </mapper>

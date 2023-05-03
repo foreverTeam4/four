@@ -1,7 +1,6 @@
 package com.hlkw.cafe.entity;
 
 public enum Level {
-
-    MANAGER
+    MANAGER, COSMOS, GALAXY, NEBULA, DUST
 
 }

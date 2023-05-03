@@ -16,4 +16,6 @@ public interface BoardMapper {
     boolean remove(int boardNo);
 
      List<Board> search(String searchBy, String word);
+
+
 }
