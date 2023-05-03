@@ -1,10 +1,14 @@
 package com.hlkw.cafe.service;
 
+
+import com.hlkw.cafe.dto.BoardListDto;
+import com.hlkw.cafe.dto.MyBoardListDto;
+import com.hlkw.cafe.dto.MyCommentListDto;
 import com.hlkw.cafe.dto.WriteDto;
 import com.hlkw.cafe.entity.Board;
+import com.hlkw.cafe.entity.Comment;
 import com.hlkw.cafe.repository.BoardMapper;
 import lombok.RequiredArgsConstructor;
-import com.hlkw.cafe.dto.BoardListDTO;
 
 import org.springframework.stereotype.Service;
 
@@ -20,21 +24,13 @@ public class BoardService {
 
     public final BoardMapper boardRepository;
 
-    //마이페이지에 보여질 내가 쓴글 전체 list 목록(줄인 제목으로)
-    public List<BoardListDTO> myPageTitleList(Board board){
+    //    마이페이지에 보여질 내가 쓴글 전체 list 목록(줄인 제목으로)
     public Board boardDetail(int boardNo) {
         return boardMapper.findOne(boardNo);
     }
 
     public boolean boardUpdate(WriteDto dto) {
         return boardMapper.modify(dto);
-    }
-        return boardRepository.myFindAll(board)
-                .stream()
-                .map(BoardListDTO::new)
-                .collect(toList())
-                ;
-
     }
 
     public void removeBoard(int boardNo) {
@@ -44,4 +40,27 @@ public class BoardService {
     public List<Board> boardSearch(String searchBy, String word) {
         return boardMapper.search(searchBy, word);
     }
+
+    // 동우 마이페이지 내 내가 작성한글 list
+    public List<MyBoardListDto> myPageTitleList(Board board){
+
+        return boardMapper.myFindAll(board)
+                .stream()
+                .map(MyBoardListDto::new)
+                .collect(toList())
+                ;
+
+    }
+
+    //동우 마이페이지 내 내가 작성한 댓글 list
+    public List<MyCommentListDto> myCommentListDtoList(Comment comment){
+        return boardMapper.myCommentList(comment)
+                .stream()
+                .map(MyCommentListDto::new)
+                .collect(toList())
+                ;
+    }
+
+
+
 }

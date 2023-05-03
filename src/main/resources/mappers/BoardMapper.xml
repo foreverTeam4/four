@@ -29,4 +29,22 @@
         delete from dust_board where board_no = #{boardNo}
     </delete>
 
+
+    //동우 내가 쓴 게시물 글 조회
+    <select id="myfindAll" resultType="board">
+        SELECT board_no, title, content, id, written_date, view_count
+        FROM dust_board
+        WHERE id=#{id}
+        ORDER BY board_no
+    </select>
+
+    //동우 내가 쓴 댓글 조회
+    <select id="myCommentList" resultType="comment">
+        SELECT comment_num, content, id, written_date, view_count
+        From dust_comment
+        Where id=#{id}
+        ORDER BY comment_num
+    </select>
+
+
 </mapper>

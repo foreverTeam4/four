@@ -3,7 +3,6 @@ package com.hlkw.cafe.dto;
 import com.hlkw.cafe.entity.Board;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
@@ -11,7 +10,7 @@ import java.time.LocalDateTime;
 @Getter @ToString
 @EqualsAndHashCode
 
-public class BoardListDTO {
+public class BoardListDto {
 
     private final long boardNo;
     private final String shortTitle;
@@ -20,7 +19,7 @@ public class BoardListDTO {
     private final int viewCount;
 
     //마이페이지 내 보여질 게시글 목록
-    public BoardListDTO(Board board){
+    public BoardListDto(Board board){
         this.boardNo=board.getBoardNo();
         this.shortContent=board.getTitle();
         this.shortTitle=board.getTitle();
@@ -28,6 +27,7 @@ public class BoardListDTO {
         this.viewCount= board.getViewCount();
 
     }
+
 
 
 }
