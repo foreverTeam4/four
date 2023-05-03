@@ -14,4 +14,13 @@ public class MemberService {
     public Member login(String id, String pw) {
         return mapper.findOne(id, pw);
     }
+
+
+    //동우 마이페이지 업데이트
+    public Member mypageUpdate(Member member) {
+        return mapper.mypageUpdate(new Member());
+
+    }
+
+
 }

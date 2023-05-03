@@ -1,5 +1,7 @@
 package com.hlkw.cafe.controller;
 
+import com.hlkw.cafe.dto.MyBoardListDto;
+import com.hlkw.cafe.dto.MyCommentListDto;
 import com.hlkw.cafe.dto.WriteDto;
 import com.hlkw.cafe.entity.Board;
 import com.hlkw.cafe.entity.Comment;
@@ -104,5 +106,29 @@ public class CafeController {
         return "admin";
     }
 
+    // 동우 마이페이지 내 내가 작성한글 목록 조회
+    @GetMapping("/myboardList")
+    public String myboardlist(Model model, Board board) {
+        List<MyBoardListDto> myPageTitleList = boardService.myPageTitleList(board);
+        model.addAttribute("myPageList", myPageTitleList);
+        return "";
+    }
 
+    //동우 마이페이지 내 내가 작성한 댓글 조회
+    @GetMapping("/myCommentList")
+    public String mycommentlist(Model model, Comment comment) {
+        List<MyCommentListDto> mycommentlist = boardService.myCommentListDtoList(comment);
+        model.addAttribute("myCommentList", mycommentlist);
+        return "";
+    }
+
+
+
+    //동우 마이페이지 내 내정보 수정
+    @GetMapping("/mypageUpdate")
+    public String mypageUpdate(Member member){
+        memberService.mypageUpdate(member);
+
+        return "";
+    }
 }
