@@ -76,8 +76,22 @@ class BoardMapperTest {
 
         //then
         System.out.println("p의 distinguish : "+p.getDistinguish());
+    }
 
+    @Test
+    @DisplayName("distinguish값에 1을 주면 공지글 전체가 나와야 한다.")
+    void adminBoardTest(){
+        //given
+        int test = 1;
 
+        //when
+        List<Board> admin = boardMapper.findAdmin(test);
+        for (Board board : admin) {
+            System.out.println("board = " + board);
+        }
+
+        //then
+        assertEquals(2, admin.size());
     }
 
 }

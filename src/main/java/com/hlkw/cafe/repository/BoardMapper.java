@@ -26,9 +26,11 @@ public interface BoardMapper {
     // 동우 내가 작성한 댓글 list
     List<Comment> myCommentList(Comment comment);
 
-
     //태근
     boolean save(Board board);
+
+    //태근 공지글 불러오기
+    List<Board> findAdmin(int distinguish);
 
 }
 
