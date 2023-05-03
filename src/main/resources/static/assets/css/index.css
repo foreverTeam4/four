@@ -51,6 +51,7 @@ body {
     margin: 0;
     padding-top: 60px;
     margin-left: 20px;
+    font-weight: 200;
 }
 
 .container .indexBlock .selectBlock .num {
