@@ -132,5 +132,3 @@ public class CafeController {
         return "";
     }
 }
-
-}
