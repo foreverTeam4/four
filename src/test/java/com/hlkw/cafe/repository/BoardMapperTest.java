@@ -32,12 +32,14 @@ class BoardMapperTest {
     }
 
     @Test
+    @DisplayName("보드넘버 1로 게시물을 조회했을 때 게시물이 반환되어야 한다")
     void findOne(){
         long boardNo = 1;
         Board one = boardMapper.findOne(boardNo);
         System.out.println(one);
     }
     @Test
+    @DisplayName("보드넘버 1번 게시물이 삭제되어야 한다")
     @Transactional @Rollback
     void remove(){
         long boardNo = 1;
