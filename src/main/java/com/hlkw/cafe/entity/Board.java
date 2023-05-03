@@ -17,4 +17,5 @@ public class Board {
     private  int viewCount;
     private  String id;
     private LocalDateTime writtenDate;
+    private int distinguish;
 }
