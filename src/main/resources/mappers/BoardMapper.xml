@@ -55,4 +55,11 @@
         </if>
     </insert>
 
+    <select id="findAdmin" resultType="board">
+        SELECT *
+        From dust_board
+        Where distinguish=#{distinguish}
+    </select>
+
+
 </mapper>
