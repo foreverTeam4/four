@@ -13,7 +13,7 @@ public class CommentService {
 
     private final CommentMapper mapper;
 
-    public List<Comment> getBoardCommentList (int boardNo) {
+    public List<Comment> getBoardCommentList (long boardNo) {
         return mapper.getBoardCommentList (boardNo);
     }
 }

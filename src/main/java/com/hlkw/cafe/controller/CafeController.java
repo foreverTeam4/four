@@ -1,5 +1,7 @@
 package com.hlkw.cafe.controller;
 
+import com.hlkw.cafe.dto.MyBoardListDto;
+import com.hlkw.cafe.dto.MyCommentListDto;
 import com.hlkw.cafe.dto.WriteDto;
 import com.hlkw.cafe.entity.Board;
 import com.hlkw.cafe.entity.Comment;
@@ -59,7 +61,7 @@ public class CafeController {
     //게시글 디테일 조회
     //게시글 번호로 Board 객체 반환받아 jsp에 전달
     @GetMapping("/detail")
-    public String boardDetail(int boardNo, Model model) {
+    public String boardDetail(long boardNo, Model model) {
         Board board = boardService.boardDetail(boardNo);
         List<Comment> commentList = commentService.getBoardCommentList (boardNo);
         model.addAttribute("b", board);
@@ -69,7 +71,7 @@ public class CafeController {
 
     //게시글 상세페이지에서 수정하기 페이지로 연결
     @GetMapping("modify")
-    public String boardUpdate(int boardNo){
+    public String boardUpdate(long boardNo){
         return "modify"; //세진 수정페이지 jsp
     }
     //게시글 수정내역 전달
@@ -82,7 +84,7 @@ public class CafeController {
 
     //게시글 삭제
     @GetMapping("/remove")
-    public String removeBoard(int boardNo){
+    public String removeBoard(long boardNo){
         boardService.removeBoard(boardNo);
         return "redirect:/main"; //석빈이 메인 페이지 jsp
     }
@@ -106,5 +108,29 @@ public class CafeController {
         return "admin";
     }
 
+    // 동우 마이페이지 내 내가 작성한글 목록 조회
+    @GetMapping("/myboardList")
+    public String myboardlist(Model model, Board board) {
+        List<MyBoardListDto> myPageTitleList = boardService.myPageTitleList(board);
+        model.addAttribute("myPageList", myPageTitleList);
+        return "";
+    }
 
+    //동우 마이페이지 내 내가 작성한 댓글 조회
+    @GetMapping("/myCommentList")
+    public String mycommentlist(Model model, Comment comment) {
+        List<MyCommentListDto> mycommentlist = boardService.myCommentListDtoList(comment);
+        model.addAttribute("myCommentList", mycommentlist);
+        return "";
+    }
+
+
+
+    //동우 마이페이지 내 내정보 수정
+    @GetMapping("/mypageUpdate")
+    public String mypageUpdate(Member member){
+        memberService.mypageUpdate(member);
+
+        return "";
+    }
 }

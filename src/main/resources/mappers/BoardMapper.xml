@@ -10,10 +10,10 @@
             where id in (select id from dust_member where nickname like concat('%', #{word}, '%'))
         </if>
         <if test = 'searchBy == "title"'>
-            where title like concat('%', #{word}, '%')
+            where title like concat('%', #{word}, '%'))
         </if>
         <if test = 'searchBy == "content"'>
-            where content like concat('%', #{word}, '%')
+            where content like concat('%', #{word}, '%'))
         </if>
     </select>
 
@@ -29,6 +29,18 @@
         delete from dust_board where board_no = #{boardNo}
     </delete>
 
+    <select id="myfindAll" resultType="board">
+        SELECT board_no, title, content, id, written_date, view_count
+        FROM dust_board
+        WHERE id=#{id}
+        ORDER BY board_no
+    </select>
 
+    <select id="myCommentList" resultType="comment">
+        SELECT comment_num, content, id, written_date, view_count
+        From dust_comment
+        Where id=#{id}
+        ORDER BY comment_num
+    </select>
 
 </mapper>
