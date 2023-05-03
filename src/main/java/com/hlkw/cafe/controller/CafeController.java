@@ -61,7 +61,7 @@ public class CafeController {
     //게시글 디테일 조회
     //게시글 번호로 Board 객체 반환받아 jsp에 전달
     @GetMapping("/detail")
-    public String boardDetail(int boardNo, Model model) {
+    public String boardDetail(long boardNo, Model model) {
         Board board = boardService.boardDetail(boardNo);
         List<Comment> commentList = commentService.getBoardCommentList (boardNo);
         model.addAttribute("b", board);
@@ -71,7 +71,7 @@ public class CafeController {
 
     //게시글 상세페이지에서 수정하기 페이지로 연결
     @GetMapping("modify")
-    public String boardUpdate(int boardNo){
+    public String boardUpdate(long boardNo){
         return "modify"; //세진 수정페이지 jsp
     }
     //게시글 수정내역 전달
@@ -84,7 +84,7 @@ public class CafeController {
 
     //게시글 삭제
     @GetMapping("/remove")
-    public String removeBoard(int boardNo){
+    public String removeBoard(long boardNo){
         boardService.removeBoard(boardNo);
         return "redirect:/main"; //석빈이 메인 페이지 jsp
     }

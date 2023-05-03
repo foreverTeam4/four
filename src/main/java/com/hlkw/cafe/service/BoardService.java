@@ -9,7 +9,6 @@ import com.hlkw.cafe.entity.Board;
 import com.hlkw.cafe.entity.Comment;
 import com.hlkw.cafe.repository.BoardMapper;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,10 +21,8 @@ public class BoardService {
 
     private final BoardMapper boardMapper;
 
-    public final BoardMapper boardRepository;
 
-    //    마이페이지에 보여질 내가 쓴글 전체 list 목록(줄인 제목으로)
-    public Board boardDetail(int boardNo) {
+    public Board boardDetail(long boardNo) {
         return boardMapper.findOne(boardNo);
     }
 
@@ -33,7 +30,7 @@ public class BoardService {
         return boardMapper.modify(dto);
     }
 
-    public void removeBoard(int boardNo) {
+    public void removeBoard(long boardNo) {
         boardMapper.remove(boardNo);
     }
 

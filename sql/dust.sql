@@ -46,3 +46,6 @@ CREATE TABLE dust_board
 select * from dust_member;
 select * from dust_board;
 select * from dust_comment;
+
+insert into dust_member (id, pw, age, phone_num, email, nickname, level) values ('admin', '1234', 35, '01000000000', 'admin@dust.net', '관리자', 'manager');
+insert into dust_board (title, content, view_count, id) values ('테스트제목', '테스트내용', 0, 'admin');
