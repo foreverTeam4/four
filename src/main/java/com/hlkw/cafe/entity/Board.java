@@ -18,4 +18,5 @@ public class Board {
     private  String id;
     private LocalDateTime writtenDate;
     private int distinguish;
+    private Category category;
 }
