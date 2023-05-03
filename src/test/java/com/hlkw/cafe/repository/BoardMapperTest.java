@@ -1,6 +1,7 @@
 package com.hlkw.cafe.repository;
 
 import com.hlkw.cafe.entity.Board;
+import com.hlkw.cafe.entity.Category;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static com.hlkw.cafe.entity.Category.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -56,6 +58,25 @@ class BoardMapperTest {
         for (Board board : content) {
             System.out.println("board = " + board.getContent());
         }
+    }
+
+    @Test
+    @DisplayName("save는 id='admin'일때는 distinguish가 0으로 입력되고, 나머지 id는 1로 입력된다.")
+    void adminSaveTest(){
+        //given
+        Board p = new Board().builder()
+                .title("안녕하세요")
+                .content("노트입니다.")
+                .id("test2")
+                .category(HORROR)
+                .build();
+
+        //when
+        boolean save = boardMapper.save(p);
+
+        //then
+        System.out.println("p의 distinguish : "+p.getDistinguish());
+
 
     }
 

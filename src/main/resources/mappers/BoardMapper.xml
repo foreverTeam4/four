@@ -46,12 +46,12 @@
 
     <insert id="save">
         INSERT INTO dust_board
-        (title,content,view_count,id,written_date)
+        (title,content,view_count,id,distinguish,category)
         <if test="id == 'admin'">
-        VALUES(#{title},#{content},#{viewCount},#{id},#{writtenDate})
+        VALUES(#{title},#{content},0,#{id},1, #{category})
         </if>
         <if test="id != 'admin'">
-        VALUES(#{title},#{content},#{viewCount},#{id},#{writtenDate})
+            VALUES(#{title},#{content},0,#{id},0, #{category})
         </if>
     </insert>
 
