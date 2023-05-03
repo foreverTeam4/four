@@ -27,6 +27,9 @@ public interface BoardMapper {
     List<Comment> myCommentList(Comment comment);
 
 
+    //태근
+    boolean save(Board board);
+
 }
 
 
