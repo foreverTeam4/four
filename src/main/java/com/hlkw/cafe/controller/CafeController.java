@@ -98,4 +98,11 @@ public class CafeController {
         return "searchList"; //세진 검색된 글 리스트 jsp
     }
 
+    @GetMapping("/admin")
+    public String adminList(){
+        commentService.getBoardCommentList(0);
+        return "admin";
+    }
+
+
 }

@@ -5,7 +5,13 @@
 <mapper namespace="com.hlkw.cafe.repository.CommentMapper">
 
     <select id="getBoardCommentList" resultType="comment">
-        select * from dust_comment where board_no = #{boardNo} order by written_date desc;
+        select *
+        from dust_comment
+        <if test="boardNo>0">
+            where board_no = #{boardNo}
+        </if>
+        order by written_date desc;
+
     </select>
 
 </mapper>
