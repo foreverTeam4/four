@@ -1,0 +1,64 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    background: url("../jpg/background.jpg") repeat;
+    background-size: 100%;
+}
+
+.container {
+    padding: 0 50px;
+    width: 1200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.container .messageWrapper {
+    padding-top: 90px;
+    background: url("../jpg/logo_yellow.png") no-repeat;
+    background-size: 75px;
+}
+.container .messageWrapper .message {
+    color: #fff;
+    font-size: 28px;
+    font-weight: lighter;
+    margin-bottom: 180px;
+}
+
+.container .loginBlock {
+    width: 1000px;
+    color: #fdeaa8;
+    font-size: 50px;
+    font-weight: lighter;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.container .loginBlock .login {
+    display: flex;
+    align-items: center;
+}
+
+.container .loginBlock .login input {
+    font-size: 40px;
+    background: none;
+    border: none;
+    outline: none;
+    color: #fff;
+    width: 350px;
+    margin: 0 20px;
+    border-bottom: 1px solid gray;
+    padding-bottom: 20px;
+}
+
+.container .fail {
+    color: rgba(255, 0, 0, 0.63);
+    font-weight: lighter;
+    position: absolute;
+    bottom: 15px;
+}
+#id, #pw{
+    font-weight: 200;
+}

@@ -1,0 +1,32 @@
+/* --font--
+    국문 : Noto Sans KR
+    Gothic1 - font weight 400이하 사용
+    영문 : Montserrat
+    Montserrat - font weight 600이하 사용
+    폰트 사이즈는 컨텐츠에 맞춰 적용
+    */
+
+/*
+    background-image가 필요하면
+    사이즈는 100%항상 fix
+*/
+
+
+* {
+    font-family: 'Montserrat', 'Noto Sans KR';
+}
+
+/* reset CSS */
+@import url("https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css");
+/* font CSS */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+body {
+    font-size: 15px;
+    font-family: 'Montserrat', 'Noto Sans KR';
+    margin: 0;
+    padding: 0;
+    background-image: url("/assets/jpg/background.jpg");
+    background-size: 100%;
+    background-repeat: repeat;
+}
