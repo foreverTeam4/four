@@ -8,4 +8,8 @@ public interface MemberMapper {
 
     Member findOne(String id, String pw);
 
+
+//동우 마이페이지 업데이트
+    Member mypageUpdate(Member member);
+
 }
