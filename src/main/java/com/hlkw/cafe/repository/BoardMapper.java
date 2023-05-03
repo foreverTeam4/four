@@ -9,11 +9,11 @@ import java.util.List;
 @Mapper
 public interface BoardMapper {
 
-    Board findOne(int boardNo);
+    Board findOne(long boardNo);
 
     boolean modify(WriteDto dto);
 
-    boolean remove(int boardNo);
+    boolean remove(long boardNo);
 
      List<Board> search(String searchBy, String word);
 }

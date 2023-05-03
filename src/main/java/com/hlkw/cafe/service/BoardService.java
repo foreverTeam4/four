@@ -15,7 +15,7 @@ public class BoardService {
     private final BoardMapper boardMapper;
 
 
-    public Board boardDetail(int boardNo) {
+    public Board boardDetail(long boardNo) {
         return boardMapper.findOne(boardNo);
     }
 
@@ -23,7 +23,7 @@ public class BoardService {
         return boardMapper.modify(dto);
     }
 
-    public void removeBoard(int boardNo) {
+    public void removeBoard(long boardNo) {
         boardMapper.remove(boardNo);
     }
 
