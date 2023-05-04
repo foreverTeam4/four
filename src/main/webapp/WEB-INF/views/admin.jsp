@@ -2,13 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="/assets/css/board-common.css">
-<link rel="stylesheet" href="/assets/css/header.css">
-<link rel="stylesheet" href="/assets/css/admin.css">
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="/assets/css/board-common.css">
+    <link rel="stylesheet" href="/assets/css/header.css">
+    <link rel="stylesheet" href="/assets/css/admin.css">
 </head>
+
 <body>
     <div class="admin-container">
         <header class="top-header">
@@ -18,20 +20,43 @@
             <img class="burger-btn" src="/assets/jpg/button.png" alt="">
         </header>
 
+        <div class="today-container">
+            <section class="today-wrapper">
+                <div class="today-title">
+                    오늘 게시물
+                </div>
+                <div class="today-count-wrapper">
+                    <span class="today-count">20</span>
+                    <span>회</span>
+                </div>
+            </section>
+            <section class="today-wrapper">
+                <div class="today-title">
+                    댓글
+                </div>
+                <div class="today-count-wrapper">
+                    <span class="today-count">01</span>
+                    <span>회</span>
+                </div>
+            </section>
+        </div>
 
         <!-- button 영역 -->
         <section class="btn-wrapper">
             <div class="admin-btn">
                 <div class="btn-title">공지작성</div>
                 <div class="btn-content">NOTICE</div>
+                <img class="add-btn2" src="/assets/jpg/than2.png" alt="than">
             </div>
             <div class="admin-btn">
                 <div class="btn-title">회원관리</div>
                 <div class="btn-content">LEVEL</div>
+                <img class="add-btn2" src="/assets/jpg/than2.png" alt="than">
             </div>
             <div class="admin-btn">
                 <div class="btn-title">TOP 조회수, 댓글</div>
                 <div class="btn-content">VIEWS</div>
+                <img class="add-btn2" src="/assets/jpg/than2.png" alt="than">
             </div>
         </section>
 
@@ -41,8 +66,9 @@
                 <div class="posts-main-title">최근 글</div>
                 <div class="add-wrapper">
                     <a href="" class="posts-add-btn">
-                    <div class="posts-add">더보기</div>
-                    <img src="/assets/jpg/than.png" alt="than"></a>
+                        <div class="posts-add">더보기</div>
+                        <img src="/assets/jpg/than.png" alt="than">
+                    </a>
                 </div>
             </div>
             <div class="posts-wrapper">
@@ -76,8 +102,9 @@
                 <div class="comments-main-title">최근 댓글</div>
                 <div class="add-wrapper">
                     <a href="" class="posts-add-btn">
-                    <div class="posts-add">더보기</div>
-                    <img src="/assets/jpg/than.png" alt="than"></a>
+                        <div class="posts-add">더보기</div>
+                        <img src="/assets/jpg/than.png" alt="than">
+                    </a>
                 </div>
             </div>
 
@@ -106,5 +133,7 @@
 
         </section>
     </div>
+
 </body>
+
 </html>

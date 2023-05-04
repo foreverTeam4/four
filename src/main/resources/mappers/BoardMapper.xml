@@ -7,13 +7,13 @@
     <select id="search" resultType="board">
         select * from dust_board
         <if test = 'searchBy == "writer"'>
-            where id in (select id from dust_member where nickname like concat('%', #{word}, '%'))
+            where id in (select id from dust_member where nickname like concat('%', #{word}, '%')
         </if>
         <if test = 'searchBy == "title"'>
-            where title like concat('%', #{word}, '%'))
+            where title like concat('%', #{word}, '%')
         </if>
         <if test = 'searchBy == "content"'>
-            where content like concat('%', #{word}, '%'))
+            where content like concat('%', #{word}, '%')
         </if>
     </select>
 
@@ -42,5 +42,24 @@
         Where id=#{id}
         ORDER BY comment_num
     </select>
+
+
+    <insert id="save">
+        INSERT INTO dust_board
+        (title,content,view_count,id,distinguish,category)
+        <if test="id == 'admin'">
+        VALUES(#{title},#{content},0,#{id},1, #{category})
+        </if>
+        <if test="id != 'admin'">
+            VALUES(#{title},#{content},0,#{id},0, #{category})
+        </if>
+    </insert>
+
+    <select id="findAdmin" resultType="board">
+        SELECT *
+        From dust_board
+        Where distinguish=#{distinguish}
+    </select>
+
 
 </mapper>

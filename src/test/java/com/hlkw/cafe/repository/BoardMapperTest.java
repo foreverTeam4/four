@@ -1,6 +1,7 @@
 package com.hlkw.cafe.repository;
 
 import com.hlkw.cafe.entity.Board;
+import com.hlkw.cafe.entity.Category;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static com.hlkw.cafe.entity.Category.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -46,4 +48,50 @@ class BoardMapperTest {
         boolean flag = boardMapper.remove(boardNo);
         System.out.println(flag);
     }
+
+    @Test
+    @DisplayName("SearchBy는 'content',word는 ''빈문자열로 뒀을 때 모든 리스트가 출력되어야 한다.")
+    void findAllTest(){
+
+        //when
+        List<Board> content = boardMapper.search("content", "");
+        for (Board board : content) {
+            System.out.println("board = " + board.getContent());
+        }
+    }
+
+    @Test
+    @DisplayName("save는 id='admin'일때는 distinguish가 0으로 입력되고, 나머지 id는 1로 입력된다.")
+    void adminSaveTest(){
+        //given
+        Board p = new Board().builder()
+                .title("안녕하세요")
+                .content("노트입니다.")
+                .id("test2")
+                .category(HORROR)
+                .build();
+
+        //when
+        boolean save = boardMapper.save(p);
+
+        //then
+        System.out.println("p의 distinguish : "+p.getDistinguish());
+    }
+
+    @Test
+    @DisplayName("distinguish값에 1을 주면 공지글 전체가 나와야 한다.")
+    void adminBoardTest(){
+        //given
+        int test = 1;
+
+        //when
+        List<Board> admin = boardMapper.findAdmin(test);
+        for (Board board : admin) {
+            System.out.println("board = " + board);
+        }
+
+        //then
+        assertEquals(2, admin.size());
+    }
+
 }
