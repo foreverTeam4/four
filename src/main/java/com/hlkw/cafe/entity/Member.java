@@ -18,4 +18,23 @@ public class Member {
     private String email;
     private String nickname;
     private Level level;
+
+//    public void setLevel(String level) {
+//        switch (level) {
+//            case "manager" : this.level = Level.MANAGER;
+//                break;
+//            case "cosmos" : this.level = Level.COSMOS;
+//                break;
+//            case "galaxy" : this.level = Level.GALAXY;
+//                break;
+//            case "nebula" : this.level = Level.NEBULA;
+//                break;
+//            case "dust" : this.level = Level.DUST;
+//                break;
+//        }
+//    }
+//
+//    public void setLevel(String level){
+//        this.level = Level.valueOf(level);
+//    }
 }
