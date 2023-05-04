@@ -61,6 +61,7 @@ public class CafeController {
     //게시글 디테일 조회
     //게시글 번호로 Board 객체 반환받아 jsp에 전달
     @GetMapping("/detail")
+//    public String boardDetail() {
     public String boardDetail(long boardNo, Model model) {
         Board board = boardService.boardDetail(boardNo);
         List<Comment> commentList = commentService.getBoardCommentList (boardNo);
