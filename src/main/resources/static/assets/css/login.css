@@ -32,19 +32,16 @@ body {
     font-size: 50px;
     font-weight: lighter;
     position: relative;
-    /* border: 1px solid #fff; */
 }
 
 .container .loginBlock .login {
     display: flex;
     align-items: center;
-    /* border: 1px solid #fff; */
     width: 500px;
 }
 .container .loginBlock .login .inputwrapper {
     width: fit-content;
     margin: 0 20px;
-    /* border: 1px solid #16b2b4; */
     border-bottom: 1px solid gray;
     height: 70px;
     
@@ -59,15 +56,8 @@ body {
     color: #fff;
     width: 350px;
     padding-bottom: 20px;
-    /* border: 1px solid #a44141; */
 }
 
-.container .fail {
-    color: rgba(255, 0, 0, 0.63);
-    font-weight: lighter;
-    position: absolute;
-    bottom: 15px;
-}
 #id, #pw{
     font-weight: 200;
     display: block;
@@ -89,4 +79,14 @@ body {
     position: absolute;
     right: 0;
     bottom: 15px;
+}
+
+.container .fail {
+    font-size: 13px;
+    color: rgb(150,150,150);
+    font-weight: lighter;
+    position: absolute;
+    bottom: 15px;
+    position: absolute;
+    bottom: -25px;
 }
