@@ -12,6 +12,7 @@ body {
     position: absolute;
     top: 110px;
     left: 200px;
+    padding-bottom: 100px;
 }
 .container .messageWrapper {
     padding-top: 90px;
