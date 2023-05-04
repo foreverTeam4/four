@@ -36,9 +36,8 @@
 
         <div class="detail-comment-box">
 
-            <!-- <c:foreach>로 돌릴 부분 -->
             <div class = "written-comments">
-                <img class = "white-star" src="../../../resources/static/assets/jpg/logo_white.png">
+                <img class = "white-star" src="/assets/jpg/logo_white.png">
                 <div class = "comment-userinfo">
                     <h4 id = "comment-nickname">태근</h4>
                     <h6 class = "comment-reg-date">2023.04.30 15:23</h6>
@@ -46,12 +45,11 @@
                 <div class = "comment-content">모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 모든 국민은 인간으로서의 존엄과 가치를 가지며, 행복을 추구할 권리를 가진다. 국가는 개인이 가지는 불가침의 기본적 인권을 확인하고 이를 보장할 의무를 진다.</div>
                 <div class = "comment-like">11</div>
             </div>
-            <!-- </c:foreach> -->
 
             <form action = "#" method = "get" class = "write-comment">
                 <h4 id = "write-comment-nickname">석빈</h4>
-                <input class = "comment-content" type="text" name = "content" placeholder="댓글을 남겨주세요">
-                <button type="submit">등록</button>
+                <textarea class = "comment-content" name = "content" placeholder="댓글을 남겨주세요"></textarea>
+                <button class = "regist-comment" type="submit">등록</button>
             </form>
         
         </div>

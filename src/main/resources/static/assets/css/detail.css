@@ -26,7 +26,7 @@
 
 .detail-title-box .detail-board-title {
     font-weight: 200;
-    font-size: 20x;
+    font-size: 20px;
     margin: 0;
     margin-bottom: 8px;
 }
@@ -56,7 +56,6 @@
 }
 
 .detail-title-box .memberinfo-wrap .mini-comment-count {
-    border: 1px solid #000;
     width: 65px;
     height: fit-content;
     text-align: end;
@@ -98,7 +97,6 @@
     align-items: end;
     width: fit-content;
     height: fit-content;
-    border: 1px solid #000;
     margin-top: 9px;
 }
 
@@ -135,6 +133,7 @@
     border-radius: 8px;
     overflow: hidden;
     margin-bottom: 50px;
+    position: relative;
 }
 
 .detail-wrapper .detail-comment-box .write-comment #write-comment-nickname {
@@ -144,8 +143,26 @@
     font-size: 15px;
     margin-top: 10px;
     padding-left: 35px;
+    margin-bottom: 5px;
 }
 
 .detail-wrapper .detail-comment-box .write-comment .comment-content {
     width: 900px;
+    height: 50px;
+    margin-left: 15px;
+    border: none;
+    resize: none;
+    outline: none;
+}
+
+.detail-wrapper .detail-comment-box .write-comment .regist-comment {
+    color: #fff;
+    background: black;
+    font-size: 12px;
+    border: none;
+    border-radius: 20px;
+    padding: 2px 15px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
 }
