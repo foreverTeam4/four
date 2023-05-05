@@ -1,5 +1,6 @@
 package com.hlkw.cafe.controller;
 
+import com.hlkw.cafe.dto.BoardSaveDto;
 import com.hlkw.cafe.dto.MyBoardListDto;
 import com.hlkw.cafe.dto.MyCommentListDto;
 import com.hlkw.cafe.dto.WriteDto;
@@ -42,7 +43,7 @@ public class CafeController {
      */
 
     @GetMapping("/login")
-    public String loginPage(){
+    public String loginPage() {
         return "/login";
     }
 
@@ -53,7 +54,7 @@ public class CafeController {
         if (mbr == null) {
             return "/loginfail";
         } else if (mbr.getId().equals("admin")) {
-            return "/admin";
+            return "redirect:/dust/admin";
         } else {
             return "/main"; //석빈이 메인 페이지 jsp
         }
@@ -93,7 +94,7 @@ public class CafeController {
 
     //게시글 상세페이지에서 수정하기 페이지로 연결
     @GetMapping("modify")
-    public String boardUpdate(Member mbr, long boardNo, Model model){
+    public String boardUpdate(Member mbr, long boardNo, Model model) {
         model.addAttribute("mbr", mbr);
         model.addAttribute("board", boardService.findOne(boardNo));
         return "modify"; //세진 수정페이지 jsp
@@ -102,14 +103,14 @@ public class CafeController {
     //게시글 수정내역 전달
     //게시글 번호, 제목, 내용 전달받아서 디비 업뎃 후 리다이렉트 처리
     @GetMapping("/modified")
-    public String boardUpdated(WriteDto dto){
+    public String boardUpdated(WriteDto dto) {
         boardService.boardUpdate(dto);
         return "redirect:/dust/detail";
     }
 
     //게시글 삭제
     @GetMapping("/remove")
-    public String removeBoard(long boardNo){
+    public String removeBoard(long boardNo) {
         boardService.removeBoard(boardNo);
         return "redirect:/main"; //석빈이 메인 페이지 jsp
     }
@@ -119,14 +120,15 @@ public class CafeController {
     public String boardSearch(
             @RequestParam(defaultValue = "content") String searchBy
             , String word, Model model
-    ){
+    ) {
         List<Board> filteresList = boardService.boardSearch(searchBy, word);
         model.addAttribute("list", filteresList);
         return "searchList"; //세진 검색된 글 리스트 jsp -> 석빈이 메인 사용
     }
 
+    //관리자 메인 페이지
     @GetMapping("/admin")
-    public String adminList(Model model){
+    public String adminList(Model model) {
         List<Comment> commentList = commentService.getBoardCommentList(0);
 
         //0을 입력하면 관리자 공지글 List, 1을 입력하면 멤버의 공지글 List
@@ -135,10 +137,37 @@ public class CafeController {
         String memberDistinguish = "1";
         List<Board> adminList = boardService.boardSearch(distinguish, adminDistinguish);
         List<Board> memberList = boardService.boardSearch(distinguish, memberDistinguish);
-        model.addAttribute("admin",adminList);
-        model.addAttribute("member",memberList);
+        model.addAttribute("admin", adminList);
+        model.addAttribute("member", memberList);
+//        System.out.println("adminList = " + adminList);
+//        System.out.println("memberList = " + memberList);
         return "admin";
     }
+
+    //관리자 공지글 페이지로 이동
+    @GetMapping("/notice")
+    public String notice() {
+        return "notice";
+    }
+
+    //관리자 공지글 작성
+    @PostMapping("/notice")
+    public String noticeWrite(BoardSaveDto dto) {
+        System.out.println("/dust/notice POST맵핑 발생");
+        System.out.println("dto = " + dto);
+        boolean flag = boardService.adminSave(dto);
+        if (flag) {
+            System.out.println("저장성공");
+            return "redirect:/dust/admin";
+        }else {
+            System.out.println("저장실패");
+            return "redirect:/dust/notice?result=false";
+        }
+        //post로 받은 값을 저장
+//        boardService.sa
+
+    }
+
 
     // 동우 마이페이지 내 내가 작성한글 목록 조회
     @GetMapping("/myboardList")
@@ -157,10 +186,9 @@ public class CafeController {
     }
 
 
-
     //동우 마이페이지 내 내정보 수정
     @GetMapping("/mypageUpdate")
-    public String mypageUpdate(Member member){
+    public String mypageUpdate(Member member) {
         memberService.mypageUpdate(member);
 
         return "";
