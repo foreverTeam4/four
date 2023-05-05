@@ -31,36 +31,49 @@
     margin-bottom: 8px;
 }
 
-.detail-title-box .memberinfo-wrap {
+.detail-title-box .memberinfo-wrap .writtenDate-wrapper {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; 
+    margin-bottom: 15px;
+    font-size: 12px;
+}
+
+.detail-title-box .memberinfo-wrap .writtenDate-wrapper .date-inner-wrap {
+    display: flex;
+    width: 150px;
+    color: rgb(190, 190, 190);
+}
+
+.detail-title-box .memberinfo-wrap .writtenDate-wrapper .writtenDate {
+    margin-right: 10px;
 }
 
 .detail-title-box .memberinfo-wrap .detail-board-member-info {
+    width: 100%;
     display: flex;
-    margin-bottom: 15px;
+    margin-bottom: 8px;
 }
 
 .detail-title-box .memberinfo-wrap .detail-board-member-info #board-nickname {
     margin: 0;
     padding-right: 15px;
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .detail-title-box .memberinfo-wrap .detail-board-member-info .member-level {
     margin: 0;
     font-weight: 200;
     padding: 0 15px;
-    font-size: 15px;
+    font-size: 14px;
     border-left: 1px solid #fff;
 }
 
 .detail-title-box .memberinfo-wrap .mini-comment-count {
-    width: 65px;
+    width: 58px;
     height: fit-content;
     text-align: end;
     background: url("../jpg/speechBublle.png") no-repeat left center;
-    background-size: 20px;
+    background-size: 18px;
 }
 
 .detail-wrapper .detail-content-box .content {

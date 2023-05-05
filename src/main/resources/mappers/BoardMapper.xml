@@ -7,7 +7,7 @@
     <select id="search" resultType="board">
         select * from dust_board
         <if test = 'searchBy == "writer"'>
-            where id in (select id from dust_member where nickname like concat('%', #{word}, '%')
+            where id in (select id from dust_member where nickname like concat('%', #{word}, '%'))
         </if>
         <if test = 'searchBy == "title"'>
             where title like concat('%', #{word}, '%')
@@ -61,5 +61,13 @@
         Where distinguish=#{distinguish}
     </select>
 
+    <select id="getCategoryByboardNo" resultType="board">
+        select category from dust_board
+        where board_no = #{boardNo}
+    </select>
+
+    <update id="addViewCount">
+        update dust_board set view_count = view_count + 1 where board_no = #{boardNo}
+    </update>
 
 </mapper>

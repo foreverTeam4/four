@@ -32,6 +32,9 @@ public interface BoardMapper {
     //태근 공지글 불러오기
     List<Board> findAdmin(int distinguish);
 
+    String getCategoryByboardNo(long boardNo);
+
+    void addViewCount(long boardNo);
 }
 
 

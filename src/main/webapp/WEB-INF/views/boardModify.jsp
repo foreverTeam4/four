@@ -17,12 +17,12 @@
 <div class="notice-container">
     <header class="top-header">
         <!-- logo,burger-btn태그 onclick 이벤트 추가 필요 -->
-        <img class="logo" src="/assets/jpg/logo_yellow.png" alt="">
+        <img class="logo" src="/jpg/logo_yellow.png" alt="">
         <div class="logo-text">Space Dust</div>
-        <img class="burger-btn" src="/assets/jpg/button.png" alt="">
+        <img class="burger-btn" src="/jpg/button.png" alt="">
     </header>
 
-    <div class="notice-main-title">공지 작성</div>
+    <div class="notice-main-title">태근이 공지 작성 완료되면 가져다 쓸거임 ~~~~~</div>
     <header class="notice-btn-wrapper">
         <div class="text-title">Category</div>
         <div class="category-wrapper">
@@ -46,21 +46,21 @@
 </div>
 
 <script>
-        const $btns = document.querySelector('.category-wrapper').children;
-        let prevSelected = null; //이전에 선택된 버튼을 저장할 변수
+    const $btns = document.querySelector('.category-wrapper').children;
+    let prevSelected = null; //이전에 선택된 버튼을 저장할 변수
 
-        for (const btnlist of $btns) {
-            btnlist.onclick = () => {
-                console.log("onclick 이벤트 발생");
-                btnlist.classList.add('btn-click');
+    for (const btnlist of $btns) {
+        btnlist.onclick = () => {
+            console.log("onclick 이벤트 발생");
+            btnlist.classList.add('btn-click');
 
-                if (prevSelected !== null && prevSelected !== btnlist) {
-                    prevSelected.classList.remove('btn-click');
-                }
-                prevSelected = btnlist
-            };
-        }
-    </script>
+            if (prevSelected !== null && prevSelected !== btnlist) {
+                prevSelected.classList.remove('btn-click');
+            }
+            prevSelected = btnlist
+        };
+    }
+</script>
 </body>
 
 </html>

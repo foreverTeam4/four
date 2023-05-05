@@ -21,10 +21,15 @@ public class BoardService {
 
     private final BoardMapper boardMapper;
 
+    public String getCategoryByboardNo(long boardNo){
+        return boardMapper.getCategoryByboardNo(boardNo);
+    };
+
     public Board findOne(long boardNo){
         return boardMapper.findOne(boardNo);
     }
     public Board boardDetail(long boardNo) {
+        boardMapper.addViewCount(boardNo);
         return boardMapper.findOne(boardNo);
     }
 
