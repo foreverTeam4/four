@@ -4,6 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hlkw.cafe.repository.MemberMapper">
 
+    <insert id = "save">
+        insert into dust_member value (#{id}, #{pw}, #{addr}, #{age}, #{phoneNum}, #{gender}, #{email}, #{nickname}, #{level})
+    </insert>
+
+    <select id="findOne" resultType="member">
+        select * from dust_member where id = #{id} and pw = #{pw}
+    </select>
+
 
     <!-- 동우 마이페이지 개인 정보 수정-->
     <update id="mypageUpdate">
