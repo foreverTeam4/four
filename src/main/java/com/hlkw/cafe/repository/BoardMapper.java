@@ -31,6 +31,10 @@ public interface BoardMapper {
     //태근
     boolean save(Board board);
 
+
+    String getCategoryByboardNo(long boardNo);
+
+    void addViewCount(long boardNo);
 }
 
 

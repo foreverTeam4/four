@@ -20,6 +20,7 @@ class BoardMapperTest {
 
     @Autowired
     BoardMapper boardMapper;
+
     @Test
     @DisplayName("작성자가 '관리자'인 게시물을 조회하면 admin 계정이 작성한 게시글을 불러온다")
     void search(){
@@ -102,5 +103,19 @@ class BoardMapperTest {
     }
 
 
+
+    @Test
+    @DisplayName("글제목이 test2title2인 글을 조회하면 게시글 2개가 조회된다.")
+    void searchTest(){
+        //given
+        String searchBy = "title";
+        String word = "test2title2";
+        List<Board> list = boardMapper.search(searchBy, word);
+        System.out.println(list);
+        //when
+        assertEquals(2, list.size());
+
+        //then
+    }
 
 }
