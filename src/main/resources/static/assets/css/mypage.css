@@ -61,19 +61,20 @@ body {
     background-color: white;
     border-radius: 15px;
     height: 180px;
-    border: 3px solid yellow;
+    border: 3px solid white;
 
 }
 
 .container .myInfo .whiteboard .whiteboard-class{
     margin-left: 30px;
-    width: 40%;
+    width: 47%;
 
 }
 
 .container .myInfo .whiteboard .user-info{
     color: black;
     padding-top: 15px;
+    margin-left: 30px;
 
 }
 
@@ -83,12 +84,12 @@ body {
 
 .myInfo .whiteboard .whiteboard-class{
     float: left;
-    border: 1px solid ;
 }
 
 .myInfo .whiteboard .whiteboard-class .user-info-bottom{
-border-right: 3px black solid;
+border-right: 2px black solid;
 margin-top: 10px;
+
 
 }
 
@@ -104,19 +105,34 @@ margin-top: 10px;
 .myInfo .whiteboard .whiteboard-class .user-info-bottom .myInfo-content a:first-child{
     float: left;
     width: 50%;
+    margin-left: 30px;
     
 }
 
 .myInfo .whiteboard .whiteboard-class .user-info-bottom .myInfo-content a:last-child{
-    width: 20%;
+    width: 16%;
     float: left;
     margin-left: 120px;
     
 }
 
+.myInfo .whiteboard .whiteboard-class .user-info-bottom .myInfo-content a:last-child div:first-child{
+    float: left;
+}
+
+.myInfo .whiteboard .whiteboard-class .user-info-bottom .myInfo-content a:last-child #fix-image{
+border: 1px solid #000;
+width: 20px;
+height: 20px;
+margin-left: 65px;
+}
+
+
 .container .myInfo .whiteboard .whiteboard-class .user-info-bottom .section1{
     float: left;
     height: 80px;
+    margin-left: 30px;
+
 
 }
 .container .myInfo .whiteboard .whiteboard-class .user-info-bottom .section1 div {
@@ -126,9 +142,8 @@ margin-top: 10px;
 
 
 .container .myInfo .whiteboard .whiteboard-class .user-info-bottom .section2{
-    margin-left: 130px;
-    float: le;
-    
+    margin-left: 180px;
+
 }
 .container .myInfo .whiteboard .whiteboard-class .user-info-bottom .section2 div{
     margin-bottom: 5px;
@@ -142,9 +157,21 @@ margin-top: 10px;
 .whiteboard .grade-count{
     width: 50%;
     height: 110px;
-    margin-left: 500px;
+    margin-left: 470px;
     margin-top: 50px;
 
+}
+
+.whiteboard .whiteboard-class #black img{
+    width: 20px;
+    height: 20px; 
+}
+
+.whiteboard .whiteboard-class #black{
+    width: 20px;
+    height: 20px;
+    float: left;
+    margin-top: 15px;
 }
 
 .whiteboard .grade{
@@ -152,7 +179,7 @@ margin-top: 10px;
 
     float: left;
     height: 110px;
-    width: 40%;
+    width: 43%;
 }
 
 .whiteboard .grade div:nth-child(1){
@@ -168,14 +195,16 @@ margin-top: 10px;
     border: 1px solid;
     float: left;
     margin-top: 10px;
+    border-radius: 50%;
+    background: black;
 
 }
 .whiteboard .grade div:nth-child(3){
 margin-top: 10px;
+font-weight: 700;
 }
 .whiteboard .grade .cosmos{
     margin-left: 85px;
-    border: 1px solid red;
     width: 120px;
     
     
@@ -187,8 +216,9 @@ margin-top: 10px;
 
 
 .whiteboard .board-comment{
-    border: 1px solid orange;
     height: 120px;
+    margin-left: 300px;
+    width: 250px;
 
 }
 
@@ -204,11 +234,9 @@ margin-top: 10px;
 .board-comment .comment div:first-child{
     float: left;
     align-items: center;
-    border: 3px solid yellow;
     width: 150px;
 }
 .board-comment .comment div:last-child{
-    border: 3px solid yellow;
 
 }
 
@@ -223,7 +251,6 @@ margin-top: 10px;
 .board-comment .count div:first-child{
     float: left;
     align-items: center;
-    border: 3px solid yellow;
     width: 150px;
 }
 .board-comment .count div span{
@@ -242,6 +269,7 @@ margin-top: 10px;
 .recent-posts, .recent-comments{
     width: 75%;
     margin: 0 auto;
+    padding-top: 10px;
 }
 
 .recent-posts{
@@ -303,7 +331,7 @@ border-bottom: 0.5px solid white;
 }
 
 .container .recent-posts .posts-wrapper .posts-nickname{
-    margin-left: 260px;
+    margin-left: 280px;
 }
 
 .container .recent-posts .posts-wrapper .posts-write-date{
@@ -311,5 +339,5 @@ border-bottom: 0.5px solid white;
 }
 
 .container .recent-posts .posts-wrapper .posts-view-count{
-    margin-left: 50px;
+    margin-left: 30px;
 }
