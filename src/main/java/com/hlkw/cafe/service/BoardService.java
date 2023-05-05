@@ -1,6 +1,7 @@
 package com.hlkw.cafe.service;
 
 
+import com.hlkw.cafe.dto.BoardSaveDto;
 import com.hlkw.cafe.dto.MyBoardListDto;
 import com.hlkw.cafe.dto.MyCommentListDto;
 import com.hlkw.cafe.dto.WriteDto;
@@ -61,7 +62,12 @@ public class BoardService {
     }
 
 
-
-
-
+    public boolean adminSave(BoardSaveDto dto) {
+        if(dto.getTitle() != "" && dto.getContent() != ""){
+            System.out.println("저장 성공");
+            boardMapper.save(new Board(dto));
+            return true;
+        }
+        return false;
+    }
 }

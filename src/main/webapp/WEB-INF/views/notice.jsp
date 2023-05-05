@@ -8,44 +8,49 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="board-common.css">
-    <link rel="stylesheet" href="notice.css">
-    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="/assets/css/board-common.css">
+    <link rel="stylesheet" href="/assets/css/notice.css">
+    <link rel="stylesheet" href="/assets/css/header.css">
 </head>
 
 <body>
-<div class="notice-container">
-    <header class="top-header">
-        <!-- logo,burger-btn태그 onclick 이벤트 추가 필요 -->
-        <img class="logo" src="/jpg/logo_yellow.png" alt="">
-        <div class="logo-text">Space Dust</div>
-        <img class="burger-btn" src="/jpg/button.png" alt="">
-    </header>
+    <form action="/dust/notice" method="post">
+        <div class="notice-container">
+            <header class="top-header">
+                <!-- logo,burger-btn태그 onclick 이벤트 추가 필요 -->
+                <img class="logo" src="/assets/jpg/logo_yellow.png" alt="">
+                <div class="logo-text">Space Dust</div>
+                <img class="burger-btn" src="/assets/jpg/button.png" alt="">
+            </header>
 
-    <div class="notice-main-title">공지 작성</div>
-    <header class="notice-btn-wrapper">
-        <div class="text-title">Category</div>
-        <div class="category-wrapper">
-            <button>Horror</button>
-            <button>Romance</button>
-            <button>Action</button>
-            <button>SF</button>
+            <div class="notice-main-title">공지 작성</div>
+            <header class="notice-btn-wrapper">
+                <div class="text-title">Category</div>
+                <div class="category-wrapper">
+                    <button>Horror</button>
+                    <button>Romance</button>
+                    <button>Action</button>
+                    <button>SF</button>
+                </div>
+            </header>
+            <div class="notice-text-wrapper">
+                <div class="text-title">Title</div>
+                <textarea rows="1" name="title" class="title-area"></textarea>
+                <div class="text-title">Content</div>
+                <textarea rows="1" name="content" class="content-area"></textarea>
+            </div>
+
+            <div class="notice-confirm-wrapper">
+                <button type="submit">등록</button>
+                <button onclick="location.href='/dust/admin'">취소</button>
+            </div>
         </div>
-    </header>
-    <div class="notice-text-wrapper">
-        <div class="text-title">Title</div>
-        <textarea rows="1" name="" id="" class="title-area"></textarea>
-        <div class="text-title">Content</div>
-        <textarea rows="1" name="" id="" class="content-area"></textarea>
-    </div>
+        <c:if test="${reslut=='false'}">
+            <div>jfslkfjkdslkfjlksfjadjklfjaslkfsjsdlkfjlkajlkds</div>
+        </c:if>
+    </form>
 
-    <div class="notice-confirm-wrapper">
-        <button>등록</button>
-        <button>취소</button>
-    </div>
-</div>
-
-<script>
+    <script>
         const $btns = document.querySelector('.category-wrapper').children;
         let prevSelected = null; //이전에 선택된 버튼을 저장할 변수
 
