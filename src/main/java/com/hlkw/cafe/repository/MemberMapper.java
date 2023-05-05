@@ -6,10 +6,13 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface MemberMapper {
 
-    Member findOne(String id, String pw);
+    void save(Member mbr);
 
+    Member findOne(String id, String pw);
+    Member findOneById(String id);
 
 //동우 마이페이지 업데이트
     Member mypageUpdate(Member member);
 
+    String findNicknameByCommentNum(long commentNum);
 }
