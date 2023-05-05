@@ -10,7 +10,7 @@
     align-items: center;
     width: 75%;
     /* height: 200px; */
-    margin: 20px auto;
+    margin: 30px auto;
 }
 
 .admin-btn {
@@ -74,15 +74,16 @@
 }
 
 /* post영역 */
-.recent-posts, .recent-comments{
+.recent-posts, .recent-comments, .recent-admin{
     width: 75%;
     margin: 0 auto;
+    margin-bottom: 40px;
 }
 
 .recent-posts{
-    margin-bottom: 40px;
+    /* margin-bottom: 40px; */
 }
-.posts-main-wrapper, .comments-main-wrapper{
+.posts-main-wrapper, .comments-main-wrapper, .admin-main-wrapper{
     width: 100%;
     color: white;
     display: flex;
@@ -91,9 +92,10 @@
     font-weight: 300;
     border-bottom: 1.5px solid white;
     height: 50px;
+    
 }
 
-.posts-main-title, .comments-main-title{
+.posts-main-title, .comments-main-title, .admin-main-title{
     font-size: 20px;
 }
 
@@ -116,29 +118,34 @@
 }
 
 /* post-text영역 */
-.posts-wrapper ,.comments-wrapper{
+.posts-wrapper ,.comments-wrapper,.admin-wrapper{
 display: flex;
 color: white;
 align-items: center;
-justify-content: center;
-text-align: center;
+justify-content: space-around;
+text-align: left;
 height: 50px;
 border-bottom: 0.5px solid white;
 }
 
 /* 목록별 크기 */
-.posts-boardNo, .comments-boardNo{
+.posts-boardNo, .comments-boardNo, .admin-boardNo{
     width: 5%;
 }
-.posts-title, .comments-title{
-    width: 65%;
+
+.posts-category, .comments-category, .admin-category{
+    width: 8%;
 }
-.posts-nickname, .comments-nickname{
+
+.posts-title, .comments-title, .admin-title{
+    width: 55%;
+}
+.posts-nickname, .comments-nickname, .admin-nickname{
     width: 10%;
 }
-.posts-write-date, .comments-write-date{
+.posts-write-date, .comments-write-date, .admin-write-date{
     width: 15%;
 }
-.posts-view-count, .comments-view-count{
-    width: 5%;
+.posts-view-count, .comments-view-count, .admin-view-count{
+    width: 2%;
 }

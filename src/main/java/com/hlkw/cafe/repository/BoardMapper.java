@@ -29,9 +29,6 @@ public interface BoardMapper {
     //태근
     boolean save(Board board);
 
-    //태근 공지글 불러오기
-    List<Board> findAdmin(int distinguish);
-
 }
 
 

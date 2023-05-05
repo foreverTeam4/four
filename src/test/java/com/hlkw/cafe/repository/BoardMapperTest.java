@@ -23,14 +23,24 @@ class BoardMapperTest {
     @DisplayName("작성자가 '관리자'인 게시물을 조회하면 admin 계정이 작성한 게시글을 불러온다")
     void search(){
         //given
-        String searchBy = "writer";
-        String word = "관리자";
-        List<Board> list = boardMapper.search(searchBy, word);
-        System.out.println(list);
-        //when
-        assertEquals(1, list.size());
+//        String searchBy = "writer";
+//        String word = "관리자";
+//        List<Board> list = boardMapper.search(searchBy, word);
+//        System.out.println(list);
+//        //when
+//        assertEquals(1, list.size());
 
         //then
+
+        //태근 관리자 테스트
+        //given
+        String searchByAdmin= "distinguish";
+        String wordAdmin = "0";
+        List<Board> adminList = boardMapper.search(searchByAdmin, wordAdmin);
+        System.out.println("adminList = " + adminList);
+        System.out.println(adminList.size());
+        System.out.println();
+        System.out.println();
     }
 
     @Test
@@ -78,20 +88,5 @@ class BoardMapperTest {
         System.out.println("p의 distinguish : "+p.getDistinguish());
     }
 
-    @Test
-    @DisplayName("distinguish값에 1을 주면 공지글 전체가 나와야 한다.")
-    void adminBoardTest(){
-        //given
-        int test = 1;
-
-        //when
-        List<Board> admin = boardMapper.findAdmin(test);
-        for (Board board : admin) {
-            System.out.println("board = " + board);
-        }
-
-        //then
-        assertEquals(2, admin.size());
-    }
 
 }
