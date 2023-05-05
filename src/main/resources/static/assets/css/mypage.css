@@ -9,9 +9,8 @@
 }
 
 body {
-    /* background: url("../jpg/background.jpg") repeat; */
+    background: url("../jpg/background.jpg") repeat;
     background-size: 100%;
-    background-color: black;
 }
 
 /* header 영역 */
