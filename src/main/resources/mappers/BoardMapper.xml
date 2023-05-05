@@ -6,7 +6,7 @@
 
     <select id="search" resultType="board">
         select * from dust_board
-        <if test = 'searchBy == "writer"'>
+        <if test='searchBy == "writer"'>
             where id in (select id from dust_member where nickname like concat('%', #{word}, '%'))
         </if>
         <if test = 'searchBy == "title"'>
@@ -15,6 +15,10 @@
         <if test = 'searchBy == "content"'>
             where content like concat('%', #{word}, '%')
         </if>
+        <if test='searchBy == "distinguish"'>
+            where distinguish =#{word}
+        </if>
+
     </select>
 
     <select id="findOne" resultType="board">
@@ -55,11 +59,6 @@
         </if>
     </insert>
 
-    <select id="findAdmin" resultType="board">
-        SELECT *
-        From dust_board
-        Where distinguish=#{distinguish}
-    </select>
 
     <select id="getCategoryByboardNo" resultType="board">
         select category from dust_board
