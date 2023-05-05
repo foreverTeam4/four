@@ -48,7 +48,7 @@ class MemberMapperTest {
     @Test
     @DisplayName("아이디와 비밀번호로 멤버를 조회할 수 있다")
     void findMember(){
-        String id = "test2";
+        String id = "test1";
         String pw = "2222";
         Member mbr = memberMapper.findOne(id, pw);
 

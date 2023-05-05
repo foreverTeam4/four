@@ -3,6 +3,7 @@ package com.hlkw.cafe.controller;
 import com.hlkw.cafe.dto.BoardSaveDto;
 import com.hlkw.cafe.dto.MyBoardListDto;
 import com.hlkw.cafe.dto.MyCommentListDto;
+import com.hlkw.cafe.dto.SimpleDateCommentDto;
 import com.hlkw.cafe.dto.WriteDto;
 import com.hlkw.cafe.entity.Board;
 import com.hlkw.cafe.entity.Comment;
@@ -14,10 +15,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -64,33 +62,57 @@ public class CafeController {
     //게시글 디테일 조회
     //게시글 번호로 Board 객체 반환받아 jsp에 전달
     @GetMapping("/detail")
-//    public String boardDetail() {
-    public String boardDetail(Member mbr, long boardNo, Model model) {
-        Board board = boardService.boardDetail(boardNo);
-        Member boardWriter = memberService.findOneById(board.getId());
+    public String boardDetail(@ModelAttribute("mbr") Member mbr, long boardNo, Model model) {
+        Map<Board, Member> boardWithWriter = getBoardWithWriter(boardNo);
+        Map<SimpleDateCommentDto, String> commentMap = getCommentWithNickname(boardNo);
 
-        Map<Comment, String> commentMap = getCommentWithNickname(boardNo);
-
-        model.addAttribute("mbr", mbr);
-        model.addAttribute("board", board);
-        model.addAttribute("writer", boardWriter);
+        model.addAttribute("board", boardWithWriter);
         model.addAttribute("comments", commentMap);
         return "detail";
+    }
+
+    private Map<Board, Member> getBoardWithWriter(long boardNo) {
+        Map<Board, Member> boardWithWriter = new HashMap<>();
+
+        Board board = boardService.boardDetail(boardNo);
+        Member boardWriter = memberService.findOneById(board.getId());
+        boardWithWriter.put(board, boardWriter);
+
+        return boardWithWriter;
     }
 
     //게시글 번호로 코멘트 객체를 얻고
     // -> 코멘트 객체로 코멘트 작성자 닉네임 겟
     // -> <코멘트, 닉네임> 맵 반환
-    private Map<Comment, String> getCommentWithNickname(long boardNo) {
-        List<Comment> commentList = commentService.getBoardCommentList(boardNo);
-        Map<Comment, String> commentMap = new HashMap<>();
+    private Map<SimpleDateCommentDto, String> getCommentWithNickname(long boardNo) {
+        List<SimpleDateCommentDto> commentList = commentService.getBoardCommentList(boardNo);
+        return getCommentMap(commentList);
+    }
 
-        for (Comment comment : commentList) {
+    //코멘트 리스트를 코멘트 작성자와 매핑하여 맵으로 반환
+    private Map<SimpleDateCommentDto, String> getCommentMap(List<SimpleDateCommentDto> commentList) {
+        Map<SimpleDateCommentDto, String> commentMap = new HashMap<>();
+
+        for (SimpleDateCommentDto comment : commentList) {
             String nickname = memberService.findNicknameByCommentNum(comment.getCommentNum());
             commentMap.put(comment, nickname);
         }
         return commentMap;
     }
+
+    //Map<<코멘트객체, 닉네임>, 카테고리> 반환 -> 메인 & 관리자용메인
+    private Map<Map, String> getCommentWithCategory(List<SimpleDateCommentDto> commentList){
+        Map<Map, String> commentWithCategory = new HashMap<>();
+        Map<SimpleDateCommentDto, String> commentMap = getCommentMap(commentList);
+
+        for (SimpleDateCommentDto comment : commentMap.keySet()) {
+            String category = boardService.getCategoryByboardNo(comment.getBoardNo());
+            commentWithCategory.put(commentMap, category);
+        }
+        return commentWithCategory;
+    }
+
+
 
     //게시글 상세페이지에서 수정하기 페이지로 연결
     @GetMapping("modify")
@@ -129,7 +151,7 @@ public class CafeController {
     //관리자 메인 페이지
     @GetMapping("/admin")
     public String adminList(Model model) {
-        List<Comment> commentList = commentService.getBoardCommentList(0);
+        List<SimpleDateCommentDto> commentList = commentService.getBoardCommentList(0);
 
         //0을 입력하면 관리자 공지글 List, 1을 입력하면 멤버의 공지글 List
         String distinguish = "distinguish";
@@ -184,6 +206,7 @@ public class CafeController {
         model.addAttribute("myCommentList", mycommentlist);
         return "";
     }
+
 
 
     //동우 마이페이지 내 내정보 수정
