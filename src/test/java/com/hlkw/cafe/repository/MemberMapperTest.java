@@ -1,8 +1,6 @@
 package com.hlkw.cafe.repository;
 
-import com.hlkw.cafe.entity.Gender;
-import com.hlkw.cafe.entity.Level;
-import com.hlkw.cafe.entity.Member;
+import com.hlkw.cafe.entity.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +8,23 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class MemberMapperTest {
 
     @Autowired
+    BoardMapper boardMapper;
+
+    @Autowired
     MemberMapper memberMapper;
+
+    @Autowired
+    CommentMapper commentMapper;
 
     @Test
     @DisplayName("멤버를 생성할 수 있다")
@@ -57,4 +65,28 @@ class MemberMapperTest {
         System.out.println(mbr);
 
     }
+
+    @Test
+    @DisplayName("게시글이 가진 id필드로 멤버를 조회할 수 있다")
+    void findOneById(){
+        Board b = boardMapper.findOne(1);
+        Member mbr = memberMapper.findOneById(b.getId());
+
+        System.out.println(mbr);
+    }
+
+    @Test
+    @DisplayName("코멘트번호로 코멘트 작성자 닉네임을 조회할 수 있다")
+    void findNicknameByCommentNum(){
+        Map<Comment, String> map = new HashMap<>();
+        long boardNo = 2;
+        List<Comment> commentList = commentMapper.getBoardCommentList(boardNo);
+        for (Comment comment : commentList) {
+            String nickname = memberMapper.findNicknameByCommentNum(comment.getCommentNum());
+            System.out.println(nickname);
+            map.put(comment, nickname);
+        }
+
+    }
+
 }

@@ -21,7 +21,9 @@ public class BoardService {
 
     private final BoardMapper boardMapper;
 
-
+    public Board findOne(long boardNo){
+        return boardMapper.findOne(boardNo);
+    }
     public Board boardDetail(long boardNo) {
         return boardMapper.findOne(boardNo);
     }

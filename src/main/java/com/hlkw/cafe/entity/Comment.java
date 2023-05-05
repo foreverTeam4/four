@@ -1,7 +1,11 @@
 package com.hlkw.cafe.entity;
 
+import com.hlkw.cafe.service.MemberService;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.hlkw.cafe.repository.MemberMapper;
 
 import java.time.LocalDateTime;
 
@@ -10,7 +14,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 public class Comment {
     private long commentNum;
     private String id;

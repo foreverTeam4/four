@@ -25,4 +25,11 @@ public class MemberService {
     }
 
 
+    public Member findOneById(String id) {
+        return mapper.findOneById(id);
+    }
+
+    public String findNicknameByCommentNum(long commentNum) {
+        return mapper.findNicknameByCommentNum(commentNum);
+    }
 }
