@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -49,9 +51,9 @@ public class CafeController {
         Member mbr = memberService.login(id, pw);
         model.addAttribute("m", mbr);
         if (mbr == null) {
-            return "/loginfail"; //
+            return "/loginfail";
         } else if (mbr.getId().equals("admin")) {
-            return "/admin_main"; // 태근이 관리자 메인 jsp
+            return "/admin";
         } else {
             return "/main"; //석빈이 메인 페이지 jsp
         }
@@ -61,20 +63,42 @@ public class CafeController {
     //게시글 디테일 조회
     //게시글 번호로 Board 객체 반환받아 jsp에 전달
     @GetMapping("/detail")
-    public String boardDetail() {
-//    public String boardDetail(long boardNo, Model model) {
-//        Board board = boardService.boardDetail(boardNo);
-//        List<Comment> commentList = commentService.getBoardCommentList (boardNo);
-//        model.addAttribute("b", board);
-//        model.addAttribute("c", commentList);
-        return "detail"; //세진 상세페이지 jsp
+//    public String boardDetail() {
+    public String boardDetail(Member mbr, long boardNo, Model model) {
+        Board board = boardService.boardDetail(boardNo);
+        Member boardWriter = memberService.findOneById(board.getId());
+
+        Map<Comment, String> commentMap = getCommentWithNickname(boardNo);
+
+        model.addAttribute("mbr", mbr);
+        model.addAttribute("board", board);
+        model.addAttribute("writer", boardWriter);
+        model.addAttribute("comments", commentMap);
+        return "detail";
+    }
+
+    //게시글 번호로 코멘트 객체를 얻고
+    // -> 코멘트 객체로 코멘트 작성자 닉네임 겟
+    // -> <코멘트, 닉네임> 맵 반환
+    private Map<Comment, String> getCommentWithNickname(long boardNo) {
+        List<Comment> commentList = commentService.getBoardCommentList(boardNo);
+        Map<Comment, String> commentMap = new HashMap<>();
+
+        for (Comment comment : commentList) {
+            String nickname = memberService.findNicknameByCommentNum(comment.getCommentNum());
+            commentMap.put(comment, nickname);
+        }
+        return commentMap;
     }
 
     //게시글 상세페이지에서 수정하기 페이지로 연결
     @GetMapping("modify")
-    public String boardUpdate(long boardNo){
+    public String boardUpdate(Member mbr, long boardNo, Model model){
+        model.addAttribute("mbr", mbr);
+        model.addAttribute("board", boardService.findOne(boardNo));
         return "modify"; //세진 수정페이지 jsp
     }
+
     //게시글 수정내역 전달
     //게시글 번호, 제목, 내용 전달받아서 디비 업뎃 후 리다이렉트 처리
     @GetMapping("/modified")
@@ -98,7 +122,7 @@ public class CafeController {
     ){
         List<Board> filteresList = boardService.boardSearch(searchBy, word);
         model.addAttribute("list", filteresList);
-        return "searchList"; //세진 검색된 글 리스트 jsp
+        return "searchList"; //세진 검색된 글 리스트 jsp -> 석빈이 메인 사용
     }
 
     @GetMapping("/admin")

@@ -74,12 +74,12 @@ body {
     border-radius: 50px;
     font-weight: 200;
     padding: 4px 27px;
-    font-size: 30px;
+    font-size: 25px;
     line-height: 30px;
     padding-bottom: 14px;
     position: absolute;
     right: 0;
-    bottom: 15px;
+    bottom: 20px;
 }
 
 .container .fail {
