@@ -126,10 +126,17 @@ public class CafeController {
     }
 
     @GetMapping("/admin")
-    public String adminList(){
+    public String adminList(Model model){
         List<Comment> commentList = commentService.getBoardCommentList(0);
-        List<Board> boardList = boardService.boardSearch("searchBy","");
 
+        //0을 입력하면 관리자 공지글 List, 1을 입력하면 멤버의 공지글 List
+        String distinguish = "distinguish";
+        String adminDistinguish = "0";
+        String memberDistinguish = "1";
+        List<Board> adminList = boardService.boardSearch(distinguish, adminDistinguish);
+        List<Board> memberList = boardService.boardSearch(distinguish, memberDistinguish);
+        model.addAttribute("admin",adminList);
+        model.addAttribute("member",memberList);
         return "admin";
     }
 

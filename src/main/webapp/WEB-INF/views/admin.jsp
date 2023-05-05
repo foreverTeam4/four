@@ -46,7 +46,7 @@
             <div class="admin-btn">
                 <div class="btn-title">공지작성</div>
                 <div class="btn-content">NOTICE</div>
-                <img class="add-btn2" src="/assets/jpg/than2.png" alt="than">
+                 <img class="add-btn2" src="/assets/jpg/than2.png" alt="than">
             </div>
             <div class="admin-btn">
                 <div class="btn-title">회원관리</div>
@@ -59,6 +59,45 @@
                 <img class="add-btn2" src="/assets/jpg/than2.png" alt="than">
             </div>
         </section>
+
+  <!-- admin 영역 -->
+  <section class="recent-admin">
+    <div class="admin-main-wrapper">
+        <div class="admin-main-title">최근 공지</div>
+        <div class="add-wrapper">
+            <a href="" class="posts-add-btn">
+                <div class="posts-add">더보기</div>
+                <img src="jpg/than.png" alt="than">
+            </a>
+        </div>
+    </div>
+    <div class="admin-wrapper">
+        <div class="admin-boardNo">9999</div>
+        <div class="admin-category">HORROR</div>
+        <div class="admin-title">대한민국의 주권은 국민에게 있고, 모든 권력은 국민으로부터 나온다.</div>
+        <div class="admin-nickname">이동우</div>
+        <div class="admin-write-date">2023.04.30</div>
+        <div class="admin-view-count">0</div>
+    </div>
+    <div class="admin-wrapper">
+        <div class="admin-boardNo">9999</div>
+        <div class="admin-category">HORROR</div>
+        <div class="admin-title">대한민국의 주권은 국민에게 있고, 모든 권력은 국민으로부터 나온다.</div>
+        <div class="admin-nickname">이동우</div>
+        <div class="admin-write-date">2023.04.30</div>
+        <div class="admin-view-count">0</div>
+    </div>
+    <div class="admin-wrapper">
+        <div class="admin-boardNo">9999</div>
+        <div class="admin-category">HORROR</div>
+        <div class="admin-title">대한민국의 주권은 국민에게 있고, 모든 권력은 국민으로부터 나온다.</div>
+        <div class="admin-nickname">이동우</div>
+        <div class="admin-write-date">2023.04.30</div>
+        <div class="admin-view-count">0</div>
+    </div>
+
+
+</section>
 
         <!-- posts 영역 -->
         <section class="recent-posts">
@@ -73,6 +112,15 @@
             </div>
             <div class="posts-wrapper">
                 <div class="posts-boardNo">9999</div>
+                <div class="posts-category">HORROR</div>
+                <div class="posts-title">대한민국의 주권은 국민에게 있고, 모든 권력은 국민으로부터 나온다.국민으로부터 나온다.</div>
+                <div class="posts-nickname">이동우</div>
+                <div class="posts-write-date">2023.04.30</div>
+                <div class="posts-view-count">0</div>
+            </div>
+            <div class="posts-wrapper">
+                <div class="posts-boardNo">9999</div>
+                <div class="posts-category">HORROR</div>
                 <div class="posts-title">대한민국의 주권은 국민에게 있고, 모든 권력은 국민으로부터 나온다.</div>
                 <div class="posts-nickname">이동우</div>
                 <div class="posts-write-date">2023.04.30</div>
@@ -80,13 +128,7 @@
             </div>
             <div class="posts-wrapper">
                 <div class="posts-boardNo">9999</div>
-                <div class="posts-title">대한민국의 주권은 국민에게 있고, 모든 권력은 국민으로부터 나온다.</div>
-                <div class="posts-nickname">이동우</div>
-                <div class="posts-write-date">2023.04.30</div>
-                <div class="posts-view-count">0</div>
-            </div>
-            <div class="posts-wrapper">
-                <div class="posts-boardNo">9999</div>
+                <div class="posts-category">HORROR</div>
                 <div class="posts-title">대한민국의 주권은 국민에게 있고, 모든 권력은 국민으로부터 나온다.</div>
                 <div class="posts-nickname">이동우</div>
                 <div class="posts-write-date">2023.04.30</div>
@@ -110,6 +152,7 @@
 
             <div class="comments-wrapper">
                 <div class="comments-boardNo">9999</div>
+                <div class="comments-category">HORROR</div>
                 <div class="comments-title">대한민국의 주권은 국민에게 있고, 모든 권력은 국민으로부터 나온다.</div>
                 <div class="comments-nickname">이동우</div>
                 <div class="comments-write-date">2023.04.30</div>
@@ -117,6 +160,7 @@
             </div>
             <div class="comments-wrapper">
                 <div class="comments-boardNo">9999</div>
+                <div class="comments-category">HORROR</div>
                 <div class="comments-title">대한민국의 주권은 국민에게 있고, 모든 권력은 국민으로부터 나온다.</div>
                 <div class="comments-nickname">이동우</div>
                 <div class="comments-write-date">2023.04.30</div>
@@ -124,6 +168,7 @@
             </div>
             <div class="comments-wrapper">
                 <div class="comments-boardNo">9999</div>
+                <div class="comments-category">HORROR</div>
                 <div class="comments-title">대한민국의 주권은 국민에게 있고, 모든 권력은 국민으로부터 나온다.</div>
                 <div class="comments-nickname">이동우</div>
                 <div class="comments-write-date">2023.04.30</div>
@@ -133,7 +178,6 @@
 
         </section>
     </div>
-
 </body>
 
 </html>
