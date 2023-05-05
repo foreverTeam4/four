@@ -21,10 +21,12 @@ public interface BoardMapper {
 
 
     // 동우 내가 작성한글 list
-    List<Board> myFindAll(Board board);
+    List<Board> myFindAll(Board myBoardOne);
 
-    // 동우 내가 작성한 댓글 list
-    List<Comment> myCommentList(Comment comment);
+    //id로 내가 쓴글 찾기
+    Board myBoardOne(String id);
+
+
 
     //태근
     boolean save(Board board);

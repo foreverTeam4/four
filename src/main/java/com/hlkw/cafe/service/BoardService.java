@@ -41,9 +41,9 @@ public class BoardService {
 
 
     // 동우 마이페이지 내 내가 작성한글 list
-    public List<MyBoardListDto> myPageTitleList(Board board){
+    public List<MyBoardListDto> myPageTitleList(Board myBoardOne){
 
-        return boardMapper.myFindAll(board)
+        return boardMapper.myFindAll(myBoardOne)
                 .stream()
                 .map(MyBoardListDto::new)
                 .collect(toList())
@@ -51,15 +51,11 @@ public class BoardService {
 
     }
 
-    //동우 마이페이지 내 내가 작성한 댓글 list
-    public List<MyCommentListDto> myCommentListDtoList(Comment comment){
-        return boardMapper.myCommentList(comment)
-                .stream()
-                .map(MyCommentListDto::new)
-                .collect(toList())
-                ;
-    }
+    //동우 아이디로 내가 쓴글 찾기
+    public Board myBoardOne(String id){
 
+        return boardMapper.myBoardOne(id);
+    }
 
 
 

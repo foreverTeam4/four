@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
+import org.w3c.dom.Comment;
 
 import java.util.List;
 
@@ -46,7 +47,7 @@ class BoardMapperTest {
     @Test
     @DisplayName("보드넘버 1로 게시물을 조회했을 때 게시물이 반환되어야 한다")
     void findOne(){
-        long boardNo = 1;
+        long boardNo = 10;
         Board one = boardMapper.findOne(boardNo);
         System.out.println(one);
     }
@@ -87,6 +88,19 @@ class BoardMapperTest {
         //then
         System.out.println("p의 distinguish : "+p.getDistinguish());
     }
+
+    //동우
+    @Test
+    @DisplayName("보드아이디 admin으로 게시물을 조회했을 때 게시물이 반환되어야 한다")
+    void myBoardOne(){
+        String id = "admin";
+        Board one = boardMapper.myBoardOne(id);
+        System.out.println("one = " + one);
+        System.out.println();
+        System.out.println();
+        assertEquals("admin",one.getId());
+    }
+
 
 
 }

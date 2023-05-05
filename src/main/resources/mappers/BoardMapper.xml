@@ -34,7 +34,16 @@
     </delete>
 
     <select id="myfindAll" resultType="board">
-        SELECT board_no, title, content, id, written_date, view_count
+        SELECT board_no, title, content, id, written_date, view_count, category
+        FROM dust_board
+        WHERE id=#{id}
+        ORDER BY board_no
+    </select>
+
+
+
+    <select id="myBoardOne" resultType="board">
+        SELECT board_no, title, content, id, written_date, view_count, category
         FROM dust_board
         WHERE id=#{id}
         ORDER BY board_no

@@ -30,4 +30,15 @@ class CommentMapperTest {
         //then
         assertEquals(3, list.size());
     }
+
+    @Test
+    @DisplayName("보드 아이디 admin으로 댓글을 조회했을 때 게시물이 반환되어야 한다")
+    void myCommentOne(){
+        String id="admin";
+        Comment one = mapper.MyCommentOne(id);
+        System.out.println("one = " + one);
+        System.out.println();
+        System.out.println();
+
+    }
 }
