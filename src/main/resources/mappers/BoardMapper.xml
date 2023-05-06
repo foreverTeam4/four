@@ -6,15 +6,19 @@
 
     <select id="search" resultType="board">
         select * from dust_board
-        <if test = 'searchBy == "writer"'>
-            where id in (select id from dust_member where nickname like concat(‘%’, #{word}, ‘%’))
+        <if test='searchBy == "writer"'>
+            where id in (select id from dust_member where nickname like concat('%', #{word}, '%'))
         </if>
         <if test = 'searchBy == "title"'>
-            where title like concat(‘%’, #{word}, ‘%’)
+            where title like concat('%', #{word}, '%')
         </if>
         <if test = 'searchBy == "content"'>
-            where content like concat(‘%’, #{word}, ‘%’)
+            where content like concat('%', #{word}, '%')
         </if>
+        <if test='searchBy == "distinguish"'>
+            where distinguish =#{word}
+        </if>
+
     </select>
 
     <select id="findOne" resultType="board">
@@ -22,11 +26,41 @@
     </select>
 
     <update id="modify">
-        update dust_board set title = #{title}, content = #{content} where board_no = #{boardNo}
+        update dust_board set category = #{category}, title = #{title}, content = #{content} where board_no = #{boardNo}
     </update>
 
     <delete id="remove">
         delete from dust_board where board_no = #{boardNo}
     </delete>
+
+    <select id="myBoardList" resultType="board">
+        SELECT *
+        FROM dust_board
+        WHERE id=#{id}
+        ORDER BY board_no
+    </select>
+
+
+
+    <insert id="save">
+        INSERT INTO dust_board
+        (title,content,view_count,id,distinguish,category)
+        <if test="id == 'admin'">
+        VALUES(#{title},#{content},0,#{id},1, #{category})
+        </if>
+        <if test="id != 'admin'">
+            VALUES(#{title},#{content},0,#{id},0, #{category})
+        </if>
+    </insert>
+
+
+    <select id="getCategoryByboardNo" resultType="board">
+        select category from dust_board
+        where board_no = #{boardNo}
+    </select>
+
+    <update id="addViewCount">
+        update dust_board set view_count = view_count + 1 where board_no = #{boardNo}
+    </update>
 
 </mapper>

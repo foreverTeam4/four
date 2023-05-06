@@ -1,0 +1,65 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: url("../jpg/background.jpg") repeat;
+    background-size: 100%;
+}
+
+.container {
+    padding: 0 50px;
+    width: 1000px;
+    position: absolute;
+    top: 150px;
+    left: 230px;
+    margin: 0 auto;
+    padding-bottom: 100px;
+}
+
+.container .messageWrapper {
+    width: 800px;
+    padding-top: 50px;
+    background: url("../jpg/logo_yellow.png") no-repeat;
+    background-size: 50px;
+}
+
+.container .messageWrapper .message {
+    color: #fff;
+    font-size: 23px;
+    font-weight: lighter;
+    margin-bottom: 100px;
+}
+
+.container .indexBlock {
+    font-size: 30px;
+    font-weight: lighter;
+    display: flex;
+    position: relative;
+    border: 1px solid gray;
+    border-left: none;
+    border-right: none;
+}
+
+.container .indexBlock .selectBlock {
+    text-decoration: none;
+    color: #fdeaa8;
+    width: 500px;
+}
+
+.container .indexBlock .selectBlock #loginPage {
+    border-right: 1px solid gray;
+}
+
+.container .indexBlock .selectBlock h2 {
+    margin: 0;
+    padding-top: 45px;
+    padding-bottom: 10px;
+    margin-left: 30px;
+    font-weight: 200;
+    /* border: 1px solid #000; */
+}
+
+.container .indexBlock .selectBlock .num {
+    font-size: 2em;
+}

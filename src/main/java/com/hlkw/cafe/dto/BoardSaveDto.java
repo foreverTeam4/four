@@ -4,14 +4,16 @@ import com.hlkw.cafe.entity.Category;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
-@Getter @Setter @ToString
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Component
-public class WriteDto {
-    private Category category;
-    private long boardNo;
+public class BoardSaveDto {
     private String title;
     private String content;
+    private String id;
+    private Category category;
 }
