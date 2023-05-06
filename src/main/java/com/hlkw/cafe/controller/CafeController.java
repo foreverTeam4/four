@@ -234,7 +234,7 @@ public class CafeController {
 
         //조회수가 가장 높은 게시물(TOP Board)
         long topBoardNo = boardService.topBoardNo();
-        Map<Board, Member> TBboardWithWriter = getBoardWithWriter(topBoardNo);
+        Map<SimpleDateBoardDto, Member> TBboardWithWriter = getBoardWithWriter(topBoardNo);
         Map<SimpleDateCommentDto, String> TBcommentMap = getCommentWithNickname(topBoardNo);
 
         model.addAttribute("TBboard", TBboardWithWriter);
@@ -242,7 +242,7 @@ public class CafeController {
 
         //좋아요가 가장 많은 댓글의 게시물(TOP Comment)
         long topCommentNo = commentService.topCommentNo();
-        Map<Board, Member> TCboardWithWriter = getBoardWithWriter(topCommentNo);
+        Map<SimpleDateBoardDto, Member> TCboardWithWriter = getBoardWithWriter(topCommentNo);
         Map<SimpleDateCommentDto, String> TCcommentMap = getCommentWithNickname(topCommentNo);
 
         model.addAttribute("TCboard", TCboardWithWriter);
