@@ -9,57 +9,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/assets/css/board-common.css">
-    <link rel="stylesheet" href="/assets/css/notice.css">
+    <link rel="stylesheet" href="/assets/css/modify.css">
     <link rel="stylesheet" href="/assets/css/header.css">
 </head>
 
 <body>
-<div class="notice-container">
+<div class="modify-container">
     <header class="top-header">
-        <!-- logo,burger-btn태그 onclick 이벤트 추가 필요 -->
-        <img class="logo" src="/jpg/logo_yellow.png" alt="">
+        <img class="logo" src="/assets/jpg/logo_yellow.png" alt="">
         <div class="logo-text">Space Dust</div>
-        <img class="burger-btn" src="/jpg/button.png" alt="">
+        <img class="burger-btn" src="/assets/jpg/button.png" alt="">
     </header>
 
-    <div class="notice-main-title">태근이 공지 작성 완료되면 가져다 쓸거임 ~~~~~</div>
-    <header class="notice-btn-wrapper">
+    <header class="modify-btn-wrapper">
         <div class="text-title">Category</div>
         <div class="category-wrapper">
-            <button>Horror</button>
-            <button>Romance</button>
-            <button>Action</button>
-            <button>SF</button>
+            <button class = "selectCategory">Horror</button>
+            <button class = "selectCategory">Romance</button>
+            <button class = "selectCategory">Action</button>
+            <button class = "selectCategory">SF</button>
         </div>
     </header>
-    <div class="notice-text-wrapper">
+
+<form action = "/dust/modified" method = "post">
+    <div class="modify-text-wrapper">
+        <input type="hidden" name = "boardNo" value="${b.boardNo}">
+        <input type="hidden" class = "category" name = "category" value = "${b.category}">
         <div class="text-title">Title</div>
-        <textarea rows="1" name="" id="" class="title-area"></textarea>
+        <textarea rows="1" name="title" id="title" class="title-area">${b.title}</textarea>
         <div class="text-title">Content</div>
-        <textarea rows="1" name="" id="" class="content-area"></textarea>
+        <textarea rows="1" name="content" id="content" class="content-area">${b.content}</textarea>
     </div>
 
-    <div class="notice-confirm-wrapper">
-        <button>등록</button>
-        <button>취소</button>
+    <div class="modify-confirm-wrapper">
+        <button type = "submit" class = "modify">수정</button>
+        <button onclick="history.back()" class = "back">취소</button>
     </div>
 </div>
+</form>
+
+<%--<input type="hidden" name = "id" value="${mbr.id}">--%>
 
 <script>
-    const $btns = document.querySelector('.category-wrapper').children;
-    let prevSelected = null; //이전에 선택된 버튼을 저장할 변수
+    const $setcategory = document.querySelector('.category-wrapper');
+    $setcategory.addEventListener('click', selectCategory);
 
-    for (const btnlist of $btns) {
-        btnlist.onclick = () => {
-            console.log("onclick 이벤트 발생");
-            btnlist.classList.add('btn-click');
-
-            if (prevSelected !== null && prevSelected !== btnlist) {
-                prevSelected.classList.remove('btn-click');
-            }
-            prevSelected = btnlist
-        };
+    function selectCategory(e) {
+        const $catetory = document.querySelector('.category');
+        const $selected = e.target.closest('.selectCategory');
+        $catetory.value = $selected.innerText.toUpperCase();
     }
+
+
 </script>
 </body>
 
