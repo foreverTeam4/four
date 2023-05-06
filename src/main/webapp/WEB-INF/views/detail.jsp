@@ -22,6 +22,7 @@
 <div class="detail-wrapper">
 
     <c:forEach var="b" items="${board}">
+        <input type="hidden" name = "boardNo" value="${b.key.boardNo}">
     <div class="detail-title-box">
         <h2 class="detail-board-category">${b.key.category}</h2>
         <h3 class="detail-board-title">${b.key.title}</h3>
@@ -48,8 +49,8 @@
 <%--            <a href="#" class="viewMorePost">${b.value.nickname}님의 게시물 더 보기 &gt;</a>--%>
 <%--        </c:if>--%>
 <%--        <c:if test="${mbr.nickname eq b.value.nickname}">--%>
-            <a href="/dust/modify" class="under-content modi-rmv">수정</a>
-            <a href="/dust/delete" class="under-content modi-rmv">삭제</a>
+            <a href="/dust/modify?boardNo=${b.key.boardNo}" class="under-content modi-rmv">수정</a>
+            <a href="/dust/remove?boardNo=${b.key.boardNo}" class="under-content modi-rmv">삭제</a>
 <%--        </c:if>--%>
     </div>
     </c:forEach>

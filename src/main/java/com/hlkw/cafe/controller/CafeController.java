@@ -13,6 +13,7 @@ import com.hlkw.cafe.service.CommentService;
 import com.hlkw.cafe.service.MemberService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,7 @@ import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 @RequestMapping("/dust")
 public class CafeController {
 
@@ -68,7 +70,7 @@ public class CafeController {
 
         model.addAttribute("board", boardWithWriter);
         model.addAttribute("comments", commentMap);
-        return "detail";
+        return "/detail";
     }
 
     private Map<Board, Member> getBoardWithWriter(long boardNo) {
@@ -118,16 +120,19 @@ public class CafeController {
     @GetMapping("modify")
     public String boardUpdate(Member mbr, long boardNo, Model model) {
         model.addAttribute("mbr", mbr);
-        model.addAttribute("board", boardService.findOne(boardNo));
-        return "modify"; //세진 수정페이지 jsp
+        model.addAttribute("b", boardService.findOne(boardNo));
+        return "boardModify"; //세진 수정페이지 jsp
     }
 
     //게시글 수정내역 전달
     //게시글 번호, 제목, 내용 전달받아서 디비 업뎃 후 리다이렉트 처리
-    @GetMapping("/modified")
-    public String boardUpdated(WriteDto dto) {
+    @PostMapping ("/modified")
+    public String boardUpdated(WriteDto dto, String id, Model model) {
         boardService.boardUpdate(dto);
-        return "redirect:/dust/detail";
+        log.info(dto.getTitle());
+//        log.info("/modified 매핑까지 이동");
+        model.addAttribute("id", id);
+        return "redirect:/dust/detail?boardNo=" + dto.getBoardNo();
     }
 
     //게시글 삭제

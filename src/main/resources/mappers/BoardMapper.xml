@@ -26,7 +26,7 @@
     </select>
 
     <update id="modify">
-        update dust_board set title = #{title}, content = #{content} where board_no = #{boardNo}
+        update dust_board set category = #{category}, title = #{title}, content = #{content} where board_no = #{boardNo}
     </update>
 
     <delete id="remove">
