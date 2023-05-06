@@ -1,10 +1,6 @@
 package com.hlkw.cafe.controller;
 
-import com.hlkw.cafe.dto.BoardSaveDto;
-import com.hlkw.cafe.dto.MyBoardListDto;
-import com.hlkw.cafe.dto.MyCommentListDto;
-import com.hlkw.cafe.dto.SimpleDateCommentDto;
-import com.hlkw.cafe.dto.WriteDto;
+import com.hlkw.cafe.dto.*;
 import com.hlkw.cafe.entity.Board;
 import com.hlkw.cafe.entity.Comment;
 import com.hlkw.cafe.entity.Member;
@@ -65,7 +61,7 @@ public class CafeController {
     //게시글 번호로 Board 객체 반환받아 jsp에 전달
     @GetMapping("/detail")
     public String boardDetail(@ModelAttribute("mbr") Member mbr, long boardNo, Model model) {
-        Map<Board, Member> boardWithWriter = getBoardWithWriter(boardNo);
+        Map<SimpleDateBoardDto, Member> boardWithWriter = getBoardWithWriter(boardNo);
         Map<SimpleDateCommentDto, String> commentMap = getCommentWithNickname(boardNo);
 
         model.addAttribute("board", boardWithWriter);
@@ -73,10 +69,10 @@ public class CafeController {
         return "/detail";
     }
 
-    private Map<Board, Member> getBoardWithWriter(long boardNo) {
-        Map<Board, Member> boardWithWriter = new HashMap<>();
+    private Map<SimpleDateBoardDto, Member> getBoardWithWriter(long boardNo) {
+        Map<SimpleDateBoardDto, Member> boardWithWriter = new HashMap<>();
 
-        Board board = boardService.boardDetail(boardNo);
+        SimpleDateBoardDto board = boardService.boardDetail(boardNo);
         Member boardWriter = memberService.findOneById(board.getId());
         boardWithWriter.put(board, boardWriter);
 
@@ -92,7 +88,7 @@ public class CafeController {
     }
 
     //코멘트 리스트를 코멘트 작성자와 매핑하여 맵으로 반환
-    private Map<SimpleDateCommentDto, String> getCommentMap(List<SimpleDateCommentDto> commentList) {
+    public Map<SimpleDateCommentDto, String> getCommentMap(List<SimpleDateCommentDto> commentList) {
         Map<SimpleDateCommentDto, String> commentMap = new HashMap<>();
 
         for (SimpleDateCommentDto comment : commentList) {
@@ -148,7 +144,7 @@ public class CafeController {
             @RequestParam(defaultValue = "content") String searchBy
             , String word, Model model
     ) {
-        List<Board> filteresList = boardService.boardSearch(searchBy, word);
+        List<SimpleDateBoardDto> filteresList = boardService.boardSearch(searchBy, word);
         model.addAttribute("list", filteresList);
         return "searchList"; //세진 검색된 글 리스트 jsp -> 석빈이 메인 사용
     }
@@ -162,8 +158,8 @@ public class CafeController {
         String distinguish = "distinguish";
         String adminDistinguish = "0";
         String memberDistinguish = "1";
-        List<Board> adminList = boardService.boardSearch(distinguish, adminDistinguish);
-        List<Board> memberList = boardService.boardSearch(distinguish, memberDistinguish);
+        List<SimpleDateBoardDto> adminList = boardService.boardSearch(distinguish, adminDistinguish);
+        List<SimpleDateBoardDto> memberList = boardService.boardSearch(distinguish, memberDistinguish);
         model.addAttribute("admin", adminList);
         model.addAttribute("member", memberList);
 //        System.out.println("adminList = " + adminList);

@@ -1,10 +1,7 @@
 package com.hlkw.cafe.service;
 
 
-import com.hlkw.cafe.dto.BoardSaveDto;
-import com.hlkw.cafe.dto.MyBoardListDto;
-import com.hlkw.cafe.dto.MyCommentListDto;
-import com.hlkw.cafe.dto.WriteDto;
+import com.hlkw.cafe.dto.*;
 import com.hlkw.cafe.entity.Board;
 import com.hlkw.cafe.entity.Comment;
 import com.hlkw.cafe.repository.BoardMapper;
@@ -25,12 +22,13 @@ public class BoardService {
         return boardMapper.getCategoryByboardNo(boardNo);
     };
 
-    public Board findOne(long boardNo){
-        return boardMapper.findOne(boardNo);
+    public SimpleDateBoardDto findOne(long boardNo){
+        return new SimpleDateBoardDto(boardMapper.findOne(boardNo));
     }
-    public Board boardDetail(long boardNo) {
+
+    public SimpleDateBoardDto boardDetail(long boardNo) {
         boardMapper.addViewCount(boardNo);
-        return boardMapper.findOne(boardNo);
+        return new SimpleDateBoardDto(boardMapper.findOne(boardNo));
     }
 
     public boolean boardUpdate(WriteDto dto) {
@@ -41,8 +39,10 @@ public class BoardService {
         boardMapper.remove(boardNo);
     }
 
-    public List<Board> boardSearch(String searchBy, String word) {
-        return boardMapper.search(searchBy, word);
+    public List<SimpleDateBoardDto> boardSearch(String searchBy, String word) {
+        return boardMapper.search(searchBy, word).stream()
+                .map(SimpleDateBoardDto::new)
+                .collect(toList());
     }
 
 

@@ -1,5 +1,6 @@
 package com.hlkw.cafe.service;
 
+import com.hlkw.cafe.dto.AddCommentDto;
 import com.hlkw.cafe.dto.SimpleDateCommentDto;
 import com.hlkw.cafe.entity.Comment;
 import com.hlkw.cafe.repository.CommentMapper;
@@ -22,4 +23,7 @@ public class CommentService {
                 .collect(Collectors.toList());
     }
 
+    public boolean addComment(AddCommentDto dto) {
+        return mapper.addComment(dto);
+    }
 }
