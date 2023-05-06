@@ -83,13 +83,23 @@
     line-height: 1.8em;
 }
 
-.detail-wrapper .viewMorePost {
+.detail-wrapper .under-content-wrapper {
+    border-bottom: 1px solid gray;
+    padding-bottom: 10px;
+}
+
+.detail-wrapper .under-content-wrapper .viewMorePost {
     font-size: 13px;
     display: block;
     text-decoration: none;
     color: #fff;
-    padding-bottom: 10px;
-    border-bottom: 1px solid gray;
+}
+
+.detail-wrapper .under-content-wrapper .modi-rmv {
+    font-size: 13px;
+    text-decoration: none;
+    color: #fff;
+    margin-right: 5px;
 }
 
 .detail-wrapper .detail-comment-box .written-comments {
