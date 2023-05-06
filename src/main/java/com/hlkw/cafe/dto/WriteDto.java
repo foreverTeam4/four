@@ -1,5 +1,6 @@
 package com.hlkw.cafe.dto;
 
+import com.hlkw.cafe.entity.Category;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 @Builder
 @Component
 public class WriteDto {
+    private Category category;
     private long boardNo;
     private String title;
     private String content;
