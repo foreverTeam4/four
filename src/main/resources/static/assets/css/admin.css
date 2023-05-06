@@ -1,6 +1,7 @@
 /* 공통container 영역 */
 .admin-container {
     width: 1500px;
+    margin : 0 auto;
 }
 
 /* 상단 btn영역 */
@@ -80,6 +81,12 @@
     margin-bottom: 40px;
 }
 
+.admin-wrapper:hover, .posts-wrapper:hover, .comments-wrapper:hover{
+    background-color: rgba(200, 200, 200, 0.1);
+    transition: 0.7s;
+    cursor: pointer;
+}
+
 .recent-posts{
     /* margin-bottom: 40px; */
 }
@@ -117,7 +124,7 @@
 
 }
 
-/* post-text영역 */
+/* text영역 */
 .posts-wrapper ,.comments-wrapper,.admin-wrapper{
 display: flex;
 color: white;
@@ -130,6 +137,7 @@ border-bottom: 0.5px solid white;
 
 /* 목록별 크기 */
 .posts-boardNo, .comments-boardNo, .admin-boardNo{
+    text-align: center;
     width: 5%;
 }
 
@@ -149,3 +157,5 @@ border-bottom: 0.5px solid white;
 .posts-view-count, .comments-view-count, .admin-view-count{
     width: 2%;
 }
+
+

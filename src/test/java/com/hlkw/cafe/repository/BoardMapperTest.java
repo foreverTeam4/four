@@ -4,6 +4,7 @@ import com.hlkw.cafe.dto.BoardSaveDto;
 import com.hlkw.cafe.dto.WriteDto;
 import com.hlkw.cafe.entity.Board;
 import com.hlkw.cafe.entity.Category;
+import com.hlkw.cafe.entity.Comment;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static com.hlkw.cafe.entity.Category.*;
@@ -60,7 +63,7 @@ class BoardMapperTest {
     @Test
     @DisplayName("보드넘버 1로 게시물을 조회했을 때 게시물이 반환되어야 한다")
     void findOne(){
-        long boardNo = 1;
+        long boardNo = 10;
         Board one = boardMapper.findOne(boardNo);
         System.out.println(one);
     }
@@ -102,8 +105,27 @@ class BoardMapperTest {
         System.out.println("p의 distinguish : "+p.getDistinguish());
     }
 
-
+    //동우
     @Test
+    @DisplayName("보드 아이디 admin으로 게시글을 조회했을 때 내가 쓴 게시글이 반환되어야 한다")
+    void myCommentList() {
+        String id = "admin";
+
+        List<Board> list = boardMapper.myBoardList(id);
+        for (Board board : list) {
+            System.out.println("comment.getId() = " + board.getId() + " " + board.getContent());
+        }
+        System.out.println();
+        System.out.println();
+
+        for (int i = 0; i < list.size(); i++) {
+            assertEquals("admin", list.get(i).getId());
+        }
+
+    }
+
+
+        @Test
     @DisplayName("글제목이 test2title2인 글을 조회하면 게시글 2개가 조회된다.")
     void searchTest(){
         //given
@@ -115,6 +137,19 @@ class BoardMapperTest {
         assertEquals(2, list.size());
 
         //then
+    }
+
+    @Test
+    @DisplayName("오늘 날짜에 해당하는 게시물 개수가 반환되어야 한다.")
+    void todayBoardTest(){
+        //given
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMdd");
+
+        //when
+        int i = boardMapper.todayCountBoard(dtf.format(now));
+
+        System.out.println("i = " + i);
     }
 
 }

@@ -8,7 +8,11 @@ import com.hlkw.cafe.repository.BoardMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
@@ -47,25 +51,13 @@ public class BoardService {
 
 
     // 동우 마이페이지 내 내가 작성한글 list
-    public List<MyBoardListDto> myPageTitleList(Board board){
-
-        return boardMapper.myFindAll(board)
+    public List<MyBoardListDto> myBoardListDto(String id){
+        return boardMapper.myBoardList(id)
                 .stream()
                 .map(MyBoardListDto::new)
                 .collect(toList())
                 ;
-
     }
-
-    //동우 마이페이지 내 내가 작성한 댓글 list
-    public List<MyCommentListDto> myCommentListDtoList(Comment comment){
-        return boardMapper.myCommentList(comment)
-                .stream()
-                .map(MyCommentListDto::new)
-                .collect(toList())
-                ;
-    }
-
 
     public boolean adminSave(BoardSaveDto dto) {
         if(dto.getTitle() != "" && dto.getContent() != ""){
@@ -74,5 +66,21 @@ public class BoardService {
             return true;
         }
         return false;
+    }
+
+    public int todayBoardCount(String today){
+        return boardMapper.todayCountBoard(today);
+    }
+
+    public long topBoardNo(){
+        String distinguish = "distinguish";
+        String adminDistinguish = "0";
+        List<Board> list = boardMapper.search(distinguish, adminDistinguish);
+        Optional<Board> maxComment = list.stream().max(Comparator.comparing(comment -> comment.getViewCount()));
+        return maxComment.get().getBoardNo();
+    }
+
+    public Board findAdminById(String id){
+        return boardMapper.findAdmin(id);
     }
 }

@@ -123,7 +123,7 @@
     cursor: pointer;
 }
 
-.back-wrapper:hover{
+.back-wrapper:hover, .choice-btn-back, .confirm-btn{
     background-color: rgba(200, 200, 200, 0.3);
     transition: 0.7s;
 }
@@ -231,4 +231,9 @@
     color: white;
     border-radius: 3px;
     cursor: pointer;
+}
+
+.modal-choice .btn-click{
+    background-color: #fdeaa8;
+    color: black;
 }

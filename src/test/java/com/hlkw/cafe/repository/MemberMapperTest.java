@@ -91,4 +91,15 @@ class MemberMapperTest {
 
     }
 
+    @Test
+    @DisplayName("파라미터에 아무것도 입력하지 않을 시 멤버의 모든 정보가 나온다.")
+    void findAllTest(){
+        //then
+        List<Member> all = memberMapper.findAll();
+        for (Member member : all) {
+            System.out.println("member = " + member);
+        }
+
+    }
+
 }
