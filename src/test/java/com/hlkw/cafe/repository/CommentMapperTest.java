@@ -20,7 +20,7 @@ class CommentMapperTest {
     @DisplayName("boarNo이 0일 때 댓글의 전체 목록이 조회되어야 한다.")
     void saveAdminTest() {
         //given
-        int boardNo = 0;
+        long boardNo = 0L;
 
         //when
         List<Comment> list = mapper.getBoardCommentList(boardNo);

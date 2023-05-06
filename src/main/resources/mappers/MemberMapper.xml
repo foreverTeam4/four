@@ -39,5 +39,10 @@
         WHERE id=#{id}
     </update>
 
+    <update id="levelChange">
+        UPDATE dust_member
+        SET LEVEL = #{level}
+        WHERE = id = #{id}
+    </update>
 
 </mapper>

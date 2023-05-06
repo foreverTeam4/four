@@ -7,6 +7,7 @@ import com.hlkw.cafe.dto.SimpleDateCommentDto;
 import com.hlkw.cafe.dto.WriteDto;
 import com.hlkw.cafe.entity.Board;
 import com.hlkw.cafe.entity.Comment;
+import com.hlkw.cafe.entity.Level;
 import com.hlkw.cafe.entity.Member;
 import com.hlkw.cafe.service.BoardService;
 import com.hlkw.cafe.service.CommentService;
@@ -101,7 +102,7 @@ public class CafeController {
     }
 
     //Map<<코멘트객체, 닉네임>, 카테고리> 반환 -> 메인 & 관리자용메인
-    private Map<Map, String> getCommentWithCategory(List<SimpleDateCommentDto> commentList){
+    private Map<Map, String> getCommentWithCategory(List<SimpleDateCommentDto> commentList) {
         Map<Map, String> commentWithCategory = new HashMap<>();
         Map<SimpleDateCommentDto, String> commentMap = getCommentMap(commentList);
 
@@ -111,7 +112,6 @@ public class CafeController {
         }
         return commentWithCategory;
     }
-
 
 
     //게시글 상세페이지에서 수정하기 페이지로 연결
@@ -150,8 +150,10 @@ public class CafeController {
 
     //관리자 메인 페이지
     @GetMapping("/admin")
-    public String adminList(Model model) {
-        List<SimpleDateCommentDto> commentList = commentService.getBoardCommentList(0);
+    public String adminList(Model model, Member mbr) {
+        List<SimpleDateCommentDto> boardCommentList = commentService.getBoardCommentList(0);
+//        System.out.println("boardCommentList = " + boardCommentList);
+
 
         //0을 입력하면 관리자 공지글 List, 1을 입력하면 멤버의 공지글 List
         String distinguish = "distinguish";
@@ -159,12 +161,18 @@ public class CafeController {
         String memberDistinguish = "1";
         List<Board> adminList = boardService.boardSearch(distinguish, adminDistinguish);
         List<Board> memberList = boardService.boardSearch(distinguish, memberDistinguish);
+
         model.addAttribute("admin", adminList);
         model.addAttribute("member", memberList);
+        model.addAttribute("board", boardCommentList);
+        model.addAttribute("mbr", mbr);
+//        System.out.println("mbr = " + mbr);
 //        System.out.println("adminList = " + adminList);
 //        System.out.println("memberList = " + memberList);
         return "admin";
     }
+
+
 
     //관리자 공지글 페이지로 이동
     @GetMapping("/notice")
@@ -181,14 +189,22 @@ public class CafeController {
         if (flag) {
             System.out.println("저장성공");
             return "redirect:/dust/admin";
-        }else {
+        } else {
             System.out.println("저장실패");
             return "redirect:/dust/notice?result=false";
         }
-        //post로 받은 값을 저장
-//        boardService.sa
-
     }
+    @GetMapping("/member")
+    public String noticeMember(){
+        return "member";
+    }
+
+    @GetMapping("/member")
+    public String levelChange(Level level, String id){
+        memberService.changeMemberLevel(level, id);
+        return "redirect:/dust/member";
+    }
+
 
 
     // 동우 마이페이지 내 내가 작성한글 목록 조회
@@ -206,7 +222,6 @@ public class CafeController {
         model.addAttribute("myCommentList", mycommentlist);
         return "";
     }
-
 
 
     //동우 마이페이지 내 내정보 수정

@@ -1,5 +1,6 @@
 package com.hlkw.cafe.repository;
 
+import com.hlkw.cafe.entity.Level;
 import com.hlkw.cafe.entity.Member;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -15,4 +16,6 @@ public interface MemberMapper {
     Member mypageUpdate(Member member);
 
     String findNicknameByCommentNum(long commentNum);
+
+    boolean levelChange(Level level, String id);
 }

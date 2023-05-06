@@ -1,5 +1,6 @@
 package com.hlkw.cafe.service;
 
+import com.hlkw.cafe.entity.Level;
 import com.hlkw.cafe.entity.Member;
 import com.hlkw.cafe.repository.MemberMapper;
 import lombok.RequiredArgsConstructor;
@@ -31,5 +32,10 @@ public class MemberService {
 
     public String findNicknameByCommentNum(long commentNum) {
         return mapper.findNicknameByCommentNum(commentNum);
+    }
+
+
+    public boolean changeMemberLevel(Level level, String id){
+        return mapper.levelChange(level, id);
     }
 }

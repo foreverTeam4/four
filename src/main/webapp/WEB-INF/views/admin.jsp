@@ -117,15 +117,16 @@
                     </a>
                 </div>
             </div>
-
+            <c:forEach var="b" items="${board}">
             <div class="comments-wrapper">
-                <div class="comments-boardNo">9999</div>
+                <div class="comments-boardNo">${b.boardNo}</div>
                 <div class="comments-category">HORROR</div>
-                <div class="comments-title">대한민국의 주권은 국민에게 있고, 모든 권력은 국민으로부터 나온다.</div>
+                <div class="comments-title">${b.content}</div>
                 <div class="comments-nickname">이동우</div>
-                <div class="comments-write-date">2023.04.30</div>
+                <div class="comments-write-date">${b.writtenDate}</div>
                 <div class="comments-view-count">0</div>
             </div>
+            </c:forEach>
             <div class="comments-wrapper">
                 <div class="comments-boardNo">9999</div>
                 <div class="comments-category">HORROR</div>

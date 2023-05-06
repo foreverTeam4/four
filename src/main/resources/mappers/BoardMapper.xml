@@ -17,6 +17,7 @@
         </if>
         <if test='searchBy == "distinguish"'>
             where distinguish =#{word}
+            ORDER BY board_no desc;
         </if>
 
     </select>
