@@ -1,10 +1,6 @@
 package com.hlkw.cafe.controller;
 
-import com.hlkw.cafe.dto.BoardSaveDto;
-import com.hlkw.cafe.dto.MyBoardListDto;
-import com.hlkw.cafe.dto.MyCommentListDto;
-import com.hlkw.cafe.dto.SimpleDateCommentDto;
-import com.hlkw.cafe.dto.WriteDto;
+import com.hlkw.cafe.dto.*;
 import com.hlkw.cafe.entity.Board;
 import com.hlkw.cafe.entity.Comment;
 import com.hlkw.cafe.entity.Member;
@@ -211,8 +207,9 @@ public class CafeController {
 
     //동우 마이페이지 내 내정보 수정
     @GetMapping("/mypageUpdate")
-    public String mypageUpdate(Member member) {
-        memberService.mypageUpdate(member);
+    public String mypageUpdate(Model model, String id) {
+        MyInfoUpdateDto mu = memberService.mypageUpdate(id);
+        model.addAttribute("mu",mu);
 
         return "";
     }

@@ -1,5 +1,6 @@
 package com.hlkw.cafe.repository;
 
+import com.hlkw.cafe.dto.MyInfoUpdateDto;
 import com.hlkw.cafe.entity.Member;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -12,7 +13,7 @@ public interface MemberMapper {
     Member findOneById(String id);
 
 //동우 마이페이지 업데이트
-    Member mypageUpdate(Member member);
+    MyInfoUpdateDto mypageUpdate(String id);
 
     String findNicknameByCommentNum(long commentNum);
 }

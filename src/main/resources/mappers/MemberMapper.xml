@@ -28,12 +28,10 @@
     <!-- 동우 마이페이지 개인 정보 수정-->
     <update id="mypageUpdate">
         UPDATE dust_member
-        SET id=#{id},
+        SET
         pw=#{pw},
         addr=#{addr},
-        age=#{age},
         phone_num=#{phoneNum},
-        gender=#{gender},
         email=#{email},
         nickname=#{nickname}
         WHERE id=#{id}
