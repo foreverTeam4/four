@@ -200,13 +200,21 @@ public class CafeController {
         }
     }
     @GetMapping("/member")
-    public String noticeMember(){
+    public String noticeMember(Model model){
+        System.out.println("GET맵핑 발생");
+//        System.out.println("memberList = " + memberList);
+        List<Member> memberList = memberService.findMemberList();
+        model.addAttribute("member",memberList);
         return "member";
     }
 
-    @GetMapping("/member")
-    public String levelChange(Level level, String id){
-        memberService.changeMemberLevel(level, id);
+    @PostMapping("/member")
+    public String levelChange(String level, String id){
+        System.out.println("level = " + level);
+        System.out.println("id = " + id);
+        Level changeEnum = Level.valueOf(level);
+        boolean flag = memberService.changeMemberLevel(changeEnum, id);
+        System.out.println("flag = " + flag);
         return "redirect:/dust/member";
     }
 

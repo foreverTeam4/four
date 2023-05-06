@@ -4,6 +4,8 @@ import com.hlkw.cafe.entity.Level;
 import com.hlkw.cafe.entity.Member;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface MemberMapper {
 
@@ -18,4 +20,7 @@ public interface MemberMapper {
     String findNicknameByCommentNum(long commentNum);
 
     boolean levelChange(Level level, String id);
+
+    //전체 멤버 출력
+    List<Member> findAll();
 }
