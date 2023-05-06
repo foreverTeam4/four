@@ -2,13 +2,13 @@ package com.hlkw.cafe.repository;
 
 import com.hlkw.cafe.entity.Board;
 import com.hlkw.cafe.entity.Category;
+import com.hlkw.cafe.entity.Comment;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
-import org.w3c.dom.Comment;
 
 import java.util.List;
 
@@ -92,19 +92,25 @@ class BoardMapperTest {
 
     //동우
     @Test
-    @DisplayName("보드아이디 admin으로 게시물을 조회했을 때 게시물이 반환되어야 한다")
-    void myBoardOne(){
+    @DisplayName("보드 아이디 admin으로 게시글을 조회했을 때 내가 쓴 게시글이 반환되어야 한다")
+    void myCommentList() {
         String id = "admin";
-        Board one = boardMapper.myBoardOne(id);
-        System.out.println("one = " + one);
+
+        List<Board> list = boardMapper.myBoardList(id);
+        for (Board board : list) {
+            System.out.println("comment.getId() = " + board.getId() + " " + board.getContent());
+        }
         System.out.println();
         System.out.println();
-        assertEquals("admin",one.getId());
+
+        for (int i = 0; i < list.size(); i++) {
+            assertEquals("admin", list.get(i).getId());
+        }
+
     }
 
 
-
-    @Test
+        @Test
     @DisplayName("글제목이 test2title2인 글을 조회하면 게시글 2개가 조회된다.")
     void searchTest(){
         //given

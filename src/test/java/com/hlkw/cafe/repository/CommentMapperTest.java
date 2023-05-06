@@ -31,14 +31,27 @@ class CommentMapperTest {
         assertEquals(3, list.size());
     }
 
+
+    //아이디로 내가쓴 댓글 list 찾기
     @Test
-    @DisplayName("보드 아이디 admin으로 댓글을 조회했을 때 게시물이 반환되어야 한다")
-    void myCommentOne(){
+    @DisplayName("보드 아이디 admin으로 댓글을 조회했을 때 내가 쓴 댓글이 반환되어야 한다")
+    void myCommentList(){
         String id="admin";
-        Comment one = mapper.MyCommentOne(id);
-        System.out.println("one = " + one);
+
+        List<Comment> list = mapper.myCommentList(id);
+        for (Comment comment : list) {
+            System.out.println("comment.getId() = " + comment.getId() +" "+comment.getContent());
+        }
         System.out.println();
         System.out.println();
 
+        for (int i = 0; i <list.size() ; i++) {
+            assertEquals("admin",list.get(i).getId());
+        }
+
+
     }
+
+
+
 }

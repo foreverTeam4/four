@@ -28,18 +28,12 @@ public class CommentService {
 
 
     //동우 마이페이지 내 내가 작성한 댓글 list
-    public List<MyCommentListDto> myCommentListDtoList(Comment comment){
-        return mapper.myCommentList(comment)
+    public List<MyCommentListDto> myCommentListDtoList(String id){
+        return mapper.myCommentList(id)
                 .stream()
                 .map(MyCommentListDto::new)
                 .collect(toList())
                 ;
     }
-
-    //동우 내가 쓴 댓글 id로 찾아오기
-    public Comment myCommentOne(String id) {
-       return mapper.MyCommentOne(id);
-    }
-
 
 }

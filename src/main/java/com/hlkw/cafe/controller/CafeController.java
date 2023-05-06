@@ -201,32 +201,19 @@ public class CafeController {
 
     // 동우 마이페이지 내 내가 작성한글 목록 조회
     @GetMapping("/myboardList")
-    public String myboardlist(Model model, Board myBoardOne) {
-        List<MyBoardListDto> myPageTitleList = boardService.myPageTitleList(myBoardOne);
+    public String myboardlist(Model model, String id) {
+        List<MyBoardListDto> myPageTitleList = boardService.myBoardListDto(id);
         model.addAttribute("myPageList", myPageTitleList);
         return "";
     }
 
-    //동우 아이디로 내가쓴 글 찾기
-    public Board myBoardOne(Model model,String id){
-        return boardService.myBoardOne(id);
-
-    }
-    //동우 아이디로 내가 쓴 댓글 찾기
-    public Comment myCommentOne(Model model,String id){
-        return commentService.myCommentOne(id);
-
-
-    }
-
-
 
     //동우 마이페이지 내 내가 작성한 댓글 조회
     @GetMapping("/myCommentList")
-    public String mycommentlist(Model model, Comment comment) {
-        List<MyCommentListDto> mycommentlist = commentService.myCommentListDtoList(comment);
+    public String mycommentlist(Model model, String id) {
+        List<MyCommentListDto> mycommentlist = commentService.myCommentListDtoList(id);
         model.addAttribute("myCommentList", mycommentlist);
-        return "";
+        return "mypage";
     }
 
 

@@ -18,8 +18,8 @@ public interface CommentMapper {
 
 
     // 동우 id로 내가 쓴 댓글 찾기
-    Comment MyCommentOne(String id);
+    Comment myCommentOne(String id);
 
     // 동우 내가 작성한 댓글 list
-    List<Comment> myCommentList(Comment comment);
+    List<Comment> myCommentList(String id);
 }

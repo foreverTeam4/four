@@ -21,11 +21,7 @@ public interface BoardMapper {
 
 
     // 동우 내가 작성한글 list
-    List<Board> myFindAll(Board myBoardOne);
-
-    //id로 내가 쓴글 찾기
-    Board myBoardOne(String id);
-
+    List<Board> myBoardList(String id);
 
 
     //태근

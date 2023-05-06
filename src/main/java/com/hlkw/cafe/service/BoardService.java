@@ -47,22 +47,12 @@ public class BoardService {
 
 
     // 동우 마이페이지 내 내가 작성한글 list
-    public List<MyBoardListDto> myPageTitleList(Board myBoardOne){
-
-        return boardMapper.myFindAll(myBoardOne)
+    public List<MyBoardListDto> myBoardListDto(String id){
+        return boardMapper.myBoardList(id)
                 .stream()
                 .map(MyBoardListDto::new)
                 .collect(toList())
                 ;
-
-    }
-
-
-
-    //동우 아이디로 내가 쓴글 찾기
-    public Board myBoardOne(String id){
-
-        return boardMapper.myBoardOne(id);
     }
 
     public boolean adminSave(BoardSaveDto dto) {
