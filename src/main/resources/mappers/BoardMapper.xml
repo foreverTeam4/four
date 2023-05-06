@@ -17,6 +17,7 @@
         </if>
         <if test='searchBy == "distinguish"'>
             where distinguish =#{word}
+            ORDER BY board_no desc;
         </if>
 
     </select>
@@ -63,4 +64,15 @@
         update dust_board set view_count = view_count + 1 where board_no = #{boardNo}
     </update>
 
+    <select id="todayCountBoard" resultType="int">
+        SELECT COUNT(*)
+        FROM dust_board
+        WHERE DATE_FORMAT(written_date, '%m%d') = #{today}
+    </select>
+
+    <select id="findAdmin" resultType="board">
+        SELECT COUNT(*)
+        FROM dust_member
+        WHERE id = #{id}
+    </select>
 </mapper>

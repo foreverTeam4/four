@@ -1,10 +1,13 @@
 package com.hlkw.cafe.service;
 
+import com.hlkw.cafe.entity.Level;
 import com.hlkw.cafe.entity.Member;
 import com.hlkw.cafe.repository.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -31,5 +34,13 @@ public class MemberService {
 
     public String findNicknameByCommentNum(long commentNum) {
         return mapper.findNicknameByCommentNum(commentNum);
+    }
+
+
+    public boolean changeMemberLevel(Level level, String id){
+        return mapper.levelChange(level, id);
+    }
+    public List<Member> findMemberList(){
+        return mapper.findAll();
     }
 }

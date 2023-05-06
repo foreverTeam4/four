@@ -9,7 +9,8 @@ import java.util.Map;
 @Mapper
 public interface CommentMapper {
 
-
+    //admin
+    int todayCountComment(String today);
 
 
     List<Comment> getBoardCommentList(long boardNo);

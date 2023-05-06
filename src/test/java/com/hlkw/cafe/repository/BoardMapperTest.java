@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static com.hlkw.cafe.entity.Category.*;
@@ -122,6 +124,19 @@ class BoardMapperTest {
         assertEquals(2, list.size());
 
         //then
+    }
+
+    @Test
+    @DisplayName("오늘 날짜에 해당하는 게시물 개수가 반환되어야 한다.")
+    void todayBoardTest(){
+        //given
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMdd");
+
+        //when
+        int i = boardMapper.todayCountBoard(dtf.format(now));
+
+        System.out.println("i = " + i);
     }
 
 }
