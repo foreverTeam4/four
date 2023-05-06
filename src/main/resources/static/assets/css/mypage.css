@@ -1,0 +1,361 @@
+.container{
+    width: 1400px;
+    margin: 0 auto;
+}
+
+* {
+    box-sizing: border-box;
+
+}
+
+body {
+    background: url("../jpg/background.jpg") repeat;
+    background-size: 100%;
+}
+
+/* header 영역 */
+.top-header{
+    margin: 30px auto;
+    height: 30px;
+    width: 90%;
+    display: flex;
+    align-items: center;
+}
+
+.logo{
+    width: 35px;
+    height: 35px;
+}
+
+.burger-btn{
+    width: 20px;
+    height: 20px;
+}
+
+.logo-text{
+    color: white;
+    margin: 0 auto;
+    font-weight: 200;
+    font-size: 23px;
+}
+
+/* myInfo 영역 */
+.myInfo{
+    width: 75%;
+    margin: 0 auto;
+    font-weight: 300;
+
+}
+
+.container .myInfo .myInfo-title{
+    width: 100%;
+    height: 50px;
+    color: white;
+    align-items: center;
+    display: flex;
+
+
+} 
+.container .myInfo .whiteboard{
+    background-color: white;
+    border-radius: 15px;
+    height: 180px;
+    border: 3px solid white;
+
+}
+
+.container .myInfo .whiteboard .whiteboard-class{
+    margin-left: 30px;
+    width: 47%;
+
+}
+
+.container .myInfo .whiteboard .user-info{
+    color: black;
+    padding-top: 15px;
+    margin-left: 30px;
+
+}
+
+.container .myInfo .whiteboard .user-info span{
+    font-weight: 1000;
+}
+
+.myInfo .whiteboard .whiteboard-class{
+    float: left;
+}
+
+.myInfo .whiteboard .whiteboard-class .user-info-bottom{
+border-right: 2px black solid;
+margin-top: 10px;
+
+
+}
+
+.myInfo .whiteboard .whiteboard-class .user-info-bottom .myInfo-content{
+    padding-top: 10px;
+    
+}
+
+.myInfo .whiteboard .whiteboard-class .user-info-bottom .section-name{
+    margin-top: 30px;
+    font-weight: 500;
+}
+
+.myInfo .whiteboard .whiteboard-class .user-info-bottom .myInfo-content a:first-child{
+    float: left;
+    width: 50%;
+    margin-left: 30px;
+    
+}
+.myInfo .whiteboard .whiteboard-class .user-info-bottom .myInfo-content a:first-child div{
+ font-weight: 700;
+ color: black;
+}
+
+.myInfo .whiteboard .whiteboard-class .user-info-bottom .myInfo-content a:last-child{
+    width: 16%;
+    float: left;
+    margin-left: 120px;
+    
+}
+
+.myInfo .whiteboard .whiteboard-class .user-info-bottom .myInfo-content a:last-child div:first-child{
+    float: left;
+    font-size: 0.7em;
+    margin-left: 15px;
+    color: black;
+}
+
+.myInfo .whiteboard .whiteboard-class .user-info-bottom .myInfo-content a:last-child #fix-image{
+border: 1px solid #000;
+width: 20px;
+height: 20px;
+margin-left: 65px;
+}
+
+
+.container .myInfo .whiteboard .whiteboard-class .user-info-bottom .section1{
+    float: left;
+    height: 80px;
+    margin-left: 30px;
+
+
+}
+.container .myInfo .whiteboard .whiteboard-class .user-info-bottom .section1 div {
+
+    margin-bottom: 5px;
+}
+
+
+.container .myInfo .whiteboard .whiteboard-class .user-info-bottom .section2{
+    margin-left: 180px;
+
+}
+.container .myInfo .whiteboard .whiteboard-class .user-info-bottom .section2 div{
+    margin-bottom: 5px;
+
+
+}
+
+
+/* 현재등급 */
+
+.whiteboard .grade-count{
+    width: 50%;
+    height: 110px;
+    margin-left: 470px;
+    margin-top: 45px;
+
+}
+
+.whiteboard .whiteboard-class #black img{
+    width: 20px;
+    height: 20px; 
+}
+
+.whiteboard .whiteboard-class #black{
+    width: 20px;
+    height: 20px;
+    float: left;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+
+.whiteboard .grade{
+    border-right: 3px black solid;
+
+    float: left;
+    height: 110px;
+    width: 43%;
+}
+
+/* 현재등급 */
+.whiteboard .grade div:nth-child(1){
+    border-bottom: 1px solid;
+    width: 70px;
+    height: 20px;
+    margin-top: 10px;
+    font-weight: 700;
+
+}
+
+
+.whiteboard .grade div:nth-child(2){
+    height: 70px;
+    width: 70px;
+    border: 1px solid;
+    float: left;
+    margin-top: 10px;
+    border-radius: 50%;
+    background: black;
+
+}
+.whiteboard .grade div:nth-child(3){
+margin-top: 10px;
+font-weight: 700;
+}
+.whiteboard .grade .cosmos{
+    margin-left: 85px;
+    width: 120px;
+    
+    
+}
+.grade .cos2{
+   color: gray;
+    
+    
+}
+
+.whiteboard .grade:first-child{
+    margin-left: 30px;
+}
+
+
+.whiteboard .board-comment{
+    height: 120px;
+    margin-left: 300px;
+    width: 250px;
+
+}
+
+
+
+
+/* 글 댓글 */
+.board-comment .comment div{
+    text-align: center;
+    padding-top: 10px;
+    font-weight: 700;
+}
+
+.board-comment .comment div:first-child{
+    float: left;
+    align-items: center;
+    width: 150px;
+}
+.board-comment .comment div:last-child{
+
+}
+
+
+
+
+.board-comment .count div{
+    text-align: center;
+    padding-top: 10px;
+    font-weight: 100;
+
+}
+
+.board-comment .count div:first-child{
+    float: left;
+    align-items: center;
+    width: 150px;
+}
+.board-comment .count div span{
+    font-size: 2.5em;
+}
+
+
+
+
+
+
+
+/* post영역 */
+.recent-posts, .recent-comments{
+    width: 75%;
+    margin: 0 auto;
+    padding-top: 10px;
+}
+
+.recent-posts{
+    margin-bottom: 40px;
+}
+.posts-main-wrapper, .comments-main-wrapper{
+    width: 100%;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 300;
+    border-bottom: 1.5px solid white;
+    height: 50px;
+}
+
+.posts-main-title, .comments-main-title{
+    font-size: 20px;
+}
+
+/* 더하기 영역 */
+.add-wrapper{
+    display: flex;
+}
+.posts-add-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+}
+.add-wrapper .posts-add-btn img{
+    color: white;
+    width: 20px;
+    height: 20px;
+
+}
+
+/* post-text영역 */
+.posts-wrapper ,.comments-wrapper{
+display: flex;
+color: white;
+align-items: center;
+text-align: center;
+height: 50px;
+border-bottom: 0.5px solid white;
+}
+
+.container .recent-posts .posts-wrapper:nth-child(2){
+    border-top: 2px white solid;
+}
+
+.container .recent-posts .posts-wrapper .posts-boardNo {
+ margin-left: 10px;
+}
+
+.container .recent-posts .posts-wrapper .posts-title{
+    margin-left: 60px;
+}
+
+.container .recent-posts .posts-wrapper .posts-nickname{
+    margin-left: 280px;
+}
+
+.container .recent-posts .posts-wrapper .posts-write-date{
+    margin-left: 35px;
+}
+
+.container .recent-posts .posts-wrapper .posts-view-count{
+    margin-left: 30px;
+}

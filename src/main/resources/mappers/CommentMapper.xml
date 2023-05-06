@@ -13,4 +13,13 @@
         order by written_date desc;
     </select>
 
+<!--    동우  아이디로 내가쓴 댓글 list 찾기-->
+    <select id="myCommentList" resultType="comment">
+        SELECT *
+        From dust_comment
+        Where id=#{id}
+    </select>
+
+
+
 </mapper>

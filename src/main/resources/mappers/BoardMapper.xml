@@ -33,19 +33,13 @@
         delete from dust_board where board_no = #{boardNo}
     </delete>
 
-    <select id="myfindAll" resultType="board">
-        SELECT board_no, title, content, id, written_date, view_count
+    <select id="myBoardList" resultType="board">
+        SELECT *
         FROM dust_board
         WHERE id=#{id}
         ORDER BY board_no
     </select>
 
-    <select id="myCommentList" resultType="comment">
-        SELECT comment_num, content, id, written_date, view_count
-        From dust_comment
-        Where id=#{id}
-        ORDER BY comment_num
-    </select>
 
 
     <insert id="save">

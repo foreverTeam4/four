@@ -47,25 +47,13 @@ public class BoardService {
 
 
     // 동우 마이페이지 내 내가 작성한글 list
-    public List<MyBoardListDto> myPageTitleList(Board board){
-
-        return boardMapper.myFindAll(board)
+    public List<MyBoardListDto> myBoardListDto(String id){
+        return boardMapper.myBoardList(id)
                 .stream()
                 .map(MyBoardListDto::new)
                 .collect(toList())
                 ;
-
     }
-
-    //동우 마이페이지 내 내가 작성한 댓글 list
-    public List<MyCommentListDto> myCommentListDtoList(Comment comment){
-        return boardMapper.myCommentList(comment)
-                .stream()
-                .map(MyCommentListDto::new)
-                .collect(toList())
-                ;
-    }
-
 
     public boolean adminSave(BoardSaveDto dto) {
         if(dto.getTitle() != "" && dto.getContent() != ""){
