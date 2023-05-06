@@ -81,6 +81,12 @@
     margin-bottom: 40px;
 }
 
+.admin-wrapper:hover, .posts-wrapper:hover, .comments-wrapper:hover{
+    background-color: rgba(200, 200, 200, 0.1);
+    transition: 0.7s;
+    cursor: pointer;
+}
+
 .recent-posts{
     /* margin-bottom: 40px; */
 }

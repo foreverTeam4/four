@@ -72,7 +72,7 @@
                 </div>
             </div>
             <c:forEach var="am" items="${admin}">
-                <div class="admin-wrapper">
+                <div class="admin-wrapper" onclick="location.href='/dust/detail?boardNo=${am.boardNo}'">
                     <div class="admin-boardNo">${am.boardNo}</div>
                     <div class="admin-category">${am.category}</div>
                     <div class="admin-title">${am.title}</div>
@@ -95,7 +95,7 @@
                 </div>
             </div>
             <c:forEach var="m" items="${member}">
-                <div class="posts-wrapper">
+                <div class="posts-wrapper" onclick="location.href='/dust/detail?boardNo=${m.boardNo}'">
                     <div class="posts-boardNo">${m.boardNo}</div>
                     <div class="posts-category">${m.category}</div>
                     <div class="posts-title">${m.title}</div>
@@ -118,7 +118,8 @@
                 </div>
             </div>
             <c:forEach var="b" items="${board}">
-            <div class="comments-wrapper">
+            
+            <div class="comments-wrapper" onclick="location.href='/dust/detail?boardNo=${b.boardNo}'">
                 <div class="comments-boardNo">${b.boardNo}</div>
                 <div class="comments-category">HORROR</div>
                 <div class="comments-title">${b.content}</div>
