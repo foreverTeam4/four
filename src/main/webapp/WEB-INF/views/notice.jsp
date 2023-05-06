@@ -15,6 +15,7 @@
 
 <body>
     <form action="/dust/notice" method="post" id="formInput">
+        <input type="hidden" name="id" id="id" value="${id}">
         <div class="notice-container">
             <header class="top-header">
                 <!-- logo,burger-btn태그 onclick 이벤트 추가 필요 -->

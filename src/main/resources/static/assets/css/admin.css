@@ -1,6 +1,7 @@
 /* 공통container 영역 */
 .admin-container {
     width: 1500px;
+    margin : 0 auto;
 }
 
 /* 상단 btn영역 */

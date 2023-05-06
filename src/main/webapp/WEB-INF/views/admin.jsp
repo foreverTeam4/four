@@ -43,7 +43,7 @@
 
         <!-- button 영역 -->
         <section class="btn-wrapper">
-            <div class="admin-btn" onclick="location.href='/dust/notice'">
+            <div class="admin-btn" onclick="location.href='/dust/notice?id=${id}'">
                 <div class="btn-title">공지작성</div>
                 <div class="btn-content">NOTICE</div>
                 <img class="add-btn2" src="/assets/jpg/than2.png" alt="than">
@@ -76,7 +76,7 @@
                     <div class="admin-boardNo">${am.boardNo}</div>
                     <div class="admin-category">${am.category}</div>
                     <div class="admin-title">${am.title}</div>
-                    <div class="admin-nickname">관리자</div>
+                    <div class="admin-nickname">${id}</div>
                     <div class="admin-write-date">${am.writtenDate}</div>
                     <div class="admin-view-count">${am.viewCount}</div>
                 </div>

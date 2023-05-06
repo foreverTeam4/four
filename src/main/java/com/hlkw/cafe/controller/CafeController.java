@@ -55,7 +55,7 @@ public class CafeController {
         if (mbr == null) {
             return "/loginfail";
         } else if (mbr.getId().equals("admin")) {
-            return "redirect:/dust/admin";
+            return "redirect:/dust/admin?&id="+mbr.getId();
         } else {
             return "/main"; //석빈이 메인 페이지 jsp
         }
@@ -155,10 +155,9 @@ public class CafeController {
 
     //관리자 메인 페이지
     @GetMapping("/admin")
-    public String adminList(Model model, Member mbr) {
+    public String adminList(String id, Model model, Member mbr) {
         List<SimpleDateCommentDto> boardCommentList = commentService.getBoardCommentList(0);
 //        System.out.println("boardCommentList = " + boardCommentList);
-
 
         //0을 입력하면 관리자 공지글 List, 1을 입력하면 멤버의 공지글 List
         String distinguish = "distinguish";
@@ -167,6 +166,7 @@ public class CafeController {
         List<Board> adminList = boardService.boardSearch(distinguish, adminDistinguish);
         List<Board> memberList = boardService.boardSearch(distinguish, memberDistinguish);
 
+        model.addAttribute("id",id);
         model.addAttribute("admin", adminList);
         model.addAttribute("member", memberList);
         model.addAttribute("board", boardCommentList);
@@ -181,7 +181,8 @@ public class CafeController {
 
     //관리자 공지글 페이지로 이동
     @GetMapping("/notice")
-    public String notice() {
+    public String notice(String id, Model model) {
+        model.addAttribute("id",id);
         return "notice";
     }
 
@@ -210,11 +211,10 @@ public class CafeController {
 
     @PostMapping("/member")
     public String levelChange(String level, String id){
-        System.out.println("level = " + level);
-        System.out.println("id = " + id);
+//        System.out.println("level = " + level);
+//        System.out.println("id = " + id);
         Level changeEnum = Level.valueOf(level);
         boolean flag = memberService.changeMemberLevel(changeEnum, id);
-        System.out.println("flag = " + flag);
         return "redirect:/dust/member";
     }
 
