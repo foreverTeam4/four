@@ -19,6 +19,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,7 +57,7 @@ public class CafeController {
         if (mbr == null) {
             return "/loginfail";
         } else if (mbr.getId().equals("admin")) {
-            return "redirect:/dust/admin?&id="+mbr.getId();
+            return "redirect:/dust/admin?&id=" + mbr.getId();
         } else {
             return "/main"; //석빈이 메인 페이지 jsp
         }
@@ -73,6 +75,8 @@ public class CafeController {
         model.addAttribute("comments", commentMap);
         return "/detail";
     }
+
+
 
     private Map<Board, Member> getBoardWithWriter(long boardNo) {
         Map<Board, Member> boardWithWriter = new HashMap<>();
@@ -126,7 +130,7 @@ public class CafeController {
 
     //게시글 수정내역 전달
     //게시글 번호, 제목, 내용 전달받아서 디비 업뎃 후 리다이렉트 처리
-    @PostMapping ("/modified")
+    @PostMapping("/modified")
     public String boardUpdated(WriteDto dto, String id, Model model) {
         boardService.boardUpdate(dto);
         log.info(dto.getTitle());
@@ -159,6 +163,13 @@ public class CafeController {
         List<SimpleDateCommentDto> boardCommentList = commentService.getBoardCommentList(0);
 //        System.out.println("boardCommentList = " + boardCommentList);
 
+        //오늘 게시물의 갯수 출력
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMdd");
+        String today = dtf.format(now);
+        int todayBoardCount = boardService.todayBoardCount(today);
+        int todayCommentCount = commentService.todayCommentCount(today);
+
         //0을 입력하면 관리자 공지글 List, 1을 입력하면 멤버의 공지글 List
         String distinguish = "distinguish";
         String adminDistinguish = "0";
@@ -166,11 +177,13 @@ public class CafeController {
         List<Board> adminList = boardService.boardSearch(distinguish, adminDistinguish);
         List<Board> memberList = boardService.boardSearch(distinguish, memberDistinguish);
 
-        model.addAttribute("id",id);
+        model.addAttribute("id", id);
         model.addAttribute("admin", adminList);
         model.addAttribute("member", memberList);
         model.addAttribute("board", boardCommentList);
         model.addAttribute("mbr", mbr);
+        model.addAttribute("todayBoardCount", todayBoardCount);
+        model.addAttribute("todayCommentCount", todayCommentCount);
 //        System.out.println("mbr = " + mbr);
 //        System.out.println("adminList = " + adminList);
 //        System.out.println("memberList = " + memberList);
@@ -178,11 +191,10 @@ public class CafeController {
     }
 
 
-
     //관리자 공지글 페이지로 이동
     @GetMapping("/notice")
     public String notice(String id, Model model) {
-        model.addAttribute("id",id);
+        model.addAttribute("id", id);
         return "notice";
     }
 
@@ -200,17 +212,18 @@ public class CafeController {
             return "redirect:/dust/notice?result=false";
         }
     }
+
     @GetMapping("/member")
-    public String noticeMember(Model model){
+    public String noticeMember(Model model) {
         System.out.println("GET맵핑 발생");
 //        System.out.println("memberList = " + memberList);
         List<Member> memberList = memberService.findMemberList();
-        model.addAttribute("member",memberList);
+        model.addAttribute("member", memberList);
         return "member";
     }
 
     @PostMapping("/member")
-    public String levelChange(String level, String id){
+    public String levelChange(String level, String id) {
 //        System.out.println("level = " + level);
 //        System.out.println("id = " + id);
         Level changeEnum = Level.valueOf(level);
@@ -218,17 +231,42 @@ public class CafeController {
         return "redirect:/dust/member";
     }
 
+    //관리자 TOP
+    @GetMapping("/adminView")
+    public String adminDetail(String id, Model model) {
+        //admin nickname 찾기
+        Board admin = boardService.findAdminById(id);
+        model.addAttribute("admin",admin);
+
+        //조회수가 가장 높은 게시물(TOP Board)
+        long topBoardNo = boardService.topBoardNo();
+        Map<Board, Member> TBboardWithWriter = getBoardWithWriter(topBoardNo);
+        Map<SimpleDateCommentDto, String> TBcommentMap = getCommentWithNickname(topBoardNo);
+
+        model.addAttribute("TBboard", TBboardWithWriter);
+        model.addAttribute("TBcomments", TBcommentMap);
+
+        //좋아요가 가장 많은 댓글의 게시물(TOP Comment)
+        long topCommentNo = commentService.topCommentNo();
+        Map<Board, Member> TCboardWithWriter = getBoardWithWriter(topCommentNo);
+        Map<SimpleDateCommentDto, String> TCcommentMap = getCommentWithNickname(topCommentNo);
+
+        model.addAttribute("TCboard", TCboardWithWriter);
+        model.addAttribute("TCcomments", TCcommentMap);
+
+        return "adminView";
+    }
 
 
     //마이페이지 목록
     @GetMapping("/mypage")
-    public String mypage(Model model, Board board){
+    public String mypage(Model model, Board board) {
 
 
         return "mypage";
     }
 
-    // 동우 마이페이지 내 내가 작성한글 목록 조회
+    // 동우 마이페이지 내 내가 작성한글 목록 조회료
     @GetMapping("/myboardList")
     public String myboardlist(Model model, String id) {
         List<MyBoardListDto> myPageTitleList = boardService.myBoardListDto(id);

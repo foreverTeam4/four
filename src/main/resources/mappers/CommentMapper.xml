@@ -20,6 +20,13 @@
         Where id=#{id}
     </select>
 
+    <select id="todayCountComment" resultType="int">
+        SELECT COUNT(*)
+        FROM dust_comment
+        WHERE DATE_FORMAT(written_date, '%m%d') = #{today}
+    </select>
+
+
 
 
 </mapper>

@@ -11,7 +11,11 @@ import com.hlkw.cafe.repository.BoardMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
@@ -62,5 +66,21 @@ public class BoardService {
             return true;
         }
         return false;
+    }
+
+    public int todayBoardCount(String today){
+        return boardMapper.todayCountBoard(today);
+    }
+
+    public long topBoardNo(){
+        String distinguish = "distinguish";
+        String adminDistinguish = "0";
+        List<Board> list = boardMapper.search(distinguish, adminDistinguish);
+        Optional<Board> maxComment = list.stream().max(Comparator.comparing(comment -> comment.getViewCount()));
+        return maxComment.get().getBoardNo();
+    }
+
+    public Board findAdminById(String id){
+        return boardMapper.findAdmin(id);
     }
 }

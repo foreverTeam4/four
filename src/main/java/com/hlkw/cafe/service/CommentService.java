@@ -7,9 +7,12 @@ import com.hlkw.cafe.repository.CommentMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.toList;
 
 @Service
@@ -36,4 +39,13 @@ public class CommentService {
                 ;
     }
 
+    public int todayCommentCount(String today){
+        return mapper.todayCountComment(today);
+    }
+
+    public long topCommentNo(){
+        List<Comment> list = mapper.getBoardCommentList(0);
+        Optional<Comment> maxComment = list.stream().max(Comparator.comparing(comment -> comment.getLikeIt()));
+        return maxComment.get().getBoardNo();
+    }
 }

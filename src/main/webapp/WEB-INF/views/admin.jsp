@@ -26,7 +26,7 @@
                     오늘 게시물
                 </div>
                 <div class="today-count-wrapper">
-                    <span class="today-count">20</span>
+                    <span class="today-count">${todayBoardCount}</span>
                     <span>회</span>
                 </div>
             </section>
@@ -35,7 +35,7 @@
                     댓글
                 </div>
                 <div class="today-count-wrapper">
-                    <span class="today-count">01</span>
+                    <span class="today-count">${todayCommentCount}</span>
                     <span>회</span>
                 </div>
             </section>
@@ -53,7 +53,7 @@
                 <div class="btn-content">LEVEL</div>
                 <img class="add-btn2" src="/assets/jpg/than2.png" alt="than">
             </div>
-            <div class="admin-btn" onclick="location.href='/dust/notice'">
+            <div class="admin-btn" onclick="location.href='/dust/adminView?id=${id}'">
                 <div class="btn-title">TOP 조회수, 댓글</div>
                 <div class="btn-content">VIEWS</div>
                 <img class="add-btn2" src="/assets/jpg/than2.png" alt="than">
@@ -147,6 +147,17 @@
 
         </section>
     </div>
+
+    <!-- 10보다 작으면 앞에 0 붙힘 -->
+    <script>
+        $countText = document.querySelectorAll('.today-count');
+        $countText.forEach(text => {
+            const count = +text.textContent;
+            if(count<10){
+                text.textContent = '0'+count;
+            }
+        });
+    </script>
 </body>
 
 </html>
