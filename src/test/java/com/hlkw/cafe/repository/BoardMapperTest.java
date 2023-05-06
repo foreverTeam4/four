@@ -93,7 +93,7 @@ class BoardMapperTest {
     //동우
     @Test
     @DisplayName("보드 아이디 admin으로 게시글을 조회했을 때 내가 쓴 게시글이 반환되어야 한다")
-    void myCommentList() {
+    void myBoardList() {
         String id = "admin";
 
         List<Board> list = boardMapper.myBoardList(id);
