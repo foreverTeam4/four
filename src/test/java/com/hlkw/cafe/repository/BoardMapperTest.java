@@ -1,5 +1,7 @@
 package com.hlkw.cafe.repository;
 
+import com.hlkw.cafe.dto.BoardSaveDto;
+import com.hlkw.cafe.dto.WriteDto;
 import com.hlkw.cafe.entity.Board;
 import com.hlkw.cafe.entity.Category;
 import org.junit.jupiter.api.DisplayName;
@@ -19,6 +21,17 @@ class BoardMapperTest {
 
     @Autowired
     BoardMapper boardMapper;
+
+    @Test
+    @DisplayName("게시글을 저장할 수 있따")
+    void save(){
+
+        for (int i = 0; i < 10; i++) {
+            BoardSaveDto dto = new BoardSaveDto("제발요" + i, "저장좀ㅠㅠ" + i, "test" + i, HORROR);
+            boardMapper.save(new Board(dto));
+        }
+
+    }
 
     @Test
     @DisplayName("작성자가 '관리자'인 게시물을 조회하면 admin 계정이 작성한 게시글을 불러온다")

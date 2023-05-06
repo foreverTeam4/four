@@ -28,10 +28,12 @@ class MemberMapperTest {
 
     @Test
     @DisplayName("멤버를 생성할 수 있다")
-    @Transactional @Rollback
+//    @Transactional @Rollback
     void save(){
-        Member mbr = new Member("test", "test", "서울", 23, "01055555555", Gender.F, "test@test.com", "test", Level.NEBULA);
+        for (int i = 0; i < 20; i++) {
+        Member mbr = new Member("test" + i, "1234", "서울", 30, "01000000000", Gender.F, "test@test.com", "test", Level.DUST);
         memberMapper.save(mbr);
+        }
 
     }
 
