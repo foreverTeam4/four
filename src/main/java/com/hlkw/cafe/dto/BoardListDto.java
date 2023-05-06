@@ -1,6 +1,7 @@
 package com.hlkw.cafe.dto;
 
 import com.hlkw.cafe.entity.Board;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;

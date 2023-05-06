@@ -1,5 +1,6 @@
 package com.hlkw.cafe.service;
 
+import com.hlkw.cafe.dto.AddCommentDto;
 import com.hlkw.cafe.dto.SimpleDateCommentDto;
 import com.hlkw.cafe.dto.MyCommentListDto;
 import com.hlkw.cafe.entity.Comment;
@@ -47,5 +48,9 @@ public class CommentService {
         List<Comment> list = mapper.getBoardCommentList(0);
         Optional<Comment> maxComment = list.stream().max(Comparator.comparing(comment -> comment.getLikeIt()));
         return maxComment.get().getBoardNo();
+    }
+
+    public boolean addComment(AddCommentDto dto) {
+        return mapper.addComment(dto);
     }
 }

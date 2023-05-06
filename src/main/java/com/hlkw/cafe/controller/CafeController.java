@@ -1,10 +1,6 @@
 package com.hlkw.cafe.controller;
 
-import com.hlkw.cafe.dto.BoardSaveDto;
-import com.hlkw.cafe.dto.MyBoardListDto;
-import com.hlkw.cafe.dto.MyCommentListDto;
-import com.hlkw.cafe.dto.SimpleDateCommentDto;
-import com.hlkw.cafe.dto.WriteDto;
+import com.hlkw.cafe.dto.*;
 import com.hlkw.cafe.entity.Board;
 import com.hlkw.cafe.entity.Comment;
 import com.hlkw.cafe.entity.Level;
@@ -68,7 +64,7 @@ public class CafeController {
     //게시글 번호로 Board 객체 반환받아 jsp에 전달
     @GetMapping("/detail")
     public String boardDetail(@ModelAttribute("mbr") Member mbr, long boardNo, Model model) {
-        Map<Board, Member> boardWithWriter = getBoardWithWriter(boardNo);
+        Map<SimpleDateBoardDto, Member> boardWithWriter = getBoardWithWriter(boardNo);
         Map<SimpleDateCommentDto, String> commentMap = getCommentWithNickname(boardNo);
 
         model.addAttribute("board", boardWithWriter);
@@ -76,12 +72,10 @@ public class CafeController {
         return "/detail";
     }
 
+    private Map<SimpleDateBoardDto, Member> getBoardWithWriter(long boardNo) {
+        Map<SimpleDateBoardDto, Member> boardWithWriter = new HashMap<>();
 
-
-    private Map<Board, Member> getBoardWithWriter(long boardNo) {
-        Map<Board, Member> boardWithWriter = new HashMap<>();
-
-        Board board = boardService.boardDetail(boardNo);
+        SimpleDateBoardDto board = boardService.boardDetail(boardNo);
         Member boardWriter = memberService.findOneById(board.getId());
         boardWithWriter.put(board, boardWriter);
 
@@ -130,7 +124,7 @@ public class CafeController {
 
     //게시글 수정내역 전달
     //게시글 번호, 제목, 내용 전달받아서 디비 업뎃 후 리다이렉트 처리
-    @PostMapping("/modified")
+    @PostMapping ("/modified")
     public String boardUpdated(WriteDto dto, String id, Model model) {
         boardService.boardUpdate(dto);
         log.info(dto.getTitle());
@@ -152,7 +146,7 @@ public class CafeController {
             @RequestParam(defaultValue = "content") String searchBy
             , String word, Model model
     ) {
-        List<Board> filteresList = boardService.boardSearch(searchBy, word);
+        List<SimpleDateBoardDto> filteresList = boardService.boardSearch(searchBy, word);
         model.addAttribute("list", filteresList);
         return "searchList"; //세진 검색된 글 리스트 jsp -> 석빈이 메인 사용
     }
@@ -174,8 +168,8 @@ public class CafeController {
         String distinguish = "distinguish";
         String adminDistinguish = "0";
         String memberDistinguish = "1";
-        List<Board> adminList = boardService.boardSearch(distinguish, adminDistinguish);
-        List<Board> memberList = boardService.boardSearch(distinguish, memberDistinguish);
+        List<SimpleDateBoardDto> adminList = boardService.boardSearch(distinguish, adminDistinguish);
+        List<SimpleDateBoardDto> memberList = boardService.boardSearch(distinguish, memberDistinguish);
 
         model.addAttribute("id", id);
         model.addAttribute("admin", adminList);
@@ -240,7 +234,7 @@ public class CafeController {
 
         //조회수가 가장 높은 게시물(TOP Board)
         long topBoardNo = boardService.topBoardNo();
-        Map<Board, Member> TBboardWithWriter = getBoardWithWriter(topBoardNo);
+        Map<SimpleDateBoardDto, Member> TBboardWithWriter = getBoardWithWriter(topBoardNo);
         Map<SimpleDateCommentDto, String> TBcommentMap = getCommentWithNickname(topBoardNo);
 
         model.addAttribute("TBboard", TBboardWithWriter);
@@ -248,7 +242,7 @@ public class CafeController {
 
         //좋아요가 가장 많은 댓글의 게시물(TOP Comment)
         long topCommentNo = commentService.topCommentNo();
-        Map<Board, Member> TCboardWithWriter = getBoardWithWriter(topCommentNo);
+        Map<SimpleDateBoardDto, Member> TCboardWithWriter = getBoardWithWriter(topCommentNo);
         Map<SimpleDateCommentDto, String> TCcommentMap = getCommentWithNickname(topCommentNo);
 
         model.addAttribute("TCboard", TCboardWithWriter);
