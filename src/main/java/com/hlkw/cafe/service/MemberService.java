@@ -1,5 +1,6 @@
 package com.hlkw.cafe.service;
 
+import com.hlkw.cafe.dto.MyInfoUpdateDto;
 import com.hlkw.cafe.entity.Level;
 import com.hlkw.cafe.entity.Member;
 import com.hlkw.cafe.repository.MemberMapper;
@@ -22,8 +23,8 @@ public class MemberService {
 
 
     //동우 마이페이지 업데이트
-    public Member mypageUpdate(Member member) {
-        return mapper.mypageUpdate(new Member());
+    public void mypageUpdate(MyInfoUpdateDto myInfoUpdateDto) {
+        mapper.mypageUpdate(myInfoUpdateDto.toEntity());
 
     }
 
