@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,10 +80,10 @@ public class CafeController {
     @GetMapping("/detail")
     public String boardDetail(@ModelAttribute("mbr") Member mbr, long boardNo, Model model) {
         Map<SimpleDateBoardDto, Member> boardWithWriter = getBoardWithWriter(boardNo);
-        Map<SimpleDateCommentDto, String> commentMap = getCommentWithNickname(boardNo);
+//        List<List> commentList = getCommentWithNickname(boardNo);
 
         model.addAttribute("board", boardWithWriter);
-        model.addAttribute("comments", commentMap);
+//        model.addAttribute("comments", commentList);
         return "/detail";
     }
 
@@ -113,18 +114,6 @@ public class CafeController {
             commentMap.put(comment, nickname);
         }
         return commentMap;
-    }
-
-    //Map<<코멘트객체, 닉네임>, 카테고리> 반환 -> 메인 & 관리자용메인
-    private Map<Map, String> getCommentWithCategory(List<SimpleDateCommentDto> commentList) {
-        Map<Map, String> commentWithCategory = new HashMap<>();
-        Map<SimpleDateCommentDto, String> commentMap = getCommentMap(commentList);
-
-        for (SimpleDateCommentDto comment : commentMap.keySet()) {
-            String category = boardService.getCategoryByboardNo(comment.getBoardNo());
-            commentWithCategory.put(commentMap, category);
-        }
-        return commentWithCategory;
     }
 
 

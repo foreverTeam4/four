@@ -2,7 +2,10 @@ package com.hlkw.cafe.controller;
 
 import com.hlkw.cafe.dto.AddCommentDto;
 import com.hlkw.cafe.dto.SimpleDateCommentDto;
+import com.hlkw.cafe.entity.Board;
+import com.hlkw.cafe.service.BoardService;
 import com.hlkw.cafe.service.CommentService;
+import com.hlkw.cafe.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -12,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,16 +26,22 @@ import java.util.Map;
 public class CommentController {
 
     private final CommentService commentService;
-    private final CafeController cafeController;
+    private final MemberService memberService;
 
     @GetMapping("/{boardNo}")
     public ResponseEntity<?> replyList(
             @PathVariable long boardNo
     ){
+        List<List> cList = new ArrayList<>();
         log.info("/comment/{} : GET", boardNo);
+
         List<SimpleDateCommentDto> commentList = commentService.getBoardCommentList(boardNo);
-        Map<SimpleDateCommentDto, String> commentMap = cafeController.getCommentMap(commentList);
-        return ResponseEntity.ok().body(commentMap);
+
+        for (SimpleDateCommentDto dto : commentList) {
+            String nickname = memberService.findNicknameByCommentNum(dto.getCommentNum());
+            cList.add(List.of(dto, nickname));
+        }
+        return ResponseEntity.ok().body(cList);
     }
 
     @PostMapping(value = "/new")
