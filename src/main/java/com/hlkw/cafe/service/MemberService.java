@@ -43,4 +43,9 @@ public class MemberService {
     public List<Member> findMemberList(){
         return mapper.findAll();
     }
+
+    public void save(Member member) {
+        mapper.save(member);
+    }
+
 }

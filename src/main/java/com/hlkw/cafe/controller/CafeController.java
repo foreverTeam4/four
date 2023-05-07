@@ -57,8 +57,22 @@ public class CafeController {
         } else {
             return "/main"; //석빈이 메인 페이지 jsp
         }
-
     }
+
+    @GetMapping("/signup")
+    public String showSignupPage(Model model) {
+        model.addAttribute("member", new Member());
+        return "signup";
+    }
+
+    @PostMapping("/signup")
+    public String signup(@ModelAttribute("member") Member member) {
+        memberService.save(member);
+        return "redirect:/main";
+    }
+
+
+
 
     //게시글 디테일 조회
     //게시글 번호로 Board 객체 반환받아 jsp에 전달
