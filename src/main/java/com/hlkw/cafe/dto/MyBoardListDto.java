@@ -31,7 +31,7 @@ public class MyBoardListDto {
     }
 
     private String makeDate(LocalDateTime writtenDate) {
-        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-mm-dd");
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return pattern.format(writtenDate);
 
     }

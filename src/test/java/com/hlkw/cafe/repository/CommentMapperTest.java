@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -86,5 +87,13 @@ class CommentMapperTest {
         boolean flag = mapper.addComment(dto);
 
         assertTrue(flag);
+    }
+
+    @Test
+    @DisplayName("코멘트 번호로 좋아요 수를 늘릴 수 있다.")
+    void like(){
+        long commentNum = 57L;
+        mapper.addLike(commentNum);
+
     }
 }

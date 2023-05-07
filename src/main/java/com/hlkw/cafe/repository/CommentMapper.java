@@ -1,6 +1,7 @@
 package com.hlkw.cafe.repository;
 
 import com.hlkw.cafe.dto.AddCommentDto;
+import com.hlkw.cafe.dto.AddLikeDto;
 import com.hlkw.cafe.entity.Comment;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -18,11 +19,10 @@ public interface CommentMapper {
 
 
 
-    // 동우 id로 내가 쓴 댓글 찾기
-    Comment myCommentOne(String id);
-
     // 동우 내가 작성한 댓글 list
     List<Comment> myCommentList(String id);
 
     boolean addComment(AddCommentDto dto);
+
+    boolean addLike(AddLikeDto dto);
 }

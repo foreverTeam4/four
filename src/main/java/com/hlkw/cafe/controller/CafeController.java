@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,20 +56,34 @@ public class CafeController {
         } else if (mbr.getId().equals("admin")) {
             return "redirect:/dust/admin?&id=" + mbr.getId();
         } else {
-            return "/main"; //석빈이 메인 페이지 jsp
+            return "/test"; //석빈이 메인 페이지 jsp
         }
-
     }
+
+    @GetMapping("/signup")
+    public String showSignupPage(Model model) {
+        model.addAttribute("member", new Member());
+        return "signup";
+    }
+
+    @PostMapping("/signup")
+    public String signup(@ModelAttribute("member") Member member) {
+        memberService.save(member);
+        return "redirect:/main";
+    }
+
+
+
 
     //게시글 디테일 조회
     //게시글 번호로 Board 객체 반환받아 jsp에 전달
     @GetMapping("/detail")
     public String boardDetail(@ModelAttribute("mbr") Member mbr, long boardNo, Model model) {
         Map<SimpleDateBoardDto, Member> boardWithWriter = getBoardWithWriter(boardNo);
-        Map<SimpleDateCommentDto, String> commentMap = getCommentWithNickname(boardNo);
+//        List<List> commentList = getCommentWithNickname(boardNo);
 
         model.addAttribute("board", boardWithWriter);
-        model.addAttribute("comments", commentMap);
+//        model.addAttribute("comments", commentList);
         return "/detail";
     }
 
@@ -99,18 +114,6 @@ public class CafeController {
             commentMap.put(comment, nickname);
         }
         return commentMap;
-    }
-
-    //Map<<코멘트객체, 닉네임>, 카테고리> 반환 -> 메인 & 관리자용메인
-    private Map<Map, String> getCommentWithCategory(List<SimpleDateCommentDto> commentList) {
-        Map<Map, String> commentWithCategory = new HashMap<>();
-        Map<SimpleDateCommentDto, String> commentMap = getCommentMap(commentList);
-
-        for (SimpleDateCommentDto comment : commentMap.keySet()) {
-            String category = boardService.getCategoryByboardNo(comment.getBoardNo());
-            commentWithCategory.put(commentMap, category);
-        }
-        return commentWithCategory;
     }
 
 
@@ -254,34 +257,21 @@ public class CafeController {
 
     //마이페이지 목록
     @GetMapping("/mypage")
-    public String mypage(Model model, Board board) {
-
+    public String mypage(Model model, Board board){
+        List<MyBoardListDto> mb = boardService.myBoardListDto(board.getId());
+        List<MyCommentListDto> mc = commentService.myCommentListDtoList(board.getId());
+        model.addAttribute("mb",mb);
+        model.addAttribute("mc",mc);
 
         return "mypage";
     }
 
-    // 동우 마이페이지 내 내가 작성한글 목록 조회료
-    @GetMapping("/myboardList")
-    public String myboardlist(Model model, String id) {
-        List<MyBoardListDto> myPageTitleList = boardService.myBoardListDto(id);
-        model.addAttribute("myPageList", myPageTitleList);
-        return "";
-    }
-
-
-    //동우 마이페이지 내 내가 작성한 댓글 조회
-    @GetMapping("/myCommentList")
-    public String mycommentlist(Model model, String id) {
-        List<MyCommentListDto> mycommentlist = commentService.myCommentListDtoList(id);
-        model.addAttribute("myCommentList", mycommentlist);
-        return "mypage";
-    }
 
 
     //동우 마이페이지 내 내정보 수정
     @GetMapping("/mypageUpdate")
-    public String mypageUpdate(Member member) {
-        memberService.mypageUpdate(member);
+    public String mypageUpdate(MyInfoUpdateDto myInfoUpdateDto) {
+        memberService.mypageUpdate(myInfoUpdateDto);
 
         return "";
     }

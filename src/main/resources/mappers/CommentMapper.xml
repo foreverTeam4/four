@@ -30,5 +30,8 @@
         insert into dust_comment (id, content, board_no) values (#{id}, #{content}, #{boardNo})
     </insert>
 
+    <update id="addLike">
+        update dust_comment set like_it = like_it + 1 where comment_num = #{commentNum}
+    </update>
 
 </mapper>

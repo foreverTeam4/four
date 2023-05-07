@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="/assets/css/detail.css">
     <link rel="stylesheet" href="/assets/css/header.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script type="text/javascript" src="/resources/js/reply.js"></script>
 </head>
 
 <body>
@@ -24,7 +23,7 @@
 <div class="detail-wrapper">
 
     <c:forEach var="b" items="${board}">
-        <input class="bno" type="hidden" name="boardNo" value="2">
+        <input class="bno" type="hidden" name="boardNo" value="${b.key.boardNo}">
         <div class="detail-title-box">
             <h2 class="detail-board-category">${b.key.category}</h2>
             <h3 class="detail-board-title">${b.key.title}</h3>
@@ -38,7 +37,7 @@
                         <div class="writtenDate">2023.05.04 23:11</div>
                         <div class="viewcount">조회 ${b.key.viewCount}</div>
                     </div>
-                    <div class="mini-comment-count">댓글 ${comments.size}</div>
+                    <div class="mini-comment-count" id="mini-comment-count"></div>
                 </div>
             </div>
         </div>
@@ -60,70 +59,145 @@
 
     <div class="detail-comment-box">
 
-        <div class="view-commentList">
-            <c:forEach var="map" items="${comments}">
-                <div class="written-comments">
-                    <img class="white-star" src="/assets/jpg/logo_white.png">
-                    <div class="comment-userinfo">
-                        <h4 id="comment-nickname">${map.value}</h4>
-                        <h6 class="comment-reg-date">${map.key.writtenDate}</h6>
-                    </div>
-                    <div class="comment-content">${map.key.content}</div>
-                    <div class="comment-like">${map.key.likeIt}</div>
-                </div>
-            </c:forEach>
+        <div class="view-commentList" id="view-commentList">
         </div>
 
         <div class="write-comment">
             <h4 id="write-comment-nickname">${mbr.nickname}</h4>
-            <input type="hidden" class="mbr-id" value="${mbr.id}">
-            <textarea class="comment-content" name="content" placeholder="댓글을 남겨주세요"></textarea>
-            <button onclick="addComment()" class="regist-comment" type="submit">등록</button>
+            <input type="hidden" class="mbr-id" value="admin">
+            <textarea class="comment-content" id="comment-content" name="content" placeholder="댓글을 남겨주세요"></textarea>
+            <button class="regist-comment" id="regist-comment">등록</button>
         </div>
     </div>
 </div>
 <script>
-    // $().ready(function () {
-        const $bno = document.querySelector('.bno').value;
-        const $id = document.querySelector('.mbr-id').value;
-        let $replies = document.querySelector('.view-commentList');
-        // getCommentList();
+    getReplyList();
 
-        function addComment() {
-            let why = document.querySelector('.comment-content').innerText;
-            console.log(why);
-            replyService.add(
-                {id: "test1", content: "머하냐지금", boardNo: $bno},
-                function (result) {
-                    alert("result" + result);
-                }
-            );
-                // getCommentList();
+    $registComment = document.getElementById('regist-comment');
+    $registComment.addEventListener("click", registCmt);
+
+    function registCmt() {
+        let id = document.querySelector('.mbr-id');
+        const replyContent = document.getElementById('comment-content');
+        let board = document.querySelector('.bno');
+        if (replyContent.value === "") {
+            return;
         }
+        $.ajax({
+            contentType: 'application/json',
+            url: "/replies/new",
+            data: JSON.stringify({
+                "id": id.value,
+                "content": replyContent.value,
+                "boardNo": board.value
+            }),
+            type: "post",
+            success: function (result) {
+                if (result === "success") {
+                    // alert("댓글이 등록되었습니다");
+                }
+            },
+            error: function () {
+                alert("등록 실패")
+            }
+        })
+        getReplyList();
+        document.getElementById('comment-content').value = "";
+    }
 
-        <%--function getCommentList() {--%>
-        <%--    replyService.getList({boardNo: $bno}, function (map) {--%>
-        <%--        let str = "";--%>
-        <%--        if (map.size === 0) {--%>
-        <%--            $replies.html("");--%>
-        <%--            return;--%>
-        <%--        }--%>
+    function getReplyList() {
+        let board = document.querySelector('.bno');
+        $.ajax({
+            contentType: 'application/json',
+            url: "/replies/" + board.value,
+            data: {
+                "boardNo": board.value
+            },
+            type: "get",
+            success: function (result) {
+                let $commentBlock = document.getElementById('view-commentList');
+                $commentBlock.innerHTML = "";
+                let $commentCnt = document.getElementById('mini-comment-count');
+                $commentCnt.innerText = "댓글 " + result.length;
+                if (result != null) {
+                    // console.log(result);
+                    for (let x of result) {
 
-        <%--        for (let i = 0; i < map.size; i++) {--%>
-        <%--            str += "<div class='written-comments'>";--%>
-        <%--            str += '<img class="white-star" src="/assets/jpg/logo_white.png">';--%>
-        <%--            str += '<div class="comment-userinfo">';--%>
-        <%--            str += '<h4 id="comment-nickname">${map.value}</h4>';--%>
-        <%--            str += '<h6 class="comment-reg-date">${map.key.writtenDate}</h6></div>';--%>
-        <%--            str += '<div class="comment-content">${map.key.content}</div>';--%>
-        <%--            str += '<div class="comment-like">${map.key.likeIt}</div>';--%>
-        <%--            str += '</div>';--%>
-        <%--        }--%>
-        <%--        $replies.html(str);--%>
+                        let $reply = document.createElement("div");
+                        $reply.classList.add('written-comments');
 
-        <%--    });--%>
-        <%--}--%>
-    // });
+                        let $cmtNum = document.createElement("input");
+                        $cmtNum.type ="hidden";
+                        $cmtNum.value = x[0].commentNum;
+
+                        let $img = document.createElement("img");
+                        $img.classList.add('white-star');
+                        $img.src = "/assets/jpg/logo_white.png";
+
+                        let $userIf = document.createElement("div");
+                        $userIf.classList.add('comment-userinfo');
+
+                        let $nnm = document.createElement("h4");
+                        $nnm.id = 'comment-nickname';
+                        $nnm.innerText = x[1];
+
+                        let $date = document.createElement("h6");
+                        $date.classList.add('comment-reg-date');
+                        $date.innerText = x[0].writtenDate;
+
+                        let $contt = document.createElement("div");
+                        $contt.classList.add('comment-content');
+                        $contt.innerText = x[0].content;
+
+                        let $like = document.createElement("div");
+                        $like.classList.add('comment-like');
+                        $like.innerText = x[0].likeIt;
+                        $like.addEventListener("click", addLike);
+
+                        $commentBlock.appendChild($reply);
+                        $reply.appendChild($cmtNum);
+                        $reply.appendChild($img);
+                        $reply.appendChild($userIf);
+                        $userIf.appendChild($nnm);
+                        $userIf.appendChild($date);
+                        $reply.appendChild($contt);
+                        $reply.appendChild($like);
+
+                    }
+                }
+
+            },
+            error: function () {
+                console.log("댓글 불러 오기 실패")
+            }
+        })
+    }
+
+    // const $comments = document.querySelectorAll('.written-comments');
+    // $comments.
+    //
+    function addLike(e) {
+        const $target = e.target.closest('.written-comments');
+        let comment = $target.firstElementChild;
+
+        $.ajax({
+            contentType: 'application/json',
+            url: "/replies/like",
+            data: JSON.stringify({
+                "commentNum": comment.value
+            }),
+            type: "post",
+            success: function (result) {
+                if (result === "success") {
+
+                }
+            },
+            error: function () {
+                alert("등록 실패")
+            }
+        })
+        getReplyList();
+    }
 
 </script>
 </body>
