@@ -345,11 +345,11 @@ border-bottom: 0.5px solid white;
 }
 
 .container .recent-posts .posts-wrapper .posts-title{
-    margin-left: 60px;
+    margin-left: 60px; width: 1000px;
 }
 
 .container .recent-posts .posts-wrapper .posts-nickname{
-    margin-left: 280px;
+    margin-left: 250px;  width: 100px; 
 }
 
 .container .recent-posts .posts-wrapper .posts-write-date{

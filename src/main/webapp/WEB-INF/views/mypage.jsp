@@ -97,8 +97,6 @@
             </div>
             <div class="posts-wrapper">
                 <div class="posts-boardNo">2</div>
-
-                
                 <div class="posts-title">대한민국의 주권은 국민에게 있고, 모든 권력은 국민으로부터 나온다.</div>
                 <div class="posts-nickname">이동우</div>
                 <div class="posts-write-date">2023.04.30</div>

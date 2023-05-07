@@ -18,6 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.SimpleTimeZone;
 
 @Controller
 @RequiredArgsConstructor
@@ -297,6 +298,27 @@ public class CafeController {
     @GetMapping("/mypageUpdate")
     public void mypageUpdate(MyInfoUpdateDto myInfoUpdateDto) {
         memberService.mypageUpdate(myInfoUpdateDto);
+
+    }
+
+    //게시판 전체 더보기
+    @GetMapping("/myBoardMore")
+    public String myBoardMore(String id, Model model){
+        Map<MyBoardListDto, Member> myBoardListDtoMemberMap = myBoardList(id);
+
+        model.addAttribute("b",myBoardListDtoMemberMap);
+
+        return "boardMore";
+
+    }
+
+    @GetMapping("/myCommentMore")
+    public String myCommentMore(String id, Model model){
+        Map<MyCommentListDto, Member> myCommentListDtoMemberMap = myCommentList(id);
+
+        model.addAttribute("b",myCommentListDtoMemberMap);
+
+        return "commentMore";
 
     }
 }
