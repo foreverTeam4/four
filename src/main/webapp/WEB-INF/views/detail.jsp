@@ -23,7 +23,7 @@
 <div class="detail-wrapper">
 
     <c:forEach var="b" items="${board}">
-        <input class="bno" type="hidden" name="boardNo" value="1">
+        <input class="bno" type="hidden" name="boardNo" value="${b.key.boardNo}">
         <div class="detail-title-box">
             <h2 class="detail-board-category">${b.key.category}</h2>
             <h3 class="detail-board-title">${b.key.title}</h3>
@@ -37,7 +37,7 @@
                         <div class="writtenDate">2023.05.04 23:11</div>
                         <div class="viewcount">조회 ${b.key.viewCount}</div>
                     </div>
-                    <div class="mini-comment-count">댓글 ${comments.size}</div>
+                    <div class="mini-comment-count" id = "mini-comment-count"></div>
                 </div>
             </div>
         </div>
@@ -59,18 +59,7 @@
 
     <div class="detail-comment-box">
 
-        <div class="view-commentList">
-            <c:forEach var="map" items="${comments}">
-                <div class="written-comments">
-                    <img class="white-star" src="/assets/jpg/logo_white.png">
-                    <div class="comment-userinfo">
-                        <h4 id="comment-nickname">${map.value}</h4>
-                        <h6 class="comment-reg-date">${map.key.writtenDate}</h6>
-                    </div>
-                    <div class="comment-content">${map.key.content}</div>
-                    <div class="comment-like">${map.key.likeIt}</div>
-                </div>
-            </c:forEach>
+        <div class="view-commentList" id = "view-commentList">
         </div>
 
         <div class="write-comment">
@@ -82,6 +71,7 @@
     </div>
 </div>
 <script>
+    getReplyList();
 
     $registComment = document.getElementById('regist-comment');
     $registComment.addEventListener("click", registCmt);
@@ -89,24 +79,89 @@
     function registCmt (){
         let id = document.querySelector('.mbr-id');
         const replyContent = document.getElementById('comment-content');
-        let boardNo = document.querySelector('.bno');
+        let board = document.querySelector('.bno');
+        if(replyContent.value === ""){return;}
         $.ajax({
             contentType: 'application/json',
             url : "/replies/new",
             data : JSON.stringify({
                 "id" : id.value,
                 "content" : replyContent.value,
-                "boardNo" : boardNo.value
+                "boardNo" : board.value
             }),
             type : "post",
             success : function (result) {
                 if(result === "success") {
-                    alert("댓글이 등록되었습니다");
+                    // alert("댓글이 등록되었습니다");
                 }
             },
             error : function ()
             {
                 alert("등록 실패")
+            }
+        })
+        getReplyList();
+        document.getElementById('comment-content').value = "";
+    }
+
+    function getReplyList(){
+        let board = document.querySelector('.bno');
+        $.ajax({
+            contentType: 'application/json',
+            url : "/replies/" + board.value,
+            data :{
+                "boardNo" : board.value
+            },
+            type : "get",
+            success : function(result){
+                let $commentBlock = document.getElementById('view-commentList');
+                $commentBlock.innerHTML = "";
+                let $commentCnt = document.getElementById('mini-comment-count');
+                $commentCnt.innerText = "댓글 " + result.length;
+                if(result != null) {
+                    console.log(result);
+                    for (let x of result) {
+
+                        let $reply = document.createElement("div");
+                        $reply.classList.add('written-comments');
+
+                        let $img = document.createElement("img");
+                        $img.classList.add('white-star');
+                        $img.src = "/assets/jpg/logo_white.png";
+
+                        let $userIf = document.createElement("div");
+                        $userIf.classList.add('comment-userinfo');
+
+                        let $nnm = document.createElement("h4");
+                        $nnm.id = 'comment-nickname';
+                        $nnm.innerText = x[1];
+
+                        let $date = document.createElement("h6");
+                        $date.classList.add('comment-reg-date');
+                        $date.innerText = x[0].writtenDate;
+
+                        let $contt = document.createElement("div");
+                        $contt.classList.add('comment-content');
+                        $contt.innerText = x[0].content;
+
+                        let $like = document.createElement("div");
+                        $like.classList.add('comment-like');
+                        $like.innerText = x[0].likeIt;
+
+                        $commentBlock.appendChild($reply);
+                        $reply.appendChild($img);
+                        $reply.appendChild($userIf);
+                        $userIf.appendChild($nnm);
+                        $userIf.appendChild($date);
+                        $reply.appendChild($contt);
+                        $reply.appendChild($like);
+
+                    }
+                }
+
+            },
+            error : function () {
+                console.log("댓글 불러 오기 실패")
             }
         })
     }
