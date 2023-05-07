@@ -91,7 +91,7 @@ public class CafeController {
     }
 
     //코멘트 리스트를 코멘트 작성자와 매핑하여 맵으로 반환
-    private Map<SimpleDateCommentDto, String> getCommentMap(List<SimpleDateCommentDto> commentList) {
+    public Map<SimpleDateCommentDto, String> getCommentMap(List<SimpleDateCommentDto> commentList) {
         Map<SimpleDateCommentDto, String> commentMap = new HashMap<>();
 
         for (SimpleDateCommentDto comment : commentList) {
@@ -263,29 +263,12 @@ public class CafeController {
         return "mypage";
     }
 
-    // 동우 마이페이지 내 내가 작성한글 목록 조회
-    @GetMapping("/myboardList")
-    public String myboardlist(Model model, String id) {
-        List<MyBoardListDto> myPageTitleList = boardService.myBoardListDto(id);
-        model.addAttribute("myPageList", myPageTitleList);
-        return "";
-    }
-
-
-    //동우 마이페이지 내 내가 작성한 댓글 조회
-    @GetMapping("/myCommentList")
-    public String mycommentlist(Model model, String id) {
-        List<MyCommentListDto> mycommentlist = commentService.myCommentListDtoList(id);
-        model.addAttribute("myCommentList", mycommentlist);
-        return "mypage";
-    }
 
 
     //동우 마이페이지 내 내정보 수정
     @GetMapping("/mypageUpdate")
-    public String mypageUpdate(Model model, String id) {
-        MyInfoUpdateDto mu = memberService.mypageUpdate(id);
-        model.addAttribute("mu",mu);
+    public String mypageUpdate(MyInfoUpdateDto myInfoUpdateDto) {
+        memberService.mypageUpdate(myInfoUpdateDto);
 
         return "";
     }

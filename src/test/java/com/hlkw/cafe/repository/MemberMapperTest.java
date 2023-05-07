@@ -105,9 +105,29 @@ class MemberMapperTest {
 
 
     @Test
-    @DisplayName("내정보 dto 확인")
+    @DisplayName("admin 아이디에 있는 정보 수정 후 재확인하면 회원 정보가 수정되어 있어야 한다")
     void mypageUpdate() {
-        MyInfoUpdateDto m = memberMapper.mypageUpdate("admin");
+        String memberId = "admin";
+        String memberPw = "ehddn";
+        String memberAddr = "서초동";
+        String memberPhoneNum = "0104454974897";
+        String memberEmail = "admin";
+        String memberNick = "닉네임";
+        Member m = Member.builder()
+                .id(memberId)
+                .pw(memberPw)
+                .addr(memberAddr)
+                .phoneNum(memberPhoneNum)
+                .email(memberEmail)
+                .nickname(memberNick)
+                .build();
+
+        boolean b = memberMapper.mypageUpdate(m);
+
+        assertTrue(b);
+        assertEquals(memberPw, memberMapper.findOne("admin","ehddn").getPw());
+        System.out.println();
+        System.out.println();
         System.out.println("m = " + m);
 
     }

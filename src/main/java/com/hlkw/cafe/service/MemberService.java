@@ -23,10 +23,8 @@ public class MemberService {
 
 
     //동우 마이페이지 업데이트
-    public MyInfoUpdateDto mypageUpdate(String id) {
-        MyInfoUpdateDto mypageUpdate= mapper.mypageUpdate(id)
-                ;
-        return mypageUpdate;
+    public void mypageUpdate(MyInfoUpdateDto myInfoUpdateDto) {
+        mapper.mypageUpdate(myInfoUpdateDto.toEntity());
 
     }
 

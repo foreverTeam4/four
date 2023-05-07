@@ -16,7 +16,7 @@ public interface MemberMapper {
     Member findOneById(String id);
 
 //동우 마이페이지 업데이트
-    MyInfoUpdateDto mypageUpdate(String id);
+    boolean mypageUpdate(Member member);
 
     String findNicknameByCommentNum(long commentNum);
 
