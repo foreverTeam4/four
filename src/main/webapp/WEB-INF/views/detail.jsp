@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="/assets/css/detail.css">
     <link rel="stylesheet" href="/assets/css/header.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script type="text/javascript" src="/resources/js/reply.js"></script>
 </head>
 
 <body>
@@ -24,7 +23,7 @@
 <div class="detail-wrapper">
 
     <c:forEach var="b" items="${board}">
-        <input class="bno" type="hidden" name="boardNo" value="2">
+        <input class="bno" type="hidden" name="boardNo" value="1">
         <div class="detail-title-box">
             <h2 class="detail-board-category">${b.key.category}</h2>
             <h3 class="detail-board-title">${b.key.title}</h3>
@@ -76,54 +75,41 @@
 
         <div class="write-comment">
             <h4 id="write-comment-nickname">${mbr.nickname}</h4>
-            <input type="hidden" class="mbr-id" value="${mbr.id}">
-            <textarea class="comment-content" name="content" placeholder="댓글을 남겨주세요"></textarea>
-            <button onclick="addComment()" class="regist-comment" type="submit">등록</button>
+            <input type="hidden" class="mbr-id" value="admin">
+            <textarea class="comment-content" id = "comment-content" name="content" placeholder="댓글을 남겨주세요"></textarea>
+            <button class="regist-comment" id = "regist-comment">등록</button>
         </div>
     </div>
 </div>
 <script>
-    // $().ready(function () {
-        const $bno = document.querySelector('.bno').value;
-        const $id = document.querySelector('.mbr-id').value;
-        let $replies = document.querySelector('.view-commentList');
-        // getCommentList();
 
-        function addComment() {
-            let why = document.querySelector('.comment-content').innerText;
-            console.log(why);
-            replyService.add(
-                {id: "test1", content: "머하냐지금", boardNo: $bno},
-                function (result) {
-                    alert("result" + result);
+    $registComment = document.getElementById('regist-comment');
+    $registComment.addEventListener("click", registCmt);
+
+    function registCmt (){
+        let id = document.querySelector('.mbr-id');
+        const replyContent = document.getElementById('comment-content');
+        let boardNo = document.querySelector('.bno');
+        $.ajax({
+            contentType: 'application/json',
+            url : "/replies/new",
+            data : JSON.stringify({
+                "id" : id.value,
+                "content" : replyContent.value,
+                "boardNo" : boardNo.value
+            }),
+            type : "post",
+            success : function (result) {
+                if(result === "success") {
+                    alert("댓글이 등록되었습니다");
                 }
-            );
-                // getCommentList();
-        }
-
-        <%--function getCommentList() {--%>
-        <%--    replyService.getList({boardNo: $bno}, function (map) {--%>
-        <%--        let str = "";--%>
-        <%--        if (map.size === 0) {--%>
-        <%--            $replies.html("");--%>
-        <%--            return;--%>
-        <%--        }--%>
-
-        <%--        for (let i = 0; i < map.size; i++) {--%>
-        <%--            str += "<div class='written-comments'>";--%>
-        <%--            str += '<img class="white-star" src="/assets/jpg/logo_white.png">';--%>
-        <%--            str += '<div class="comment-userinfo">';--%>
-        <%--            str += '<h4 id="comment-nickname">${map.value}</h4>';--%>
-        <%--            str += '<h6 class="comment-reg-date">${map.key.writtenDate}</h6></div>';--%>
-        <%--            str += '<div class="comment-content">${map.key.content}</div>';--%>
-        <%--            str += '<div class="comment-like">${map.key.likeIt}</div>';--%>
-        <%--            str += '</div>';--%>
-        <%--        }--%>
-        <%--        $replies.html(str);--%>
-
-        <%--    });--%>
-        <%--}--%>
-    // });
+            },
+            error : function ()
+            {
+                alert("등록 실패")
+            }
+        })
+    }
 
 </script>
 </body>
