@@ -82,4 +82,17 @@ public class CommentController {
             log.warn("500 Status code response! caused by {}", e.getMessage());
         }
     }
+
+    @PostMapping(value = "/dislike")
+    public void removeLike(
+            @Validated @RequestBody AddLikeDto dto
+    ) {
+        log.info("코멘트 컨트롤러 " + dto);
+
+        try {
+            boolean flag = commentService.removeLike(dto);
+        } catch (Exception e) {
+            log.warn("500 Status code response! caused by {}", e.getMessage());
+        }
+    }
 }
