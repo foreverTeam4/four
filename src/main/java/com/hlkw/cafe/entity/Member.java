@@ -1,5 +1,6 @@
 package com.hlkw.cafe.entity;
 
+import com.hlkw.cafe.dto.MyInfoUpdateDto;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
@@ -18,4 +19,9 @@ public class Member {
     private String email;
     private String nickname;
     private Level level;
+
+
 }
+
+
+
