@@ -32,4 +32,8 @@ public class MemberService {
     public String findNicknameByCommentNum(long commentNum) {
         return mapper.findNicknameByCommentNum(commentNum);
     }
+
+    public void save(Member member) {
+        mapper.save(member); // Member 정보를 저장하는 Repository의 save 메서드 호출
+    }
 }
