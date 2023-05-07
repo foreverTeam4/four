@@ -82,19 +82,43 @@
 /* 하단 버튼 */
 .notice-confirm-wrapper{
     padding: 10px;
-}
+    display: flex;
+}   
 
-.notice-confirm-wrapper button{
+/* 하단 버튼 공통 영역 */
+.back-wrapper, .confirm-btn{
     width: 200px;
     height: 50px;
     margin-bottom: 100px;
     background: rgba(255, 255, 255, 0.1);
-    border: none;
-    /* border: 0.5px solid white; */
     color: white;
     font-size: 19px;
     font-weight: 300;
     border-radius: 10px;
     margin-right: 5px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.confirm-btn{
+    border: none;
+}
+
+.back-wrapper:hover, .confirm-btn:hover{
+    background-color: rgba(200, 200, 200, 0.3);
+    transition: 0.7s;
+}
+.back-btn {
+    border: none;
+    background: none;
+    color: white;
+    font-size: 19px;
+    font-weight: 200;
+}
+
+.back-btnImg {
+    width: 30px;
+    height: 30px;
 }

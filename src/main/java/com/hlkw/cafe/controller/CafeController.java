@@ -1,12 +1,9 @@
 package com.hlkw.cafe.controller;
 
-import com.hlkw.cafe.dto.BoardSaveDto;
-import com.hlkw.cafe.dto.MyBoardListDto;
-import com.hlkw.cafe.dto.MyCommentListDto;
-import com.hlkw.cafe.dto.SimpleDateCommentDto;
-import com.hlkw.cafe.dto.WriteDto;
+import com.hlkw.cafe.dto.*;
 import com.hlkw.cafe.entity.Board;
 import com.hlkw.cafe.entity.Comment;
+import com.hlkw.cafe.entity.Level;
 import com.hlkw.cafe.entity.Member;
 import com.hlkw.cafe.service.BoardService;
 import com.hlkw.cafe.service.CommentService;
@@ -18,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +53,7 @@ public class CafeController {
         if (mbr == null) {
             return "/loginfail";
         } else if (mbr.getId().equals("admin")) {
-            return "redirect:/dust/admin";
+            return "redirect:/dust/admin?&id=" + mbr.getId();
         } else {
             return "/main"; //석빈이 메인 페이지 jsp
         }
@@ -79,7 +78,7 @@ public class CafeController {
     //게시글 번호로 Board 객체 반환받아 jsp에 전달
     @GetMapping("/detail")
     public String boardDetail(@ModelAttribute("mbr") Member mbr, long boardNo, Model model) {
-        Map<Board, Member> boardWithWriter = getBoardWithWriter(boardNo);
+        Map<SimpleDateBoardDto, Member> boardWithWriter = getBoardWithWriter(boardNo);
         Map<SimpleDateCommentDto, String> commentMap = getCommentWithNickname(boardNo);
 
         model.addAttribute("board", boardWithWriter);
@@ -87,10 +86,10 @@ public class CafeController {
         return "/detail";
     }
 
-    private Map<Board, Member> getBoardWithWriter(long boardNo) {
-        Map<Board, Member> boardWithWriter = new HashMap<>();
+    private Map<SimpleDateBoardDto, Member> getBoardWithWriter(long boardNo) {
+        Map<SimpleDateBoardDto, Member> boardWithWriter = new HashMap<>();
 
-        Board board = boardService.boardDetail(boardNo);
+        SimpleDateBoardDto board = boardService.boardDetail(boardNo);
         Member boardWriter = memberService.findOneById(board.getId());
         boardWithWriter.put(board, boardWriter);
 
@@ -117,7 +116,7 @@ public class CafeController {
     }
 
     //Map<<코멘트객체, 닉네임>, 카테고리> 반환 -> 메인 & 관리자용메인
-    private Map<Map, String> getCommentWithCategory(List<SimpleDateCommentDto> commentList){
+    private Map<Map, String> getCommentWithCategory(List<SimpleDateCommentDto> commentList) {
         Map<Map, String> commentWithCategory = new HashMap<>();
         Map<SimpleDateCommentDto, String> commentMap = getCommentMap(commentList);
 
@@ -127,7 +126,6 @@ public class CafeController {
         }
         return commentWithCategory;
     }
-
 
 
     //게시글 상세페이지에서 수정하기 페이지로 연결
@@ -162,32 +160,49 @@ public class CafeController {
             @RequestParam(defaultValue = "content") String searchBy
             , String word, Model model
     ) {
-        List<Board> filteresList = boardService.boardSearch(searchBy, word);
+        List<SimpleDateBoardDto> filteresList = boardService.boardSearch(searchBy, word);
         model.addAttribute("list", filteresList);
         return "searchList"; //세진 검색된 글 리스트 jsp -> 석빈이 메인 사용
     }
 
     //관리자 메인 페이지
     @GetMapping("/admin")
-    public String adminList(Model model) {
-        List<SimpleDateCommentDto> commentList = commentService.getBoardCommentList(0);
+    public String adminList(String id, Model model, Member mbr) {
+        List<SimpleDateCommentDto> boardCommentList = commentService.getBoardCommentList(0);
+//        System.out.println("boardCommentList = " + boardCommentList);
+
+        //오늘 게시물의 갯수 출력
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMdd");
+        String today = dtf.format(now);
+        int todayBoardCount = boardService.todayBoardCount(today);
+        int todayCommentCount = commentService.todayCommentCount(today);
 
         //0을 입력하면 관리자 공지글 List, 1을 입력하면 멤버의 공지글 List
         String distinguish = "distinguish";
         String adminDistinguish = "0";
         String memberDistinguish = "1";
-        List<Board> adminList = boardService.boardSearch(distinguish, adminDistinguish);
-        List<Board> memberList = boardService.boardSearch(distinguish, memberDistinguish);
+        List<SimpleDateBoardDto> adminList = boardService.boardSearch(distinguish, adminDistinguish);
+        List<SimpleDateBoardDto> memberList = boardService.boardSearch(distinguish, memberDistinguish);
+
+        model.addAttribute("id", id);
         model.addAttribute("admin", adminList);
         model.addAttribute("member", memberList);
+        model.addAttribute("board", boardCommentList);
+        model.addAttribute("mbr", mbr);
+        model.addAttribute("todayBoardCount", todayBoardCount);
+        model.addAttribute("todayCommentCount", todayCommentCount);
+//        System.out.println("mbr = " + mbr);
 //        System.out.println("adminList = " + adminList);
 //        System.out.println("memberList = " + memberList);
         return "admin";
     }
 
+
     //관리자 공지글 페이지로 이동
     @GetMapping("/notice")
-    public String notice() {
+    public String notice(String id, Model model) {
+        model.addAttribute("id", id);
         return "notice";
     }
 
@@ -200,25 +215,66 @@ public class CafeController {
         if (flag) {
             System.out.println("저장성공");
             return "redirect:/dust/admin";
-        }else {
+        } else {
             System.out.println("저장실패");
             return "redirect:/dust/notice?result=false";
         }
-        //post로 받은 값을 저장
-//        boardService.sa
+    }
 
+    @GetMapping("/member")
+    public String noticeMember(Model model) {
+        System.out.println("GET맵핑 발생");
+//        System.out.println("memberList = " + memberList);
+        List<Member> memberList = memberService.findMemberList();
+        model.addAttribute("member", memberList);
+        return "member";
+    }
+
+    @PostMapping("/member")
+    public String levelChange(String level, String id) {
+//        System.out.println("level = " + level);
+//        System.out.println("id = " + id);
+        Level changeEnum = Level.valueOf(level);
+        boolean flag = memberService.changeMemberLevel(changeEnum, id);
+        return "redirect:/dust/member";
+    }
+
+    //관리자 TOP
+    @GetMapping("/adminView")
+    public String adminDetail(String id, Model model) {
+        //admin nickname 찾기
+        Board admin = boardService.findAdminById(id);
+        model.addAttribute("admin",admin);
+
+        //조회수가 가장 높은 게시물(TOP Board)
+        long topBoardNo = boardService.topBoardNo();
+        Map<SimpleDateBoardDto, Member> TBboardWithWriter = getBoardWithWriter(topBoardNo);
+        Map<SimpleDateCommentDto, String> TBcommentMap = getCommentWithNickname(topBoardNo);
+
+        model.addAttribute("TBboard", TBboardWithWriter);
+        model.addAttribute("TBcomments", TBcommentMap);
+
+        //좋아요가 가장 많은 댓글의 게시물(TOP Comment)
+        long topCommentNo = commentService.topCommentNo();
+        Map<SimpleDateBoardDto, Member> TCboardWithWriter = getBoardWithWriter(topCommentNo);
+        Map<SimpleDateCommentDto, String> TCcommentMap = getCommentWithNickname(topCommentNo);
+
+        model.addAttribute("TCboard", TCboardWithWriter);
+        model.addAttribute("TCcomments", TCcommentMap);
+
+        return "adminView";
     }
 
 
     //마이페이지 목록
     @GetMapping("/mypage")
-    public String mypage(Model model, Board board){
+    public String mypage(Model model, Board board) {
 
 
         return "mypage";
     }
 
-    // 동우 마이페이지 내 내가 작성한글 목록 조회
+    // 동우 마이페이지 내 내가 작성한글 목록 조회료
     @GetMapping("/myboardList")
     public String myboardlist(Model model, String id) {
         List<MyBoardListDto> myPageTitleList = boardService.myBoardListDto(id);
@@ -234,7 +290,6 @@ public class CafeController {
         model.addAttribute("myCommentList", mycommentlist);
         return "mypage";
     }
-
 
 
     //동우 마이페이지 내 내정보 수정

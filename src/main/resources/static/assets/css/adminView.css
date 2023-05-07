@@ -1,12 +1,27 @@
 * {
     box-sizing: border-box;
 }
-
+.adminView-wrapper{
+    display: flex;
+    width: 1100px;
+    margin: 80px auto;
+    justify-content: center;
+    align-items: center;
+}
 .detail-wrapper {
     margin: 0 auto;
-    width: 1000px;
+    width: 500px;
     color: #fff;
     font-weight: 200;
+    position: relative;
+}
+
+.main-title{
+    font-weight: 300;
+    font-size: 25px;
+    margin-bottom: 35px;
+    color: #fdeaa8;
+    
 }
 
 .detail-title-box {
@@ -81,6 +96,7 @@
     padding-bottom: 80px;
     font-size: 15px;
     line-height: 1.8em;
+    height: 250px;
 }
 
 .detail-wrapper .under-content-wrapper {
@@ -155,7 +171,7 @@
     background: #fff;
     border-radius: 8px;
     overflow: hidden;
-    margin-bottom: 50px;
+    /* margin-bottom: 50px; */
     position: relative;
 }
 
@@ -188,5 +204,12 @@
     position: absolute;
     bottom: 10px;
     right: 10px;
-    cursor: pointer;
+}
+
+/* 하얀 박스 추가 */
+.detail-whiteBox{
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    margin: 10px;
+    border-radius: 10px;
 }

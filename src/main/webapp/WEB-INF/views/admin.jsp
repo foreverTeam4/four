@@ -26,7 +26,7 @@
                     오늘 게시물
                 </div>
                 <div class="today-count-wrapper">
-                    <span class="today-count">20</span>
+                    <span class="today-count">${todayBoardCount}</span>
                     <span>회</span>
                 </div>
             </section>
@@ -35,7 +35,7 @@
                     댓글
                 </div>
                 <div class="today-count-wrapper">
-                    <span class="today-count">01</span>
+                    <span class="today-count">${todayCommentCount}</span>
                     <span>회</span>
                 </div>
             </section>
@@ -43,7 +43,7 @@
 
         <!-- button 영역 -->
         <section class="btn-wrapper">
-            <div class="admin-btn" onclick="location.href='/dust/notice'">
+            <div class="admin-btn" onclick="location.href='/dust/notice?id=${id}'">
                 <div class="btn-title">공지작성</div>
                 <div class="btn-content">NOTICE</div>
                 <img class="add-btn2" src="/assets/jpg/than2.png" alt="than">
@@ -53,7 +53,7 @@
                 <div class="btn-content">LEVEL</div>
                 <img class="add-btn2" src="/assets/jpg/than2.png" alt="than">
             </div>
-            <div class="admin-btn" onclick="location.href='/dust/notice'">
+            <div class="admin-btn" onclick="location.href='/dust/adminView?id=${id}'">
                 <div class="btn-title">TOP 조회수, 댓글</div>
                 <div class="btn-content">VIEWS</div>
                 <img class="add-btn2" src="/assets/jpg/than2.png" alt="than">
@@ -72,11 +72,11 @@
                 </div>
             </div>
             <c:forEach var="am" items="${admin}">
-                <div class="admin-wrapper">
+                <div class="admin-wrapper" onclick="location.href='/dust/detail?boardNo=${am.boardNo}'">
                     <div class="admin-boardNo">${am.boardNo}</div>
                     <div class="admin-category">${am.category}</div>
                     <div class="admin-title">${am.title}</div>
-                    <div class="admin-nickname">관리자</div>
+                    <div class="admin-nickname">${id}</div>
                     <div class="admin-write-date">${am.writtenDate}</div>
                     <div class="admin-view-count">${am.viewCount}</div>
                 </div>
@@ -95,7 +95,7 @@
                 </div>
             </div>
             <c:forEach var="m" items="${member}">
-                <div class="posts-wrapper">
+                <div class="posts-wrapper" onclick="location.href='/dust/detail?boardNo=${m.boardNo}'">
                     <div class="posts-boardNo">${m.boardNo}</div>
                     <div class="posts-category">${m.category}</div>
                     <div class="posts-title">${m.title}</div>
@@ -117,15 +117,17 @@
                     </a>
                 </div>
             </div>
-
-            <div class="comments-wrapper">
-                <div class="comments-boardNo">9999</div>
+            <c:forEach var="b" items="${board}">
+            
+            <div class="comments-wrapper" onclick="location.href='/dust/detail?boardNo=${b.boardNo}'">
+                <div class="comments-boardNo">${b.boardNo}</div>
                 <div class="comments-category">HORROR</div>
-                <div class="comments-title">대한민국의 주권은 국민에게 있고, 모든 권력은 국민으로부터 나온다.</div>
+                <div class="comments-title">${b.content}</div>
                 <div class="comments-nickname">이동우</div>
-                <div class="comments-write-date">2023.04.30</div>
+                <div class="comments-write-date">${b.writtenDate}</div>
                 <div class="comments-view-count">0</div>
             </div>
+            </c:forEach>
             <div class="comments-wrapper">
                 <div class="comments-boardNo">9999</div>
                 <div class="comments-category">HORROR</div>
@@ -146,6 +148,17 @@
 
         </section>
     </div>
+
+    <!-- 10보다 작으면 앞에 0 붙힘 -->
+    <script>
+        $countText = document.querySelectorAll('.today-count');
+        $countText.forEach(text => {
+            const count = +text.textContent;
+            if(count<10){
+                text.textContent = '0'+count;
+            }
+        });
+    </script>
 </body>
 
 </html>

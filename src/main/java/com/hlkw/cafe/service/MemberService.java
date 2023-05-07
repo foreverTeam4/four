@@ -1,10 +1,13 @@
 package com.hlkw.cafe.service;
 
+import com.hlkw.cafe.entity.Level;
 import com.hlkw.cafe.entity.Member;
 import com.hlkw.cafe.repository.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -33,7 +36,11 @@ public class MemberService {
         return mapper.findNicknameByCommentNum(commentNum);
     }
 
-    public void save(Member member) {
-        mapper.save(member); // Member 정보를 저장하는 Repository의 save 메서드 호출
+
+    public boolean changeMemberLevel(Level level, String id){
+        return mapper.levelChange(level, id);
+    }
+    public List<Member> findMemberList(){
+        return mapper.findAll();
     }
 }
