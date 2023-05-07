@@ -56,7 +56,7 @@ public class CafeController {
         } else if (mbr.getId().equals("admin")) {
             return "redirect:/dust/admin?&id=" + mbr.getId();
         } else {
-            return "/main"; //석빈이 메인 페이지 jsp
+            return "/test"; //석빈이 메인 페이지 jsp
         }
     }
 
