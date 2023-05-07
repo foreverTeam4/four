@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/header.css">
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/board-common.css">
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/mainBoard.css">
+</head>
+
+<body>
+<div class="container">
+    <header class="top-header">
+        <img class="logo" src="/src/main/resources/static/assets/jpg/logo_yellow.png" alt="">
+        <div class="logo-text">Space Dust</div>
+        <a href="#" onclick="BurgerBtn()" id="BurgerBtn"><img class="burger-btn"
+                                                              src="/src/main/resources/static/assets/jpg/button.png" alt="burger-btn">
+            <span class="Inr-menu"></span>
+        </a>
+
+        <nav class="gnb" id="BgrBtnBox">
+            <a href="" class="close" id="Closebtn" onclick="CloseBtn()"></a>
+            <ul>
+                <div class="Inr-menu-list-box">
+                    <a href="#">
+                        <li class="Inr-menu-list" id="Inr-Menu-List">menu1</li>
+                    </a>
+                    <a href="#">
+                        <li class="Inr-menu-list" id="Inr-Menu-List">menu2</li>
+                    </a>
+                    <a href="#">
+                        <li class="Inr-menu-list" id="Inr-Menu-List">menu3</li>
+                    </a>
+                    <a href="#">
+                        <li class="Inr-menu-list" id="Inr-Menu-List">menu4</li>
+                    </a>
+                </div>
+            </ul>
+        </nav>
+
+
+    </header>
+
+    <section class="img-wrapper">
+        <!-- 카테고리별 이미지 Search -->
+        <div class="category1Img"></div>
+    </section>
+
+
+    <section class="btn-warpper">
+        <nav class="btn-warpper-box">
+            <a href="#">
+                <div class="allList">전체 목록</div>
+            </a>
+            <a href="#">
+                <div class="viewNotice">공지보기</div>
+            </a>
+            <a href="#">
+                <div class="popular">인기글</div>
+            </a>
+            <div class="search-form">
+                <form action="#">
+                    <input type="text" name="" id="">
+                    <button></button>
+                </form>
+            </div>
+        </nav>
+    </section>
+
+
+
+    <section class="title-warpper">
+        <div class="boardNo">글번호</div>
+        <div class="title" id="BoardTitle">제목</div>
+        <div class="nickname">작성자</div>
+        <div class="write-date">작성일시</div>
+        <div class="view-count">조회수</div>
+    </section>
+
+    <section class="text-wrapper">
+        <div class="boardNo">1</div>
+        <div class="title">대한민국의 주권은 국민에게 있고, 모든 권력은 국민으로부터 나온다.</div>
+        <div class="nickname">이동우</div>
+        <div class="write-date">2023.04.30</div>
+        <div class="view-count">0</div>
+    </section>
+</div>
+
+
+<script>
+        const $bgrbtn = document.getElementById('BurgerBtn');
+        const $bgrbtnbox = document.getElementById('BgrBtnBox');
+        const $closebtn = document.getElementById('Closebtn');
+
+        const $input = document.querySelector('.search-form');
+        const $search = document.querySelector('input')
+        const $button = document.querySelector('button');
+        function BurgerBtn() {
+            if ($bgrbtnbox.style.right === '-500px') {
+                $bgrbtnbox.style.right = 0;
+            } else {
+                $bgrbtnbox.style.right = '-500px';
+            }
+        }
+
+        $button.addEventListener('click', function (e) {
+            e.preventDefault();
+            $input.classList.toggle('active');
+        })
+        $search.addEventListener('focus', function () {
+            $input.classList.add('focus');
+        })
+
+        $search.addEventListener('blur', function () {
+            $search.value.length != 0 ? $input.classList.add('focus') : $input.classList.remove('focus');
+        })
+    </script>
+
+</body>
+
+</html>
