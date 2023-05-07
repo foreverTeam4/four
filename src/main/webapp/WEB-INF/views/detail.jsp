@@ -127,7 +127,7 @@
                         $reply.classList.add('written-comments');
 
                         let $cmtNum = document.createElement("input");
-                        $cmtNum.type ="hidden";
+                        $cmtNum.type = "hidden";
                         $cmtNum.value = x[0].commentNum;
 
                         let $img = document.createElement("img");
@@ -173,9 +173,6 @@
         })
     }
 
-    // const $comments = document.querySelectorAll('.written-comments');
-    // $comments.
-    //
     function addLike(e) {
         const $target = e.target.closest('.written-comments');
         let comment = $target.firstElementChild;

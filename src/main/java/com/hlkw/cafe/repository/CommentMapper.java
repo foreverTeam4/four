@@ -25,4 +25,6 @@ public interface CommentMapper {
     boolean addComment(AddCommentDto dto);
 
     boolean addLike(AddLikeDto dto);
+
+    boolean removeLike(AddLikeDto dto);
 }
