@@ -16,7 +16,7 @@
             서로의 생각을 나눌 수 있습니다.</h1>
         </div>
         
-        <form action="/dust/main" method = "post" class = "loginBlock">
+        <form action="/dust/loading" method = "post" class = "loginBlock">
             <div class = "login"><h2 id = "id">ID</h2><div class = "inputwrapper"><input type="text" name = "id" autofocus></div></div>
             <div class = "login"><h2 id = "pw">PW</h2><div class = "inputwrapper"><input type="password" name = "pw"></div></div>
             <button type="submit">Login</button>

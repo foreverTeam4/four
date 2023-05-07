@@ -18,19 +18,30 @@
             <img src="/assets/jpg/ani3.png" alt="" class="ani3">
             <img src="/assets/jpg/ani4.png" alt="" class="ani4">
         </div>
-        <div class="title">From DUST, To SPACE</div>
-        <form id="testForm" method="get" action="/dust/test">
-            <input type="hidden" name="test" value="">
+        <div class="title none">From DUST, To SPACE</div>
+        <form id="end-loading" method="post" action="/dust/main">
+            <input type="hidden" name="id" value="${id}">
+            <input type="hidden" name="pw" value="${pw}">
         </form>
-        <iframe name="hframe" style="display:none;"></iframe>
+
     </div>
 
     <script>
-        document.getElementById("testForm").target = "hframe"; //타겟을 iframe으로 한다
         setTimeout(function () {
-            document.getElementById("testForm").submit();
+            document.getElementById("end-loading").submit();
             console.log("실행");
-        }, 4000);
+        }, 5000);
+
+        //Title 2초 뒤 보이게
+        setTimeout(function () {
+            document.querySelector('.title').classList.remove('none');
+        }, 2000)
+
+        // setTimeout(function () {
+        //     document.querySelectorAll('.img-wrapper img').forEach(function (img) {
+        //         img.classList.remove('none');
+        //     });
+        // }, 2000);
     </script>
 </body>
 
