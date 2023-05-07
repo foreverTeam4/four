@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,18 +34,26 @@ public class CommentController {
         return ResponseEntity.ok().body(commentMap);
     }
 
-    @PostMapping(value = "/new",
-        consumes = "application/json",
-        produces = {MediaType.TEXT_PLAIN_VALUE})
+    @PostMapping(value = "/new")
     public ResponseEntity<?> addReply(
-            @RequestBody AddCommentDto dto
-    ){
-        boolean flag = commentService.addComment(dto);
-        if(flag) {
-            return new ResponseEntity<>("success", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            @Validated @RequestBody AddCommentDto dto
+            , BindingResult result
+    ) {
+        log.info("코멘트 컨트롤러 " + dto.getContent());
+        if (result.hasErrors()) {
+            return ResponseEntity.badRequest()
+                    .body(result.toString());
+        }
+        try {
+            boolean flag = commentService.addComment(dto);
+            List<SimpleDateCommentDto> commentList = commentService.getBoardCommentList(dto.getBoardNo());
+            //성공시 클라이언트에 응답하기
+            return ResponseEntity.ok().body(commentList);
+        } catch (Exception e) {
+            //문제 발생상황을 클라이언트에게 전달
+            log.warn("500 Status code response! caused by {}", e.getMessage());
+            return ResponseEntity.internalServerError()
+                    .body(e.getMessage());
         }
     }
-
 }

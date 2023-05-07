@@ -105,7 +105,7 @@ public class CafeController {
     }
 
     //코멘트 리스트를 코멘트 작성자와 매핑하여 맵으로 반환
-    private Map<SimpleDateCommentDto, String> getCommentMap(List<SimpleDateCommentDto> commentList) {
+    public Map<SimpleDateCommentDto, String> getCommentMap(List<SimpleDateCommentDto> commentList) {
         Map<SimpleDateCommentDto, String> commentMap = new HashMap<>();
 
         for (SimpleDateCommentDto comment : commentList) {
