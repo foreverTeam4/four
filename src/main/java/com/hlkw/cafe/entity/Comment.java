@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 
 @Component @Setter @Getter
 @ToString @EqualsAndHashCode
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class Comment {
     private long commentNum;

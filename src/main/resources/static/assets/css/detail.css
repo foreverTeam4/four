@@ -149,6 +149,8 @@
     margin-bottom: 20px;
     background: url("../jpg/heart.png") no-repeat left center;
     background-size: 13px;
+    width: fit-content;
+    cursor: pointer;
 }
 
 .detail-wrapper .detail-comment-box .write-comment {

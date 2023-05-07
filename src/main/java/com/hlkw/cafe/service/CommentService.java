@@ -1,6 +1,7 @@
 package com.hlkw.cafe.service;
 
 import com.hlkw.cafe.dto.AddCommentDto;
+import com.hlkw.cafe.dto.AddLikeDto;
 import com.hlkw.cafe.dto.SimpleDateCommentDto;
 import com.hlkw.cafe.dto.MyCommentListDto;
 import com.hlkw.cafe.entity.Comment;
@@ -13,7 +14,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.toList;
 
 @Service
@@ -52,5 +52,9 @@ public class CommentService {
 
     public boolean addComment(AddCommentDto dto) {
         return mapper.addComment(dto);
+    }
+
+    public boolean addLike(AddLikeDto commentNum) {
+        return mapper.addLike(commentNum);
     }
 }

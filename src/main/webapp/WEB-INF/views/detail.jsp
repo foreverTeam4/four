@@ -37,7 +37,7 @@
                         <div class="writtenDate">2023.05.04 23:11</div>
                         <div class="viewcount">조회 ${b.key.viewCount}</div>
                     </div>
-                    <div class="mini-comment-count" id = "mini-comment-count"></div>
+                    <div class="mini-comment-count" id="mini-comment-count"></div>
                 </div>
             </div>
         </div>
@@ -59,14 +59,14 @@
 
     <div class="detail-comment-box">
 
-        <div class="view-commentList" id = "view-commentList">
+        <div class="view-commentList" id="view-commentList">
         </div>
 
         <div class="write-comment">
             <h4 id="write-comment-nickname">${mbr.nickname}</h4>
             <input type="hidden" class="mbr-id" value="admin">
-            <textarea class="comment-content" id = "comment-content" name="content" placeholder="댓글을 남겨주세요"></textarea>
-            <button class="regist-comment" id = "regist-comment">등록</button>
+            <textarea class="comment-content" id="comment-content" name="content" placeholder="댓글을 남겨주세요"></textarea>
+            <button class="regist-comment" id="regist-comment">등록</button>
         </div>
     </div>
 </div>
@@ -76,27 +76,28 @@
     $registComment = document.getElementById('regist-comment');
     $registComment.addEventListener("click", registCmt);
 
-    function registCmt (){
+    function registCmt() {
         let id = document.querySelector('.mbr-id');
         const replyContent = document.getElementById('comment-content');
         let board = document.querySelector('.bno');
-        if(replyContent.value === ""){return;}
+        if (replyContent.value === "") {
+            return;
+        }
         $.ajax({
             contentType: 'application/json',
-            url : "/replies/new",
-            data : JSON.stringify({
-                "id" : id.value,
-                "content" : replyContent.value,
-                "boardNo" : board.value
+            url: "/replies/new",
+            data: JSON.stringify({
+                "id": id.value,
+                "content": replyContent.value,
+                "boardNo": board.value
             }),
-            type : "post",
-            success : function (result) {
-                if(result === "success") {
+            type: "post",
+            success: function (result) {
+                if (result === "success") {
                     // alert("댓글이 등록되었습니다");
                 }
             },
-            error : function ()
-            {
+            error: function () {
                 alert("등록 실패")
             }
         })
@@ -104,26 +105,30 @@
         document.getElementById('comment-content').value = "";
     }
 
-    function getReplyList(){
+    function getReplyList() {
         let board = document.querySelector('.bno');
         $.ajax({
             contentType: 'application/json',
-            url : "/replies/" + board.value,
-            data :{
-                "boardNo" : board.value
+            url: "/replies/" + board.value,
+            data: {
+                "boardNo": board.value
             },
-            type : "get",
-            success : function(result){
+            type: "get",
+            success: function (result) {
                 let $commentBlock = document.getElementById('view-commentList');
                 $commentBlock.innerHTML = "";
                 let $commentCnt = document.getElementById('mini-comment-count');
                 $commentCnt.innerText = "댓글 " + result.length;
-                if(result != null) {
-                    console.log(result);
+                if (result != null) {
+                    // console.log(result);
                     for (let x of result) {
 
                         let $reply = document.createElement("div");
                         $reply.classList.add('written-comments');
+
+                        let $cmtNum = document.createElement("input");
+                        $cmtNum.type ="hidden";
+                        $cmtNum.value = x[0].commentNum;
 
                         let $img = document.createElement("img");
                         $img.classList.add('white-star');
@@ -147,8 +152,10 @@
                         let $like = document.createElement("div");
                         $like.classList.add('comment-like');
                         $like.innerText = x[0].likeIt;
+                        $like.addEventListener("click", addLike);
 
                         $commentBlock.appendChild($reply);
+                        $reply.appendChild($cmtNum);
                         $reply.appendChild($img);
                         $reply.appendChild($userIf);
                         $userIf.appendChild($nnm);
@@ -160,10 +167,36 @@
                 }
 
             },
-            error : function () {
+            error: function () {
                 console.log("댓글 불러 오기 실패")
             }
         })
+    }
+
+    // const $comments = document.querySelectorAll('.written-comments');
+    // $comments.
+    //
+    function addLike(e) {
+        const $target = e.target.closest('.written-comments');
+        let comment = $target.firstElementChild;
+
+        $.ajax({
+            contentType: 'application/json',
+            url: "/replies/like",
+            data: JSON.stringify({
+                "commentNum": comment.value
+            }),
+            type: "post",
+            success: function (result) {
+                if (result === "success") {
+
+                }
+            },
+            error: function () {
+                alert("등록 실패")
+            }
+        })
+        getReplyList();
     }
 
 </script>
