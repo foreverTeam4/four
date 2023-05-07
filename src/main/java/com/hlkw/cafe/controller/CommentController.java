@@ -1,6 +1,7 @@
 package com.hlkw.cafe.controller;
 
 import com.hlkw.cafe.dto.AddCommentDto;
+import com.hlkw.cafe.dto.AddLikeDto;
 import com.hlkw.cafe.dto.SimpleDateCommentDto;
 import com.hlkw.cafe.entity.Board;
 import com.hlkw.cafe.service.BoardService;
@@ -12,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -64,6 +66,20 @@ public class CommentController {
             log.warn("500 Status code response! caused by {}", e.getMessage());
             return ResponseEntity.internalServerError()
                     .body(e.getMessage());
+        }
+    }
+
+    @PostMapping(value = "/like")
+    public void addLike(
+            @Validated @RequestBody AddLikeDto dto
+
+    ) {
+        log.info("코멘트 컨트롤러 " + dto);
+
+        try {
+            boolean flag = commentService.addLike(dto);
+        } catch (Exception e) {
+            log.warn("500 Status code response! caused by {}", e.getMessage());
         }
     }
 }
