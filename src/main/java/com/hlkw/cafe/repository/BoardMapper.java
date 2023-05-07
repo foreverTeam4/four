@@ -24,6 +24,7 @@ public interface BoardMapper {
     List<Board> myBoardList(String id);
 
 
+
     //태근 - admin notice
     boolean save(Board board);
     int todayCountBoard(String today);

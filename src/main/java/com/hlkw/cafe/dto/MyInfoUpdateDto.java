@@ -16,14 +16,6 @@ public class MyInfoUpdateDto {
     private final String email;
     private final String nickname;
 
-    public MyInfoUpdateDto(Member member) {
-        this.id = member.getId();
-        this.pw = member.getPw();
-        this.addr = member.getAddr();
-        this.phoneNum = member.getPhoneNum();
-        this.email = member.getEmail();
-        this.nickname = member.getNickname();
-    }
 
     public Member toEntity(){
         return Member.builder()
