@@ -1,5 +1,7 @@
 package com.hlkw.cafe.repository;
 
+import com.hlkw.cafe.dto.BoardSaveDto;
+import com.hlkw.cafe.dto.WriteDto;
 import com.hlkw.cafe.entity.Board;
 import com.hlkw.cafe.entity.Category;
 import com.hlkw.cafe.entity.Comment;
@@ -10,6 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static com.hlkw.cafe.entity.Category.*;
@@ -20,6 +24,17 @@ class BoardMapperTest {
 
     @Autowired
     BoardMapper boardMapper;
+
+    @Test
+    @DisplayName("게시글을 저장할 수 있따")
+    void save(){
+
+        for (int i = 0; i < 10; i++) {
+            BoardSaveDto dto = new BoardSaveDto("제발요" + i, "저장좀ㅠㅠ" + i, "test" + i, HORROR);
+            boardMapper.save(new Board(dto));
+        }
+
+    }
 
     @Test
     @DisplayName("작성자가 '관리자'인 게시물을 조회하면 admin 계정이 작성한 게시글을 불러온다")
@@ -122,6 +137,19 @@ class BoardMapperTest {
         assertEquals(2, list.size());
 
         //then
+    }
+
+    @Test
+    @DisplayName("오늘 날짜에 해당하는 게시물 개수가 반환되어야 한다.")
+    void todayBoardTest(){
+        //given
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMdd");
+
+        //when
+        int i = boardMapper.todayCountBoard(dtf.format(now));
+
+        System.out.println("i = " + i);
     }
 
 }

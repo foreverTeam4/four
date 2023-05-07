@@ -20,6 +20,15 @@
         Where id=#{id}
     </select>
 
+    <select id="todayCountComment" resultType="int">
+        SELECT COUNT(*)
+        FROM dust_comment
+        WHERE DATE_FORMAT(written_date, '%m%d') = #{today}
+    </select>
+
+    <insert id = "addComment">
+        insert into dust_comment (id, content, board_no) values (#{id}, #{content}, #{boardNo})
+    </insert>
 
 
 </mapper>

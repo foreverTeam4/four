@@ -28,8 +28,8 @@ public class Board {
         this.title = dto.getTitle();
         this.content= dto.getContent();
         this.id = dto.getId();
-        this.category = Category.HORROR;
-//        this.category = dto.getCategory();
+//        this.category = Category.HORROR;
+        this.category = dto.getCategory();
     }
 
 

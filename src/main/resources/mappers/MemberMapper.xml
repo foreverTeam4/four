@@ -5,7 +5,7 @@
 <mapper namespace="com.hlkw.cafe.repository.MemberMapper">
 
     <insert id = "save">
-        insert into dust_member value (#{id}, #{pw}, #{addr}, #{age}, #{phoneNum}, #{gender}, #{email}, #{nickname}, 1#{level})
+        insert into dust_member value (#{id}, #{pw}, #{addr}, #{age}, #{phoneNum}, #{gender}, #{email}, #{nickname}, #{level})
     </insert>
 
     <select id="findOne" resultType="member">
@@ -37,5 +37,17 @@
         WHERE id=#{id}
     </update>
 
+    <update id="levelChange">
+        UPDATE dust_member
+        SET LEVEL = #{level}
+        WHERE id = #{id}
+    </update>
 
+
+    <select id="findAll" resultType="member">
+        select *
+        from dust_member
+        where id != "admin"
+        order by LEVEL desc;
+    </select>
 </mapper>
