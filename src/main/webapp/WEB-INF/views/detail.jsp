@@ -60,16 +60,6 @@
     <div class="detail-comment-box">
 
         <div class="view-commentList" id = "view-commentList">
-<%--            <c:forEach var="map" items="${comments}">--%>
-<%--                <div class="written-comments">--%>
-<%--                    <img class="white-star" src="/assets/jpg/logo_white.png">--%>
-<%--                    <div class="comment-userinfo">--%>
-<%--                        <h4 id="comment-nickname">${map.value}</h4>--%>
-<%--                        <h6 class="comment-reg-date">${map.key.writtenDate}</h6>--%>
-<%--                    </div>--%>
-<%--                    <div class="comment-content">${map.key.content}</div>--%>
-<%--                    <div class="comment-like">${map.key.likeIt}</div>--%>
-<%--            </c:forEach>--%>
         </div>
 
         <div class="write-comment">
@@ -90,6 +80,7 @@
         let id = document.querySelector('.mbr-id');
         const replyContent = document.getElementById('comment-content');
         let board = document.querySelector('.bno');
+        if(replyContent.value === ""){return;}
         $.ajax({
             contentType: 'application/json',
             url : "/replies/new",
@@ -109,8 +100,8 @@
                 alert("등록 실패")
             }
         })
-        document.getElementById('comment-content').value = "";
         getReplyList();
+        document.getElementById('comment-content').value = "";
     }
 
     function getReplyList(){
@@ -130,32 +121,32 @@
                 if(result != null) {
                     console.log(result);
                     for (let x of result) {
-                        const $reply = document.createElement("div");
+
+                        let $reply = document.createElement("div");
                         $reply.classList.add('written-comments');
-                        // let $reply = $("<div class='written-comments'>");
+
                         let $img = document.createElement("img");
                         $img.classList.add('white-star');
                         $img.src = "/assets/jpg/logo_white.png";
-                        // let $img = $("<img class='white-star' src='/assets/jpg/logo_white.png'>");
+
                         let $userIf = document.createElement("div");
                         $userIf.classList.add('comment-userinfo');
-                        // let $userIf = $("<div class='comment-userinfo'>");
+
                         let $nnm = document.createElement("h4");
                         $nnm.id = 'comment-nickname';
                         $nnm.innerText = x[1];
-                        // let $nnm = $("<h4 id='comment-nickname'>").text(x.get(1)).append("</h4>");
+
                         let $date = document.createElement("h6");
                         $date.classList.add('comment-reg-date');
                         $date.innerText = x[0].writtenDate;
-                        <%--let $date = $("<h6 class='comment-reg-date'>${x.get(0).writtenDate}</h6></div>");--%>
+
                         let $contt = document.createElement("div");
                         $contt.classList.add('comment-content');
                         $contt.innerText = x[0].content;
-                        <%--let $contt = $("<div class='comment-content'>${x.get(0).content}</div>");--%>
+
                         let $like = document.createElement("div");
                         $like.classList.add('comment-like');
                         $like.innerText = x[0].likeIt;
-                        <%--let $like = $("<div class='comment-like'>${x.get(0).likeIt}</div></div>");--%>
 
                         $commentBlock.appendChild($reply);
                         $reply.appendChild($img);
@@ -164,16 +155,6 @@
                         $userIf.appendChild($date);
                         $reply.appendChild($contt);
                         $reply.appendChild($like);
-
-                <%--<div class="written-comments">--%>
-                <%--    <img class="white-star" src="/assets/jpg/logo_white.png">--%>
-                <%--    <div class="comment-userinfo">--%>
-                <%--        <h4 id="comment-nickname">${map.value}</h4>--%>
-                <%--        <h6 class="comment-reg-date">${map.key.writtenDate}</h6>--%>
-                <%--    </div>--%>
-                <%--    <div class="comment-content">${map.key.content}</div>--%>
-                <%--    <div class="comment-like">${map.key.likeIt}</div>--%>
-                <%--</div>--%>
 
                     }
                 }
