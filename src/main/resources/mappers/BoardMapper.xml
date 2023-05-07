@@ -42,7 +42,6 @@
     </select>
 
 
-
     <insert id="save">
         INSERT INTO dust_board
         (title,content,view_count,id,distinguish,category)
