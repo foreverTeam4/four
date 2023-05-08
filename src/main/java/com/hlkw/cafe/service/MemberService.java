@@ -1,6 +1,7 @@
 package com.hlkw.cafe.service;
 
 import com.hlkw.cafe.dto.MyInfoUpdateDto;
+import com.hlkw.cafe.dto.SimpleDateBoardDto;
 import com.hlkw.cafe.entity.Level;
 import com.hlkw.cafe.entity.Member;
 import com.hlkw.cafe.repository.MemberMapper;
@@ -8,7 +9,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -25,8 +28,8 @@ public class MemberService {
     //동우 마이페이지 업데이트
     public void mypageUpdate(MyInfoUpdateDto myInfoUpdateDto) {
         mapper.mypageUpdate(myInfoUpdateDto.toEntity());
-
     }
+
 
 
     public Member findOneById(String id) {

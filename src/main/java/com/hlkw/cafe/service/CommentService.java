@@ -54,7 +54,11 @@ public class CommentService {
         return mapper.addComment(dto);
     }
 
-    public boolean addLike(AddLikeDto commentNum) {
-        return mapper.addLike(commentNum);
+    public boolean addLike(AddLikeDto dto) {
+        return mapper.addLike(dto);
+    }
+
+    public boolean removeLike(AddLikeDto dto) {
+        return mapper.removeLike(dto);
     }
 }

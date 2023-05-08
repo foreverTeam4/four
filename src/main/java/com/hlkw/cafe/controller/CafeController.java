@@ -2,13 +2,11 @@ package com.hlkw.cafe.controller;
 
 import com.hlkw.cafe.dto.*;
 import com.hlkw.cafe.entity.Board;
-import com.hlkw.cafe.entity.Comment;
 import com.hlkw.cafe.entity.Level;
 import com.hlkw.cafe.entity.Member;
 import com.hlkw.cafe.service.BoardService;
 import com.hlkw.cafe.service.CommentService;
 import com.hlkw.cafe.service.MemberService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -264,25 +261,52 @@ public class CafeController {
     }
 
 
-    //마이페이지 목록
+    //마이페이지
     @GetMapping("/mypage")
-    public String mypage(Model model, Board board){
-        List<MyBoardListDto> mb = boardService.myBoardListDto(board.getId());
-        List<MyCommentListDto> mc = commentService.myCommentListDtoList(board.getId());
-        model.addAttribute("mb",mb);
-        model.addAttribute("mc",mc);
+    public String mypage(String id, Model model){
+        Map<MyBoardListDto, Member> myBoardListDtoMemberMap = myBoardList(id);
+        Map<MyCommentListDto, Member> myCommentListDtoMemberMap = myCommentList(id);
+        model.addAttribute("b",myBoardListDtoMemberMap);
+        model.addAttribute("c",myCommentListDtoMemberMap);
 
         return "mypage";
+
     }
 
 
+    //마이페이지 게시판 목록
+    private Map<MyBoardListDto, Member> myBoardList(String id) {
+        Map<MyBoardListDto, Member> boardWithWriter = new HashMap<>();
+
+        List<MyBoardListDto> board = boardService.myBoardListDto(id);
+
+        for (MyBoardListDto myBoardListDto : board) {
+            Member boardWriter = memberService.findOneById(id);
+            boardWithWriter.put(myBoardListDto, boardWriter);
+        }
+
+        return boardWithWriter;
+    }
+
+    //마이페이지 댓글 목록
+    private Map<MyCommentListDto,Member> myCommentList(String id){
+        Map<MyCommentListDto, Member> commentWithWriter = new HashMap<>();
+
+        List<MyCommentListDto> comment = commentService.myCommentListDtoList(id);
+
+        for (MyCommentListDto myCommentListDto : comment) {
+            Member boardWriter = memberService.findOneById(id);
+            commentWithWriter.put(myCommentListDto, boardWriter);
+        }
+
+        return commentWithWriter;
+    }
 
     //동우 마이페이지 내 내정보 수정
     @GetMapping("/mypageUpdate")
-    public String mypageUpdate(MyInfoUpdateDto myInfoUpdateDto) {
+    public void mypageUpdate(MyInfoUpdateDto myInfoUpdateDto) {
         memberService.mypageUpdate(myInfoUpdateDto);
 
-        return "";
     }
 
 
