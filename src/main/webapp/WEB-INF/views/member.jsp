@@ -53,9 +53,9 @@
                     </ul>
                 </c:forEach>
             </section>
-            <div class="back-wrapper">
+            <div id="back-wrapper" onclick="location.href='/dust/admin'">
                 <img src="/assets/jpg/back.png" alt="" class="back-btnImg">
-                <button type="button" class="back-btn" onclick="location.href='/dust/admin'">뒤로가기</button>
+                <button type="button" class="back-btn" >뒤로가기</button>
             </div>
     </div>
     <!-- Modal -->

@@ -44,11 +44,20 @@ public class CafeController {
         return "/login";
     }
 
+    @PostMapping("loading")
+    public String loading(String id, String pw, Model model){
+        model.addAttribute("id",id);
+        model.addAttribute("pw",pw);
+
+        return "loading";
+    }
+
     @PostMapping("/main")
     public String login(String id, String pw, Model model) {
         Member mbr = memberService.login(id, pw);
         model.addAttribute("m", mbr);
         if (mbr == null) {
+            System.out.println("실패");
             return "/loginfail";
         } else if (mbr.getId().equals("admin")) {
             return "redirect:/dust/admin?&id=" + mbr.getId();
@@ -299,4 +308,6 @@ public class CafeController {
         memberService.mypageUpdate(myInfoUpdateDto);
 
     }
+
+
 }
