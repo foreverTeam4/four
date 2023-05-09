@@ -37,4 +37,8 @@
     <update id="removeLike">
         update dust_comment set like_it = like_it - 1 where comment_num = #{commentNum}
     </update>
+
+    <delete id="removeComment">
+        delete from dust_comment where board_no = #{boardNo}
+    </delete>
 </mapper>

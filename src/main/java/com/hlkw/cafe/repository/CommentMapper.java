@@ -27,4 +27,6 @@ public interface CommentMapper {
     boolean addLike(AddLikeDto dto);
 
     boolean removeLike(AddLikeDto dto);
+
+    void removeComment(long boardNo);
 }
