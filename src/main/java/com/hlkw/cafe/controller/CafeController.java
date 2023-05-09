@@ -145,6 +145,7 @@ public class CafeController {
     //게시글 삭제
     @GetMapping("/remove")
     public String removeBoard(long boardNo) {
+        commentService.removeComment(boardNo);
         boardService.removeBoard(boardNo);
         return "redirect:/main"; //석빈이 메인 페이지 jsp
     }

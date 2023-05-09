@@ -1,6 +1,7 @@
 package com.hlkw.cafe.repository;
 
 import com.hlkw.cafe.dto.AddCommentDto;
+import com.hlkw.cafe.dto.AddLikeDto;
 import com.hlkw.cafe.entity.Comment;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -92,8 +93,9 @@ class CommentMapperTest {
     @Test
     @DisplayName("코멘트 번호로 좋아요 수를 늘릴 수 있다.")
     void like(){
-        long commentNum = 57L;
-        mapper.addLike(commentNum);
+        AddLikeDto dto = AddLikeDto.builder()
+                .commentNum(10L).build();
+        mapper.addLike(dto);
 
     }
 }

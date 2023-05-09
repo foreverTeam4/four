@@ -24,6 +24,8 @@ class BoardMapperTest {
 
     @Autowired
     BoardMapper boardMapper;
+    @Autowired
+    CommentMapper commentMapper;
 
     @Test
     @DisplayName("게시글을 저장할 수 있따")
@@ -150,6 +152,17 @@ class BoardMapperTest {
         int i = boardMapper.todayCountBoard(dtf.format(now));
 
         System.out.println("i = " + i);
+    }
+
+    @Test
+    @DisplayName("댓글이 달린 게시물을 삭제할 수 있따")
+    @Transactional @Rollback
+    void deleteTest(){
+        long boardNo = 10L;
+        commentMapper.removeComment(boardNo);
+        boolean flag = boardMapper.remove(boardNo);
+        assertTrue(flag);
+
     }
 
 }

@@ -61,4 +61,8 @@ public class CommentService {
     public boolean removeLike(AddLikeDto dto) {
         return mapper.removeLike(dto);
     }
+
+    public void removeComment(long boardNo){
+        mapper.removeComment(boardNo);
+    }
 }
